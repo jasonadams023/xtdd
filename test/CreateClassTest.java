@@ -80,4 +80,43 @@ class CreateClassTest {
 
         assertTrue(data.contains("class " + className + " {"));
     }
+
+    @Test
+    void shouldGenerateEmptyFunction() {
+        String className = "Example";
+        Generator generator = new Generator(exampleDirectory);
+
+        File testFile = new File(exampleDirectory.getPath() + "/test/" + className + "Test.java");
+
+        generator.createClass(testFile);
+
+        String data = "";
+        try {
+            data = new String(Files.readAllBytes(Paths.get(exampleSourceDirectory.getPath() + "/" + className + ".java")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        assertTrue(data.contains("static void example() {"));
+    }
+
+    @Disabled
+    @Test
+    void shouldGenerateDifferentEmptyFunctionBasedOnTestFile() {
+        String className = "Example";
+        Generator generator = new Generator(exampleDirectory);
+
+        File testFile = new File(exampleDirectory.getPath() + "/test/" + className + "Test.java");
+
+        generator.createClass(testFile);
+
+        String data = "";
+        try {
+            data = new String(Files.readAllBytes(Paths.get(exampleSourceDirectory.getPath() + "/" + className + ".java")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        assertTrue(data.contains("static void different() {"));
+    }
 }
