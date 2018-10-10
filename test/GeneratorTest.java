@@ -22,7 +22,9 @@ class GeneratorTest {
 
     @Test
     void shouldGenerateClassBasedOnTestFiles() {
-        Generator.generate(example);
+        Generator generator = new Generator(example);
+
+        generator.generate();
 
         String data1 = "";
         String data2 = "";

@@ -5,18 +5,24 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 class Generator {
-    static void generate(File directory) {
+    private final File directory;
+
+    Generator(File targetDirectory) {
+        directory = targetDirectory;
+    }
+
+    void generate() {
         File testDirectory = new File(directory.getPath() + "/test");
         String[] testFileNames = testDirectory.list();
 
         for (String testFileName : testFileNames) {
             String name = testFileName.substring(0, testFileName.length() - 9);
-            createClass(name, directory.getPath() + "/src");
+            createClass(name);
         }
     }
 
-    static void createClass(String name, String targetDirectory) {
-        Path path = Paths.get(targetDirectory + "/" + name + ".java");
+    void createClass(String name) {
+        Path path = Paths.get(directory.getPath() + "/src/" + name + ".java");
 
         String output = "class " + name + " {\n" +
                 "    static void example() {\n" +
