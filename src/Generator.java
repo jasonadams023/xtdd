@@ -1,19 +1,29 @@
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 class Generator {
-    static void generate() {
-        try {
-            File file = new File("./generated/file.java");
-            boolean result = file.createNewFile();
-            if (result == true) {
-                System.out.println("created new file");
-            } else {
-                System.out.println("did not create new file");
-            }
+    static void generate(File directory) {
+        File testDirectory = new File(directory.getPath() + "/test");
+        String[] classNames = testDirectory.list();
 
-        } catch (IOException e) {
-            e.printStackTrace();
+        for (String className : classNames) {
+            String name = className.substring(0, className.length() - 9);
+            Path path = Paths.get(directory.getPath() + "/src/" + name + ".java");
+
+            String output = "class " + name + " {\n" +
+                    "    static void example() {\n" +
+                    "    }\n" +
+                    "}";
+            byte[] outputBytes = output.getBytes();
+
+            try {
+                Files.write(path, outputBytes);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
