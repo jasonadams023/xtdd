@@ -29,10 +29,13 @@ class Generator {
         String className = getClassName(testFile);
         Path path = Paths.get(directory.getPath() + "/src/" + className + ".java");
 
-        String output = "class " + className + " {\n" +
-                "    static void example() {\n" +
-                "    }\n" +
-                "}";
+        String output = "class " + className + " {\n";
+
+        for (String signature : getFunctionSignatures(testFile)) {
+            output += generateFunction(signature);
+        }
+
+        output += "}\n";
         byte[] outputBytes = output.getBytes();
 
         try {
@@ -67,5 +70,14 @@ class Generator {
         }
 
         return output;
+    }
+
+    static String generateFunction(String signature) {
+        String[] parts = signature.split(Pattern.quote(":"));
+        String returnType = parts[0];
+        String name = parts[1];
+
+        return  "static " + returnType + " " + name + "() {\n" +
+                "}\n";
     }
 }

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -82,8 +83,30 @@ class CreateClassTest {
     }
 
     @Test
-    void shouldGenerateEmptyFunction() {
-        String className = "Example";
+    void shouldGenerateEmptyClass() {
+        String className = "Empty";
+        Generator generator = new Generator(exampleDirectory);
+
+        File testFile = new File(exampleDirectory.getPath() + "/test/" + className + "Test.java");
+
+        generator.createClass(testFile);
+
+        String data = "";
+        try {
+            data = new String(Files.readAllBytes(Paths.get(exampleSourceDirectory.getPath() + "/" + className + ".java")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        String expected = "class Empty {\n" +
+                "}\n";
+
+        assertEquals(expected, data);
+    }
+
+    @Test
+    void shouldGenerateFunctionsBasedOnTestFile() {
+        String className = "First";
         Generator generator = new Generator(exampleDirectory);
 
         File testFile = new File(exampleDirectory.getPath() + "/test/" + className + "Test.java");
@@ -98,25 +121,6 @@ class CreateClassTest {
         }
 
         assertTrue(data.contains("static void example() {"));
-    }
-
-    @Disabled
-    @Test
-    void shouldGenerateDifferentEmptyFunctionBasedOnTestFile() {
-        String className = "Example";
-        Generator generator = new Generator(exampleDirectory);
-
-        File testFile = new File(exampleDirectory.getPath() + "/test/" + className + "Test.java");
-
-        generator.createClass(testFile);
-
-        String data = "";
-        try {
-            data = new String(Files.readAllBytes(Paths.get(exampleSourceDirectory.getPath() + "/" + className + ".java")));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
         assertTrue(data.contains("static void different() {"));
     }
 }
