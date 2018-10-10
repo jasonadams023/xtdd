@@ -21,11 +21,10 @@ class Generator {
     }
 
     void createClass(File testFile) {
-        String testFileName = testFile.getName();
-        String name = testFileName.substring(0, testFileName.length() - 9);
-        Path path = Paths.get(directory.getPath() + "/src/" + name + ".java");
+        String className = getClassName(testFile);
+        Path path = Paths.get(directory.getPath() + "/src/" + className + ".java");
 
-        String output = "class " + name + " {\n" +
+        String output = "class " + className + " {\n" +
                 "    static void example() {\n" +
                 "    }\n" +
                 "}";
@@ -36,5 +35,10 @@ class Generator {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    static String getClassName(File testFile) {
+        String testFileName = testFile.getName();
+        return testFileName.substring(0, testFileName.length() - 9);
     }
 }
