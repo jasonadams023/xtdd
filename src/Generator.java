@@ -16,12 +16,13 @@ class Generator {
         String[] testFileNames = testDirectory.list();
 
         for (String testFileName : testFileNames) {
-            String name = testFileName.substring(0, testFileName.length() - 9);
-            createClass(name);
+            createClass(new File(testFileName));
         }
     }
 
-    void createClass(String name) {
+    void createClass(File testFile) {
+        String testFileName = testFile.getName();
+        String name = testFileName.substring(0, testFileName.length() - 9);
         Path path = Paths.get(directory.getPath() + "/src/" + name + ".java");
 
         String output = "class " + name + " {\n" +

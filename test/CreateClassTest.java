@@ -23,19 +23,23 @@ class CreateClassTest {
 
     @Test
     void shouldWriteToFolder() {
+        String className = "Example";
         Generator generator = new Generator(exampleDirectory);
 
-        generator.createClass("Example");
+        File testFile = new File(exampleDirectory.getPath() + "/test/" + className + "Test.java");
 
+        generator.createClass(testFile);
         assertTrue(exampleSourceDirectory.list().length > 0);
     }
 
     @Test
     void shouldCreateJavaFile() {
+        String className = "Example";
         Generator generator = new Generator(exampleDirectory);
 
-        generator.createClass("Example");
+        File testFile = new File(exampleDirectory.getPath() + "/test/" + className + "Test.java");
 
+        generator.createClass(testFile);
         File file = new File(exampleSourceDirectory.getPath() + "/Example.java");
         assertTrue(file.exists());
     }
@@ -45,7 +49,9 @@ class CreateClassTest {
         String className = "Example";
         Generator generator = new Generator(exampleDirectory);
 
-        generator.createClass(className);
+        File testFile = new File(exampleDirectory.getPath() + "/test/" + className + "Test.java");
+
+        generator.createClass(testFile);
 
         String data = "";
         try {
@@ -62,8 +68,9 @@ class CreateClassTest {
         String className = "Different";
         Generator generator = new Generator(exampleDirectory);
 
-        generator.createClass(className);
+        File testFile = new File(exampleDirectory.getPath() + "/test/" + className + "Test.java");
 
+        generator.createClass(testFile);
         String data = "";
         try {
             data = new String(Files.readAllBytes(Paths.get(exampleSourceDirectory.getPath() + "/" + className + ".java")));
