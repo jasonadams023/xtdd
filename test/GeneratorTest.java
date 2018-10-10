@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class GeneratorTest {
-    File example = new File("./example");
+    private File example = new File("./example");
 
     @AfterAll
     @BeforeAll
@@ -21,54 +21,20 @@ class GeneratorTest {
     }
 
     @Test
-    void shouldWriteToFolder() {
+    void shouldGenerateClassBasedOnTestFiles() {
         Generator.generate(example);
 
-        File directory = new File(example.getPath() + "/src");
-        assertTrue(directory.list().length > 0);
-    }
+        String data1 = "";
+        String data2 = "";
 
-    @Test
-    void shouldCreateJavaFile() {
-        Generator.generate(example);
-
-        File file = new File(example.getPath() + "/src/First.java");
-        assertTrue(file.exists());
-    }
-
-    @Test
-    void shouldCreateSecondJavaFile() {
-        Generator.generate(example);
-
-        File file = new File(example.getPath() + "/src/Second.java");
-        assertTrue(file.exists());
-    }
-
-    @Test
-    void shouldGenerateClass() {
-        Generator.generate(example);
-
-        String data = "";
         try {
-            data = new String(Files.readAllBytes(Paths.get(example.getPath() + "/src/First.java")));
+            data1 = new String(Files.readAllBytes(Paths.get(example.getPath() + "/src/First.java")));
+            data2 = new String(Files.readAllBytes(Paths.get(example.getPath() + "/src/Second.java")));
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        assertTrue(data.contains("class First {"));
-    }
-
-    @Test
-    void shouldGenerateSecondClass() {
-        Generator.generate(example);
-
-        String data = "";
-        try {
-            data = new String(Files.readAllBytes(Paths.get(example.getPath() + "/src/Second.java")));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        assertTrue(data.contains("class Second {"));
+        assertTrue(data1.contains("class First {"));
+        assertTrue(data2.contains("class Second {"));
     }
 }
