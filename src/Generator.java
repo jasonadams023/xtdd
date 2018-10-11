@@ -29,14 +29,16 @@ class Generator {
         String className = getClassName(testFile);
         Path path = Paths.get(directory.getPath() + "/src/" + className + ".java");
 
-        String output = "class " + className + " {\n";
+        StringBuilder builder = new StringBuilder();
+
+        builder.append("class ").append(className).append(" {\n");
 
         for (String signature : getFunctionSignatures(testFile)) {
-            output += generateFunction(signature);
+            builder.append(generateFunction(signature));
         }
 
-        output += "}\n";
-        byte[] outputBytes = output.getBytes();
+        builder.append("}\n");
+        byte[] outputBytes = builder.toString().getBytes();
 
         try {
             Files.write(path, outputBytes);
