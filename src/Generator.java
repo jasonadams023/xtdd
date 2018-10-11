@@ -53,7 +53,7 @@ class Generator {
     }
 
     static List<String> getFunctionSignatures(File testFile) {
-        List<String> output = new ArrayList<String>();
+        List<String> output = new ArrayList<>();
         String className = getClassName(testFile);
 
         List<String> lines = Collections.emptyList();
