@@ -18,10 +18,10 @@ class Generator {
 
     void generate() {
         File testDirectory = new File(directory.getPath() + "/test");
-        String[] testFileNames = testDirectory.list();
+        File[] testFiles = testDirectory.listFiles();
 
-        for (String testFileName : testFileNames) {
-            createClass(new File(testFileName));
+        for (File testFile : testFiles) {
+            createClass(testFile);
         }
     }
 
