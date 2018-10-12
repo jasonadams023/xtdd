@@ -1,5 +1,10 @@
 .idea/
 *.iml
 out/
-generated/
+
+//Gradle
 .gradle/
+gradle/
+build/
+gradlew
+gradlew.bat
