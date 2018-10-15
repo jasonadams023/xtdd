@@ -6,8 +6,12 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.BDDMockito.willReturn;
+import static org.mockito.Mockito.spy;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class CreateClassTest {
@@ -26,22 +30,29 @@ class CreateClassTest {
     @Test
     void shouldWriteToFolder() {
         String className = "Example";
-        Generator generator = new Generator(exampleDirectory);
-
         File testFile = new File(exampleDirectory.getPath() + "/test/" + className + "Test.java");
 
-        generator.createClass(testFile);
+        Generator generator = new Generator(exampleDirectory);
+        Generator generatorSpy = spy(generator);
+        List<String> output = new ArrayList<>();
+        willReturn(output).given(generatorSpy).getFunctionSignatures(testFile);
+
+        generatorSpy.createClass(testFile);
+
         assertTrue(exampleSourceDirectory.list().length > 0);
     }
 
     @Test
     void shouldCreateJavaFile() {
         String className = "Example";
-        Generator generator = new Generator(exampleDirectory);
-
         File testFile = new File(exampleDirectory.getPath() + "/test/" + className + "Test.java");
 
-        generator.createClass(testFile);
+        Generator generator = new Generator(exampleDirectory);
+        Generator generatorSpy = spy(generator);
+        List<String> output = new ArrayList<>();
+        willReturn(output).given(generatorSpy).getFunctionSignatures(testFile);
+
+        generatorSpy.createClass(testFile);
         File file = new File(exampleSourceDirectory.getPath() + "/Example.java");
         assertTrue(file.exists());
     }
@@ -49,11 +60,14 @@ class CreateClassTest {
     @Test
     void shouldGenerateClass() {
         String className = "Example";
-        Generator generator = new Generator(exampleDirectory);
-
         File testFile = new File(exampleDirectory.getPath() + "/test/" + className + "Test.java");
 
-        generator.createClass(testFile);
+        Generator generator = new Generator(exampleDirectory);
+        Generator generatorSpy = spy(generator);
+        List<String> output = new ArrayList<>();
+        willReturn(output).given(generatorSpy).getFunctionSignatures(testFile);
+
+        generatorSpy.createClass(testFile);
 
         String data = "";
         try {
@@ -68,11 +82,15 @@ class CreateClassTest {
     @Test
     void shouldGenerateDifferentClass() {
         String className = "Different";
-        Generator generator = new Generator(exampleDirectory);
-
         File testFile = new File(exampleDirectory.getPath() + "/test/" + className + "Test.java");
 
-        generator.createClass(testFile);
+        Generator generator = new Generator(exampleDirectory);
+        Generator generatorSpy = spy(generator);
+        List<String> output = new ArrayList<>();
+        willReturn(output).given(generatorSpy).getFunctionSignatures(testFile);
+
+        generatorSpy.createClass(testFile);
+
         String data = "";
         try {
             data = new String(Files.readAllBytes(Paths.get(exampleSourceDirectory.getPath() + "/" + className + ".java")));

@@ -54,7 +54,7 @@ public class Generator {
         return testFileName.substring(0, testFileName.length() - 9);
     }
 
-    static List<String> getFunctionSignatures(File testFile) {
+    List<String> getFunctionSignatures(File testFile) {
         List<String> output = new ArrayList<>();
         String className = getClassName(testFile);
 
