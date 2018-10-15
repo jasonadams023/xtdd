@@ -16,9 +16,11 @@ class GeneratorTest {
     @BeforeAll
     void cleanup() {
         File directory = new File(example.getPath() + "/src");
-        for(File file: directory.listFiles())
-            if (!file.isDirectory())
+        for(File file: directory.listFiles()) {
+            if (!file.isDirectory()) {
                 file.delete();
+            }
+        }
     }
 
     @Test

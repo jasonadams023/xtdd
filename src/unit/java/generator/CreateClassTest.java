@@ -22,9 +22,11 @@ class CreateClassTest {
     @BeforeAll
     void cleanup() {
         File directory = exampleSourceDirectory;
-        for(File file: directory.listFiles())
-            if (!file.isDirectory())
+        for(File file: directory.listFiles()) {
+            if (!file.isDirectory()) {
                 file.delete();
+            }
+        }
     }
 
     @Test
