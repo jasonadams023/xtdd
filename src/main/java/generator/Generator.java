@@ -11,14 +11,14 @@ import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
 
-class Generator {
+public class Generator {
     private final File directory;
 
-    Generator(File targetDirectory) {
+    public Generator(File targetDirectory) {
         directory = targetDirectory;
     }
 
-    void generate() {
+    public void generate() {
         File testDirectory = new File(directory.getPath() + "/test");
         File[] testFiles = testDirectory.listFiles();
 
@@ -27,7 +27,7 @@ class Generator {
         }
     }
 
-    void createClass(File testFile) {
+    public void createClass(File testFile) {
         String className = getClassName(testFile);
         Path path = Paths.get(directory.getPath() + "/src/" + className + ".java");
 

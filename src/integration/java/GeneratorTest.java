@@ -1,5 +1,4 @@
-package generator;
-
+import generator.Generator;
 import org.junit.jupiter.api.*;
 
 import java.io.File;
