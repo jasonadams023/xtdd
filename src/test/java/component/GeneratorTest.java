@@ -1,26 +1,25 @@
 package component;
 
 import generator.Generator;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.*;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class GeneratorTest {
-    private File example = new File("./example");
+    private File exampleDirectory = new File("./example");
+    private File exampleSourceDirectory = new File(exampleDirectory.getPath() + "/src");
 
+    @BeforeEach
     @AfterAll
-    @BeforeAll
     void cleanup() {
-        File directory = new File(example.getPath() + "/src");
+        File directory = new File(exampleDirectory.getPath() + "/src");
         for(File file: directory.listFiles()) {
             if (!file.isDirectory()) {
                 file.delete();
@@ -30,7 +29,7 @@ class GeneratorTest {
 
     @Test
     void shouldGenerateClassBasedOnTestFiles() {
-        Generator generator = new Generator(example);
+        Generator generator = new Generator(exampleDirectory);
 
         generator.generate();
 
@@ -38,13 +37,51 @@ class GeneratorTest {
         String data2 = "";
 
         try {
-            data1 = new String(Files.readAllBytes(Paths.get(example.getPath() + "/src/First.java")));
-            data2 = new String(Files.readAllBytes(Paths.get(example.getPath() + "/src/Second.java")));
+            data1 = new String(Files.readAllBytes(Paths.get(exampleDirectory.getPath() + "/src/First.java")));
+            data2 = new String(Files.readAllBytes(Paths.get(exampleDirectory.getPath() + "/src/Second.java")));
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         assertTrue(data1.contains("class First {"));
         assertTrue(data2.contains("class Second {"));
+    }
+
+    @Test
+    void shouldGenerateEmptyClass() {
+        String className = "Empty";
+        Generator generator = new Generator(exampleDirectory);
+
+        generator.generate();
+
+        String data = "";
+        try {
+            data = new String(Files.readAllBytes(Paths.get(exampleSourceDirectory.getPath() + "/" + className + ".java")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        String expected = "class Empty {\n" +
+                "}\n";
+
+        assertEquals(expected, data);
+    }
+
+    @Test
+    void shouldGenerateFunctionsBasedOnTestFile() {
+        String className = "First";
+        Generator generator = new Generator(exampleDirectory);
+
+        generator.generate();
+
+        String data = "";
+        try {
+            data = new String(Files.readAllBytes(Paths.get(exampleSourceDirectory.getPath() + "/" + className + ".java")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        assertTrue(data.contains("static void example() {"));
+        assertTrue(data.contains("static void different() {"));
     }
 }

@@ -27,7 +27,7 @@ public class Generator {
         }
     }
 
-    public void createClass(File testFile) {
+    void createClass(File testFile) {
         String className = getClassName(testFile);
         Path path = Paths.get(directory.getPath() + "/src/" + className + ".java");
 
