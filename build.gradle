@@ -17,3 +17,15 @@ dependencies {
     testRuntimeOnly('org.junit.jupiter:junit-jupiter-engine:5.1.0')
     testCompile "org.mockito:mockito-core:2.+"
 }
+
+test {
+    useJUnitPlatform()
+}
+
+sourceSets {
+    test {
+        java {
+            srcDirs = ["src/unit/java", "src/integration/java"]
+        }
+    }
+}
