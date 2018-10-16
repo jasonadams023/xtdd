@@ -1,4 +1,4 @@
-package integration;
+package component;
 
 import generator.Generator;
 import org.junit.jupiter.api.AfterAll;
