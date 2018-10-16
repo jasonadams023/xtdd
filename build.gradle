@@ -25,7 +25,7 @@ test {
 sourceSets {
     test {
         java {
-            srcDirs = ["src/unit/java", "src/integration/java"]
+            srcDirs = ["src/test/java"]
         }
     }
 }
