@@ -81,6 +81,7 @@ class GeneratorTest {
             e.printStackTrace();
         }
 
+        assertTrue(data.contains("class First {"));
         assertTrue(data.contains("static void example() {"));
         assertTrue(data.contains("static void different() {"));
     }
