@@ -40,10 +40,15 @@ public class Generator {
         }
 
         builder.append("}\n");
-        byte[] outputBytes = builder.toString().getBytes();
+
+        writeFile(path, builder.toString());
+    }
+
+    static void writeFile(Path targetPath, String input) {
+        byte[] outputBytes = input.getBytes();
 
         try {
-            Files.write(path, outputBytes);
+            Files.write(targetPath, outputBytes);
         } catch (IOException e) {
             e.printStackTrace();
         }
