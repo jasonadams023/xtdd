@@ -44,7 +44,8 @@ public class Generator {
         writeFile(path, builder.toString());
     }
 
-    static void writeFile(Path targetPath, String input) {
+    //Will become dependant on ProjectDirectory structure
+    void writeFile(Path targetPath, String input) {
         byte[] outputBytes = input.getBytes();
 
         try {
@@ -54,11 +55,13 @@ public class Generator {
         }
     }
 
-    static String getClassName(File testFile) {
+    //Will be moved to Class class
+    String getClassName(File testFile) {
         String testFileName = testFile.getName();
         return testFileName.substring(0, testFileName.length() - 9);
     }
 
+    //Will be moved to Function class
     List<String> getFunctionSignatures(File testFile) {
         List<String> output = new ArrayList<>();
         String className = getClassName(testFile);
@@ -81,7 +84,8 @@ public class Generator {
         return output;
     }
 
-    static String generateFunction(String signature) {
+    //will be moved to Function class
+    String generateFunction(String signature) {
         String[] parts = signature.split(Pattern.quote(":"));
         String returnType = parts[0];
         String name = parts[1];

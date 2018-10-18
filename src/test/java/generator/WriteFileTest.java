@@ -31,8 +31,9 @@ class WriteFileTest {
     @Test
     void should_CreateFile_WhenProvidedString() {
         Path targetPath = Paths.get(exampleSourceDirectory + "/Example.java");
+        Generator generator = new Generator(new File("./example"));
 
-        Generator.writeFile(targetPath, "some text");
+        generator.writeFile(targetPath, "some text");
 
         String data = "";
         try {

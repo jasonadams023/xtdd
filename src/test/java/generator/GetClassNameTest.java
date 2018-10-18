@@ -9,12 +9,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class GetClassNameTest {
+    File exampleDirectory = new File("./example");
+
     @Test
     void shouldReturnClassName() {
         String className = "Example";
         File testFile = new File("./example/test/" + className + "Test.java");
+        Generator generator = new Generator(exampleDirectory);
 
-        String name = Generator.getClassName(testFile);
+        String name = generator.getClassName(testFile);
 
         assertEquals(className, name);
     }
@@ -23,8 +26,9 @@ class GetClassNameTest {
     void shouldReturnDifferentClassName() {
         String className = "Different";
         File testFile = new File("./example/test/" + className + "Test.java");
+        Generator generator = new Generator(exampleDirectory);
 
-        String name = Generator.getClassName(testFile);
+        String name = generator.getClassName(testFile);
 
         assertEquals(className, name);
     }
