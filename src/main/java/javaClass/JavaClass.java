@@ -4,15 +4,19 @@ import java.io.File;
 
 public class JavaClass {
     File file;
-    private String name;
+    String name;
 
     public JavaClass(File file) {
         this.file = file;
-        String fileName = file.getName();
-        name = fileName.substring(0, fileName.length() - 9);
+        this.name = generateName();
     }
 
     public String toString() {
         return  "class " + name  + " {\n}\n";
+    }
+
+    String generateName() {
+        String fileName = file.getName();
+        return fileName.substring(0, fileName.length() - 9);
     }
 }
