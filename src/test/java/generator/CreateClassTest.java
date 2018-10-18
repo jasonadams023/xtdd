@@ -129,6 +129,27 @@ class CreateClassTest {
     }
 
     @Test
+    void should_CallWriteFileWithDifferentClassName() {
+        File testFile = new File(exampleDirectory.getPath() + "/test/DifferentTest.java");
+        Generator generator = new Generator(exampleDirectory);
+        Generator generatorSpy = spy(generator);
+
+        willReturn("Different").given(generatorSpy).getClassName(testFile);
+
+        List<String> output = new ArrayList<>();
+        willReturn(output).given(generatorSpy).getFunctionSignatures(testFile);
+
+        Path expectedPath = Paths.get(exampleDirectory.getPath() + "/src/Different.java");
+        String expectedInput = "class Different {\n}\n";
+
+        doNothing().when(generatorSpy).writeFile(expectedPath, expectedInput);
+
+        generatorSpy.createClass(testFile);
+
+        verify(generatorSpy, times(1)).writeFile(expectedPath, expectedInput);
+    }
+
+    @Test
     void should_CallWriteFileWithMultipleFunctions() {
         File directory = new File("./someDirectory");
         File testFile = new File(directory.getPath() + "/ExampleTest.java");
