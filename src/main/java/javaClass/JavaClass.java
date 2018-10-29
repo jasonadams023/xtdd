@@ -50,14 +50,8 @@ public class JavaClass {
     }
 
     void readFile() {
-        List<String> lines;
         functions = new ArrayList<>();
-        try {
-            lines = fileReader.readAllLines(Paths.get(file.getPath()));
-        } catch (Exception e) {
-            lines = Collections.emptyList();
-            e.printStackTrace();
-        }
+        List<String> lines = getLines();
 
         for (String line: lines) {
             addFunctionFromLine(line);
@@ -82,5 +76,17 @@ public class JavaClass {
         if(generated != null) {
             functions.add(generateFunction(line));
         }
+    }
+
+    List<String> getLines() {
+        List<String> lines = new ArrayList<>();
+
+        try {
+            lines = fileReader.readAllLines(Paths.get(file.getPath()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return lines;
     }
 }

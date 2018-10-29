@@ -1,20 +1,21 @@
 package javaClass;
 
-import function.Function;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.willReturn;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.*;
 
-class ReadFileTest {
+class GetLinesTest {
     @Test
-    void should_NotGenerateFunctions_WhenNoFunctionCallsInFile() {
+    void should_ReturnLines() {
         File file = new File("./ExampleTest.java");
         FileReader fileReaderMock = mock(FileReader.class);
 
@@ -29,32 +30,30 @@ class ReadFileTest {
 
         JavaClass javaClass = new JavaClass(file, fileReaderMock);
 
-        javaClass.readFile();
+        List<String> lines = javaClass.getLines();
 
-        assertEquals(0, javaClass.functions.size());
+        assertEquals(expectedLines, lines);
     }
 
     @Test
-    void should_GenerateFunction_WhenFunctionCallInFile() {
+    void should_ReturnEmptyList() {
         File file = new File("./ExampleTest.java");
         FileReader fileReaderMock = mock(FileReader.class);
 
         List<String> expectedLines = new ArrayList<>();
-        expectedLines.add("Example.function()");
+        IOException exceptionMock = mock(IOException.class);
+
         try {
-            willReturn(expectedLines).given(fileReaderMock).readAllLines(Paths.get(file.getPath()));
+            when(fileReaderMock.readAllLines(any())).thenThrow(exceptionMock);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         JavaClass javaClass = new JavaClass(file, fileReaderMock);
 
-        javaClass.readFile();
+        List<String> lines = javaClass.getLines();
 
-        Function expectedFunction = new Function();
-        expectedFunction.setName("function");
-
-        assertEquals(1, javaClass.functions.size());
-        assertEquals(expectedFunction, javaClass.functions.get(0));
+        assertEquals(expectedLines, lines);
+        verify(exceptionMock, times(1)).printStackTrace();
     }
 }
