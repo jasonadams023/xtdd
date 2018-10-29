@@ -24,7 +24,7 @@ public class Function {
         return builder.toString();
     }
 
-    void setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 

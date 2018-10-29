@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class JavaClass {
     FileReader fileReader;
@@ -47,5 +48,17 @@ public class JavaClass {
         for (String line: lines) {
             functions.add(new Function());
         }
+    }
+
+    Function generateFunction(String line) {
+        Function output = null;
+        if (line.contains(this.name + ".")) {
+            String functionCall = line.split(Pattern.quote("."))[1];
+            String functionName = functionCall.split(Pattern.quote("("))[0];
+
+            output = new Function();
+            output.setName(functionName);
+        }
+        return output;
     }
 }
