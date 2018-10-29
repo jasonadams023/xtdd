@@ -21,7 +21,7 @@ class ToStringTest {
 
         String functionString = function.toString();
 
-        assertEquals("void Example() {\n}\n", functionString);
+        assertEquals("static void Example() {\n}\n", functionString);
     }
 
     @Test
@@ -32,6 +32,6 @@ class ToStringTest {
 
         String functionString = function.toString();
 
-        assertEquals("String Example() {\n}\n", functionString);
+        assertEquals("static String Example() {\n}\n", functionString);
     }
 }

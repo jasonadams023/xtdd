@@ -13,6 +13,7 @@ public class Function {
         StringBuilder builder = new StringBuilder();
 
         if (!name.equals("")) {
+            builder.append("static ");
             builder.append(returnType);
             builder.append(" ");
             builder.append(name);
