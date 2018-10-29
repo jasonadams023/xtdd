@@ -29,4 +29,14 @@ class EqualsTest {
 
         assertFalse(output);
     }
+
+    @Test
+    void should_ReturnFalse_WhenDifferentObjects () {
+        Function function1 = new Function();
+        function1.setName("someName");
+
+        boolean output = function1.equals("Not a function");
+
+        assertFalse(output);
+    }
 }
