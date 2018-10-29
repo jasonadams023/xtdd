@@ -26,8 +26,13 @@ public class Function {
         this.name = name;
     }
 
-    public String getName() {
-        return this.name;
+    public boolean equals(Object o) {
+        if (o instanceof Function) {
+            Function compareTo = (Function) o;
+            return name.equals(compareTo.name);
+        }
+
+        return false;
     }
 
     void setReturnType(String returnType) {

@@ -30,6 +30,6 @@ class GenerateFunctionTest {
 
         Function output = javaClass.generateFunction("Example.function()");
 
-        assertEquals(expectedOutput.toString(), output.toString());
+        assertEquals(expectedOutput, output);
     }
 }

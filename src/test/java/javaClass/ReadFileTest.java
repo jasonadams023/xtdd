@@ -50,7 +50,10 @@ class ReadFileTest {
 
         javaClass.readFile();
 
+        Function expectedFunction = new Function();
+        expectedFunction.setName("function");
+
         assertEquals(1, javaClass.functions.size());
-        assertEquals("function", javaClass.functions.get(0).getName());
+        assertEquals(expectedFunction, javaClass.functions.get(0));
     }
 }
