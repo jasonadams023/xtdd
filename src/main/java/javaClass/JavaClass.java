@@ -18,16 +18,30 @@ public class JavaClass {
     public JavaClass(File file) {
         this.file = file;
         this.name = generateName();
+        this.functions = new ArrayList<>();
     }
 
     JavaClass(File file, FileReader files) {
         this.file = file;
         this.name = generateName();
+        this.functions = new ArrayList<>();
         this.fileReader = files;
     }
 
     public String toString() {
-        return  "class " + name  + " {\n}\n";
+        StringBuilder builder = new StringBuilder();
+
+        builder.append("class ");
+        builder.append(name);
+        builder.append(" {\n");
+
+        for (Function function : functions) {
+            builder.append(function.toString());
+        }
+
+        builder.append("}\n");
+
+        return  builder.toString();
     }
 
     String generateName() {

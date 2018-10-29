@@ -16,6 +16,7 @@ class ConstructorTest {
 
         assertEquals(file, javaClass.file);
         assertEquals("Example", javaClass.name);
+        assertEquals(0, javaClass.functions.size());
     }
 
     @Test
@@ -27,6 +28,7 @@ class ConstructorTest {
 
         assertEquals(file, javaClass.file);
         assertEquals("Example", javaClass.name);
+        assertEquals(0, javaClass.functions.size());
         assertNotNull(javaClass.fileReader);
     }
 }
