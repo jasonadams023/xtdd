@@ -60,10 +60,7 @@ public class JavaClass {
         }
 
         for (String line: lines) {
-            Function generated = generateFunction(line);
-            if(generated != null) {
-                functions.add(generateFunction(line));
-            }
+            addFunctionFromLine(line);
         }
     }
 
@@ -77,5 +74,13 @@ public class JavaClass {
             output.setName(functionName);
         }
         return output;
+    }
+
+    void addFunctionFromLine(String line) {
+        Function generated = generateFunction(line);
+
+        if(generated != null) {
+            functions.add(generateFunction(line));
+        }
     }
 }
