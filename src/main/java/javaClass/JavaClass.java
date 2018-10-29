@@ -31,9 +31,7 @@ public class JavaClass {
     public String toString() {
         StringBuilder builder = new StringBuilder();
 
-        builder.append("class ");
-        builder.append(name);
-        builder.append(" {\n");
+        builder.append(getHeader());
 
         for (Function function : functions) {
             builder.append(function.toString());
@@ -86,5 +84,9 @@ public class JavaClass {
         }
 
         return new ArrayList<>();
+    }
+
+    String getHeader() {
+        return "class " + name + " {\n";
     }
 }
