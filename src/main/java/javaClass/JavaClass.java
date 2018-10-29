@@ -79,14 +79,12 @@ public class JavaClass {
     }
 
     List<String> getLines() {
-        List<String> lines = new ArrayList<>();
-
         try {
-            lines = fileReader.readAllLines(Paths.get(file.getPath()));
+            return fileReader.readAllLines(Paths.get(file.getPath()));
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return lines;
+        return new ArrayList<>();
     }
 }
