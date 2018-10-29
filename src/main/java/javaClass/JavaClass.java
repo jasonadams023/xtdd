@@ -60,7 +60,10 @@ public class JavaClass {
         }
 
         for (String line: lines) {
-            functions.add(generateFunction(line));
+            Function generated = generateFunction(line);
+            if(generated != null) {
+                functions.add(generateFunction(line));
+            }
         }
     }
 

@@ -19,9 +19,11 @@ class ReadFileTest {
         File file = new File("./ExampleTest.java");
         FileReader fileReaderMock = mock(FileReader.class);
 
-        List<Function> expectedFunctions = Collections.emptyList();
+        List<String> expectedLines = new ArrayList<>();
+        expectedLines.add("class Example{\n");
+        expectedLines.add("}\n");
         try {
-            willReturn(expectedFunctions).given(fileReaderMock).readAllLines(Paths.get(file.getPath()));
+            willReturn(expectedLines).given(fileReaderMock).readAllLines(Paths.get(file.getPath()));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -38,10 +40,10 @@ class ReadFileTest {
         File file = new File("./ExampleTest.java");
         FileReader fileReaderMock = mock(FileReader.class);
 
-        List<String> expectedFunctions = new ArrayList<>();
-        expectedFunctions.add("Example.function()");
+        List<String> expectedLines = new ArrayList<>();
+        expectedLines.add("Example.function()");
         try {
-            willReturn(expectedFunctions).given(fileReaderMock).readAllLines(Paths.get(file.getPath()));
+            willReturn(expectedLines).given(fileReaderMock).readAllLines(Paths.get(file.getPath()));
         } catch (Exception e) {
             e.printStackTrace();
         }
