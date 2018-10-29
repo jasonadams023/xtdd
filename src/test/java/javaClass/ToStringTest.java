@@ -9,48 +9,43 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.BDDMockito.willReturn;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.*;
 
 class ToStringTest {
     @Test
-    void should_PrintEmptyClass() {
+    void should_CallHeaderAndFooter() {
         File file = new File("./ExampleTest.java");
         JavaClass javaClass = new JavaClass(file);
+        JavaClass javaClassSpy = spy(javaClass);
 
-        String classString = javaClass.toString();
+        willReturn("header ").given(javaClassSpy).getHeader();
+        willReturn("footer ").given(javaClassSpy).getFooter();
 
-        assertEquals( "class Example {\n}\n", classString);
+        String output = javaClassSpy.toString();
+
+        verify(javaClassSpy, times(1)).getHeader();
+        verify(javaClassSpy, times(1)).getFooter();
+
+        assertEquals("header footer ", output);
     }
 
     @Test
-    void should_PrintDifferentEmptyClass() {
-        File file = new File("./DifferentTest.java");
-        JavaClass javaClass = new JavaClass(file);
-
-        String classString = javaClass.toString();
-
-        assertEquals( "class Different {\n}\n", classString);
-    }
-
-    @Test
-    void should_PrintClassWithFunctions() {
+    void should_IncludeFunctions() {
         File file = new File("./ExampleTest.java");
         JavaClass javaClass = new JavaClass(file);
+        JavaClass javaClassSpy = spy(javaClass);
+        Function functionMock = mock(Function.class);
 
         List<Function> functions = new ArrayList<>();
+        functions.add(functionMock);
+        javaClassSpy.functions = functions;
 
-        Function mockFunction = mock(Function.class);
-        willReturn("void function() {\n}\n").given(mockFunction).toString();
+        willReturn("header ").given(javaClassSpy).getHeader();
+        willReturn("function ").given(functionMock).toString();
+        willReturn("footer ").given(javaClassSpy).getFooter();
 
-        functions.add(mockFunction);
-        javaClass.functions = functions;
+        String output = javaClassSpy.toString();
 
-        String expected = "class Example {\n" +
-                "void function() {\n}\n" +
-                "}\n";
-
-        String classString = javaClass.toString();
-
-        assertEquals(expected, classString);
+        assertEquals("header function footer ", output);
     }
 }

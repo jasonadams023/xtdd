@@ -16,4 +16,14 @@ class GetHeaderTest {
 
         assertEquals("class Example {\n", header);
     }
+
+    @Test
+    void should_ReturnHeaderWithDifferentName() {
+        File file = new File("./DifferentTest.java");
+        JavaClass javaClass = new JavaClass(file);
+
+        String header = javaClass.getHeader();
+
+        assertEquals("class Different {\n", header);
+    }
 }
