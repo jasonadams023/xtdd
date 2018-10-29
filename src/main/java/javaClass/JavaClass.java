@@ -5,7 +5,6 @@ import function.Function;
 import java.io.File;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -37,7 +36,7 @@ public class JavaClass {
             builder.append(function.toString());
         }
 
-        builder.append("}\n");
+        builder.append(getFooter());
 
         return  builder.toString();
     }
@@ -88,5 +87,9 @@ public class JavaClass {
 
     String getHeader() {
         return "class " + name + " {\n";
+    }
+
+    String getFooter() {
+        return "}\n";
     }
 }
