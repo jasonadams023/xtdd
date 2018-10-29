@@ -26,6 +26,10 @@ public class Function {
         this.name = name;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
     void setReturnType(String returnType) {
         this.returnType = returnType;
     }

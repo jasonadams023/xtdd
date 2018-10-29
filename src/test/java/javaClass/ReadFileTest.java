@@ -51,5 +51,6 @@ class ReadFileTest {
         javaClass.readFile();
 
         assertEquals(1, javaClass.functions.size());
+        assertEquals("function", javaClass.functions.get(0).getName());
     }
 }

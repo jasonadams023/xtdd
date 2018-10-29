@@ -46,7 +46,7 @@ public class JavaClass {
         }
 
         for (String line: lines) {
-            functions.add(new Function());
+            functions.add(generateFunction(line));
         }
     }
 
