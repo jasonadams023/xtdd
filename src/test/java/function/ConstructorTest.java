@@ -11,6 +11,5 @@ class ConstructorTest {
 
         assertEquals("", function.name);
         assertEquals("void", function.returnType);
-        assertEquals("", function.className);
     }
 }
