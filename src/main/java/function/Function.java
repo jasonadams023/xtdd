@@ -1,10 +1,12 @@
 package function;
 
 public class Function {
+    String className;
     String name;
     String returnType;
 
     public Function() {
+        this.className = "";
         this.name = "";
         this.returnType = "void";
     }
