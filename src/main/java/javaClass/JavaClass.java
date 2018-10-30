@@ -20,7 +20,7 @@ public class JavaClass {
         this.functions = new ArrayList<>();
     }
 
-    JavaClass(File file, FileReader files) {
+    public JavaClass(File file, FileReader files) {
         this.file = file;
         this.name = generateName();
         this.functions = new ArrayList<>();
@@ -46,7 +46,7 @@ public class JavaClass {
         return fileName.substring(0, fileName.length() - 9);
     }
 
-    void readFile() {
+    public void readFile() {
         functions = new ArrayList<>();
         List<String> lines = getLines();
 
