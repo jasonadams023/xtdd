@@ -92,4 +92,8 @@ public class JavaClass {
     String getFooter() {
         return "}\n";
     }
+
+    public String getName() {
+        return name;
+    }
 }
