@@ -9,7 +9,7 @@ import java.util.List;
 public class FilesWrapper {
     FilesInterface files;
 
-    FilesWrapper(FilesInterface files) {
+    public FilesWrapper(FilesInterface files) {
         this.files = files;
     }
 
@@ -31,7 +31,7 @@ public class FilesWrapper {
         return new ArrayList<>();
     }
 
-    File getTestDirectory(File directory) {
+    public File getTestDirectory(File directory) {
         File[] directoryFiles = directory.listFiles();
         if (directoryFiles != null) {
             for (File file : directoryFiles) {

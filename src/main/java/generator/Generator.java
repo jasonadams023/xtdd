@@ -1,5 +1,6 @@
 package generator;
 
+import filesWrapper.FilesWrapper;
 import javaClass.FileReader;
 import javaClass.JavaClass;
 
@@ -10,25 +11,32 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class Generator {
-    private final File directory;
+    File directory;
+    FilesWrapper files;
 
     public Generator(File targetDirectory) {
         directory = targetDirectory;
     }
 
+    public Generator(File directory, FilesWrapper filesWrapper) {
+        this.directory = directory;
+        this.files = filesWrapper;
+    }
+
     public void generate() {
-        File testDirectory = new File(directory.getPath() + "/test");
+        File testDirectory = files.getTestDirectory(directory);
         File[] testFiles = testDirectory.listFiles();
 
         for (File testFile : testFiles) {
-            FileReader reader = (path) -> Files.readAllLines(path);
+            FileReader reader = (path) -> files.readAllLines(path);
+
             JavaClass javaClass = new JavaClass(testFile, reader);
             javaClass.readFile();
 
             String className = javaClass.getName();
             Path path = Paths.get(directory.getPath() + "/src/" + className + ".java");
 
-            writeFile(path, javaClass.toString());
+            files.writeFile(path, javaClass.toString());
         }
     }
 
