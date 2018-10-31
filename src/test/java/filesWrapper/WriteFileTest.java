@@ -42,15 +42,11 @@ class WriteFileTest {
         try {
             when(filesMock.write(any(), any())).thenThrow(exceptionMock);
         } catch (Exception e) {
-            e.printStackTrace();
+            fail("Failed in setup");
         }
 
         filesWrapper.writeFile(path, text);
 
-        try {
-            verify(exceptionMock, times(1)).printStackTrace();
-        } catch (Exception e) {
-            fail("Try verify failed");
-        }
+        verify(exceptionMock, times(1)).printStackTrace();
     }
 }

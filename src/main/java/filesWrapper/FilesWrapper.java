@@ -1,8 +1,11 @@
 package filesWrapper;
 
+import java.io.IOException;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 
-class FilesWrapper {
+public class FilesWrapper {
     FilesInterface files;
 
     FilesWrapper(FilesInterface files) {
@@ -12,8 +15,19 @@ class FilesWrapper {
     void writeFile(Path path, String text) {
         try {
             files.write(path, text.getBytes());
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+    List<String> readAllLines(Path path) {
+        try {
+            return files.readAllLines(path);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return new ArrayList<>();
+    }
+
 }
