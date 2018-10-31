@@ -39,15 +39,4 @@ public class Generator {
             files.writeFile(path, javaClass.toString());
         }
     }
-
-    //Will become dependant on ProjectDirectory structure
-    void writeFile(Path targetPath, String input) {
-        byte[] outputBytes = input.getBytes();
-
-        try {
-            Files.write(targetPath, outputBytes);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }
