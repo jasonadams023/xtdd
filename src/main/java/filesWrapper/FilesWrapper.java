@@ -1,5 +1,6 @@
 package filesWrapper;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ public class FilesWrapper {
         this.files = files;
     }
 
-    void writeFile(Path path, String text) {
+    public void writeFile(Path path, String text) {
         try {
             files.write(path, text.getBytes());
         } catch (IOException e) {
@@ -20,7 +21,7 @@ public class FilesWrapper {
         }
     }
 
-    List<String> readAllLines(Path path) {
+    public List<String> readAllLines(Path path) {
         try {
             return files.readAllLines(path);
         } catch (Exception e) {
@@ -30,4 +31,16 @@ public class FilesWrapper {
         return new ArrayList<>();
     }
 
+    File getTestDirectory(File directory) {
+        File[] directoryFiles = directory.listFiles();
+        if (directoryFiles != null) {
+            for (File file : directoryFiles) {
+                if (file.getName().equals("test")) {
+                    return file;
+                }
+            }
+        }
+
+        return null;
+    }
 }
