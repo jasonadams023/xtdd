@@ -91,4 +91,13 @@ public class JavaClass {
     public String getName() {
         return name;
     }
+
+    public boolean equals(Object o) {
+        if (o instanceof JavaClass) {
+            JavaClass compareTo = (JavaClass) o;
+            return name.equals(compareTo.name);
+        }
+
+        return false;
+    }
 }

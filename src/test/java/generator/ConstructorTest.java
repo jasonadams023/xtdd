@@ -1,9 +1,11 @@
 package generator;
 
 import fileManager.FileManager;
+import javaClass.JavaClass;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -17,7 +19,8 @@ class ConstructorTest {
         Generator generator = new Generator(directory, fileManager);
 
         assertNotNull(generator);
-        assertEquals(fileManager, generator.files);
+        assertEquals(fileManager, generator.fileManager);
         assertEquals(directory, generator.directory);
+        assertEquals(new ArrayList<JavaClass>(), generator.javaClasses);
     }
 }
