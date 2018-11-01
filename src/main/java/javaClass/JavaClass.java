@@ -1,15 +1,15 @@
 package javaClass;
 
+import filesWrapper.FilesWrapper;
 import function.Function;
 
 import java.io.File;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
 public class JavaClass {
-    FileReader fileReader;
+    FilesWrapper filesWrapper;
     File file;
     String name;
     List<Function> functions;
@@ -20,11 +20,11 @@ public class JavaClass {
         this.functions = new ArrayList<>();
     }
 
-    public JavaClass(File file, FileReader files) {
+    public JavaClass(File file, FilesWrapper filesWrapper) {
         this.file = file;
         this.name = generateName();
         this.functions = new ArrayList<>();
-        this.fileReader = files;
+        this.filesWrapper = filesWrapper;
     }
 
     public String toString() {
@@ -48,7 +48,7 @@ public class JavaClass {
 
     public void readFile() {
         functions = new ArrayList<>();
-        List<String> lines = getLines();
+        List<String> lines = filesWrapper.readAllLines(file.toPath());
 
         for (String line: lines) {
             addFunctionFromLine(line);
@@ -73,16 +73,6 @@ public class JavaClass {
         if(generated != null) {
             functions.add(generateFunction(line));
         }
-    }
-
-    List<String> getLines() {
-        try {
-            return fileReader.readAllLines(Paths.get(file.getPath()));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return new ArrayList<>();
     }
 
     String getHeader() {

@@ -1,7 +1,6 @@
 package generator;
 
 import filesWrapper.FilesWrapper;
-import javaClass.FileReader;
 import javaClass.JavaClass;
 
 import java.io.File;
@@ -22,9 +21,7 @@ public class Generator {
         File[] testFiles = testDirectory.listFiles();
 
         for (File testFile : testFiles) {
-            FileReader reader = (path) -> files.readAllLines(path);
-
-            JavaClass javaClass = new JavaClass(testFile, reader);
+            JavaClass javaClass = new JavaClass(testFile, files);
             javaClass.readFile();
 
             String className = javaClass.getName();
