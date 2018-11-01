@@ -5,18 +5,12 @@ import javaClass.FileReader;
 import javaClass.JavaClass;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class Generator {
     File directory;
     FilesWrapper files;
-
-    public Generator(File targetDirectory) {
-        directory = targetDirectory;
-    }
 
     public Generator(File directory, FilesWrapper filesWrapper) {
         this.directory = directory;
