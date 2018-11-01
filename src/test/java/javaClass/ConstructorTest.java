@@ -1,9 +1,11 @@
 package javaClass;
 
 import fileManager.FileManager;
+import function.Function;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -31,5 +33,13 @@ class ConstructorTest {
         assertEquals("Example", javaClass.name);
         assertEquals(0, javaClass.functions.size());
         assertNotNull(javaClass.fileManager);
+    }
+
+    @Test
+    void should_CreateNewJavaClass_WithName() {
+        JavaClass javaClass = new JavaClass("Example");
+
+        assertEquals("Example", javaClass.name);
+        assertEquals(new ArrayList<Function>(), javaClass.functions);
     }
 }
