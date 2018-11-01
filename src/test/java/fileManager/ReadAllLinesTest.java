@@ -1,4 +1,4 @@
-package filesWrapper;
+package fileManager;
 
 import org.junit.jupiter.api.Test;
 
@@ -16,8 +16,8 @@ import static org.mockito.Mockito.*;
 class ReadAllLinesTest {
     @Test
     void should_CallReadAllLinesMethod() {
-        FilesInterface filesMock = mock(FilesInterface.class);
-        FilesWrapper filesWrapper = new FilesWrapper(filesMock);
+        FilesWrapper filesWrapper = mock(FilesWrapper.class);
+        FileManager fileManager = new FileManager(filesWrapper);
 
         Path path = Paths.get("./somePath");
         List<String> lines = new ArrayList<>();
@@ -25,31 +25,31 @@ class ReadAllLinesTest {
         lines.add("two");
 
         try {
-            willReturn(lines).given(filesMock).readAllLines(path);
+            willReturn(lines).given(filesWrapper).readAllLines(path);
         } catch (Exception e) {
             fail("Failed in setup");
         }
 
-        List<String> output = filesWrapper.readAllLines(path);
+        List<String> output = fileManager.readAllLines(path);
 
         assertEquals(lines, output);
     }
 
     @Test
     void should_PrintStackTraceAndReturnEmptyList_WhenExceptionThrown() {
-        FilesInterface filesMock = mock(FilesInterface.class);
-        FilesWrapper filesWrapper = new FilesWrapper(filesMock);
+        FilesWrapper filesWrapper = mock(FilesWrapper.class);
+        FileManager fileManager = new FileManager(filesWrapper);
         Path path = Paths.get("./somePath");
 
         IOException exceptionMock = mock(IOException.class);
 
         try {
-            when(filesMock.readAllLines(path)).thenThrow(exceptionMock);
+            when(filesWrapper.readAllLines(path)).thenThrow(exceptionMock);
         } catch (Exception e) {
             fail("Failed in setup");
         }
 
-        List<String> output = filesWrapper.readAllLines(path);
+        List<String> output = fileManager.readAllLines(path);
 
         verify(exceptionMock, times(1)).printStackTrace();
         assertEquals(new ArrayList<String>(), output);

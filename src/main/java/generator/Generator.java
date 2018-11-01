@@ -1,6 +1,6 @@
 package generator;
 
-import filesWrapper.FilesWrapper;
+import fileManager.FileManager;
 import javaClass.JavaClass;
 
 import java.io.File;
@@ -9,11 +9,11 @@ import java.nio.file.Paths;
 
 public class Generator {
     File directory;
-    FilesWrapper files;
+    FileManager files;
 
-    public Generator(File directory, FilesWrapper filesWrapper) {
+    public Generator(File directory, FileManager fileManager) {
         this.directory = directory;
-        this.files = filesWrapper;
+        this.files = fileManager;
     }
 
     public void generate() {

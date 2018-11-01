@@ -1,4 +1,4 @@
-package filesWrapper;
+package fileManager;
 
 import org.junit.jupiter.api.Test;
 
@@ -12,19 +12,19 @@ import static org.mockito.Mockito.mock;
 class GetTestDirectory {
     @Test
     void should_ReturnNullIfNoTestDirectoryExists() {
-        FilesInterface filesInterface = mock(FilesInterface.class);
-        FilesWrapper filesWrapper = new FilesWrapper(filesInterface);
+        FilesWrapper filesWrapper = mock(FilesWrapper.class);
+        FileManager fileManager = new FileManager(filesWrapper);
         File directory = mock(File.class);
 
-        File output = filesWrapper.getTestDirectory(directory);
+        File output = fileManager.getTestDirectory(directory);
 
         assertNull(output);
     }
 
     @Test
     void should_ReturnTestDirectoryIfItExists() {
-        FilesInterface filesInterface = mock(FilesInterface.class);
-        FilesWrapper filesWrapper = new FilesWrapper(filesInterface);
+        FilesWrapper filesWrapper = mock(FilesWrapper.class);
+        FileManager fileManager = new FileManager(filesWrapper);
         File directory = mock(File.class);
 
         File testDirectory = mock(File.class);
@@ -35,7 +35,7 @@ class GetTestDirectory {
         directories[0] = testDirectory;
         willReturn(directories).given(directory).listFiles();
 
-        File output = filesWrapper.getTestDirectory(directory);
+        File output = fileManager.getTestDirectory(directory);
 
         assertEquals(testDirectory, output);
     }

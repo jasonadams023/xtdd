@@ -1,4 +1,4 @@
-package filesWrapper;
+package fileManager;
 
 import java.io.File;
 import java.io.IOException;
@@ -6,10 +6,10 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FilesWrapper {
-    FilesInterface files;
+public class FileManager {
+    FilesWrapper files;
 
-    public FilesWrapper(FilesInterface files) {
+    public FileManager(FilesWrapper files) {
         this.files = files;
     }
 

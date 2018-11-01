@@ -1,6 +1,6 @@
 package javaClass;
 
-import filesWrapper.FilesWrapper;
+import fileManager.FileManager;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -23,13 +23,13 @@ class ConstructorTest {
     @Test
     void should_InjectFileReader() {
         File file = new File("./ExampleTest.java");
-        FilesWrapper filesWrapper = mock(FilesWrapper.class);
+        FileManager fileManager = mock(FileManager.class);
 
-        JavaClass javaClass = new JavaClass(file, filesWrapper);
+        JavaClass javaClass = new JavaClass(file, fileManager);
 
         assertEquals(file, javaClass.file);
         assertEquals("Example", javaClass.name);
         assertEquals(0, javaClass.functions.size());
-        assertNotNull(javaClass.filesWrapper);
+        assertNotNull(javaClass.fileManager);
     }
 }

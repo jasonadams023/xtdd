@@ -1,6 +1,6 @@
 package javaClass;
 
-import filesWrapper.FilesWrapper;
+import fileManager.FileManager;
 import function.Function;
 import org.junit.jupiter.api.Test;
 
@@ -17,18 +17,18 @@ class ReadFileTest {
     @Test
     void should_NotGenerateFunctions_WhenNoFunctionCallsInFile() {
         File file = new File("./ExampleTest.java");
-        FilesWrapper filesWrapper = mock(FilesWrapper.class);
+        FileManager fileManager = mock(FileManager.class);
 
         List<String> expectedLines = new ArrayList<>();
         expectedLines.add("class Example{\n");
         expectedLines.add("}\n");
         try {
-            willReturn(expectedLines).given(filesWrapper).readAllLines(Paths.get(file.getPath()));
+            willReturn(expectedLines).given(fileManager).readAllLines(Paths.get(file.getPath()));
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        JavaClass javaClass = new JavaClass(file, filesWrapper);
+        JavaClass javaClass = new JavaClass(file, fileManager);
 
         javaClass.readFile();
 
@@ -38,17 +38,17 @@ class ReadFileTest {
     @Test
     void should_GenerateFunction_WhenFunctionCallInFile() {
         File file = new File("./ExampleTest.java");
-        FilesWrapper filesWrapper = mock(FilesWrapper.class);
+        FileManager fileManager = mock(FileManager.class);
 
         List<String> expectedLines = new ArrayList<>();
         expectedLines.add("Example.function()");
         try {
-            willReturn(expectedLines).given(filesWrapper).readAllLines(Paths.get(file.getPath()));
+            willReturn(expectedLines).given(fileManager).readAllLines(Paths.get(file.getPath()));
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        JavaClass javaClass = new JavaClass(file, filesWrapper);
+        JavaClass javaClass = new JavaClass(file, fileManager);
 
         javaClass.readFile();
 

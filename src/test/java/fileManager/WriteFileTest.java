@@ -1,4 +1,4 @@
-package filesWrapper;
+package fileManager;
 
 import org.junit.jupiter.api.Test;
 
@@ -13,17 +13,17 @@ import static org.mockito.Mockito.*;
 class WriteFileTest {
     @Test
     void should_CallWriteMethodWithArgs() {
-        FilesInterface filesMock = mock(FilesInterface.class);
-        FilesWrapper filesWrapper = new FilesWrapper(filesMock);
+        FilesWrapper filesWrapper = mock(FilesWrapper.class);
+        FileManager fileManager = new FileManager(filesWrapper);
 
         Path path = Paths.get("./ExamplePath.txt");
         String text = "Example text";
         byte[] bytes = text.getBytes();
 
-        filesWrapper.writeFile(path, text);
+        fileManager.writeFile(path, text);
 
         try {
-            verify(filesMock, times(1)).write(path, bytes);
+            verify(filesWrapper, times(1)).write(path, bytes);
         } catch (Exception e) {
             fail("Try verify failed");
         }
@@ -31,8 +31,8 @@ class WriteFileTest {
 
     @Test
     void should_PrintStackTrace_WhenExceptionThrown() {
-        FilesInterface filesMock = mock(FilesInterface.class);
-        FilesWrapper filesWrapper = new FilesWrapper(filesMock);
+        FilesWrapper filesWrapper = mock(FilesWrapper.class);
+        FileManager fileManager = new FileManager(filesWrapper);
 
         Path path = Paths.get("./ExamplePath.txt");
         String text = "Example text";
@@ -40,12 +40,12 @@ class WriteFileTest {
         IOException exceptionMock = mock(IOException.class);
 
         try {
-            when(filesMock.write(any(), any())).thenThrow(exceptionMock);
+            when(filesWrapper.write(any(), any())).thenThrow(exceptionMock);
         } catch (Exception e) {
             fail("Failed in setup");
         }
 
-        filesWrapper.writeFile(path, text);
+        fileManager.writeFile(path, text);
 
         verify(exceptionMock, times(1)).printStackTrace();
     }

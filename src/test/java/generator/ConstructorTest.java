@@ -1,6 +1,6 @@
 package generator;
 
-import filesWrapper.FilesWrapper;
+import fileManager.FileManager;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -13,11 +13,11 @@ class ConstructorTest {
     @Test
     void should_ReturnNewGenerator() {
         File directory = mock(File.class);
-        FilesWrapper filesWrapper = mock(FilesWrapper.class);
-        Generator generator = new Generator(directory, filesWrapper);
+        FileManager fileManager = mock(FileManager.class);
+        Generator generator = new Generator(directory, fileManager);
 
         assertNotNull(generator);
-        assertEquals(filesWrapper, generator.files);
+        assertEquals(fileManager, generator.files);
         assertEquals(directory, generator.directory);
     }
 }

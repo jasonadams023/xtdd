@@ -1,6 +1,6 @@
 package generator;
 
-import filesWrapper.FilesWrapper;
+import fileManager.FileManager;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -15,7 +15,7 @@ class GenerateTest {
     @Test
     void should_NotCreateClassForEmptyFolder() {
         File directoryMock = mock(File.class);
-        FilesWrapper filesMock = mock(FilesWrapper.class);
+        FileManager filesMock = mock(FileManager.class);
         Generator generator = new Generator(directoryMock, filesMock);
 
         int fileCount = 0;
@@ -39,7 +39,7 @@ class GenerateTest {
         String directoryString = "./example";
         willReturn(directoryString).given(directoryMock).getPath();
 
-        FilesWrapper filesMock = mock(FilesWrapper.class);
+        FileManager filesMock = mock(FileManager.class);
         Generator generator = new Generator(directoryMock, filesMock);
 
         String firstClassName = "class1";

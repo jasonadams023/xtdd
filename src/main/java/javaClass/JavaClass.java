@@ -1,6 +1,6 @@
 package javaClass;
 
-import filesWrapper.FilesWrapper;
+import fileManager.FileManager;
 import function.Function;
 
 import java.io.File;
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public class JavaClass {
-    FilesWrapper filesWrapper;
+    FileManager fileManager;
     File file;
     String name;
     List<Function> functions;
@@ -20,11 +20,11 @@ public class JavaClass {
         this.functions = new ArrayList<>();
     }
 
-    public JavaClass(File file, FilesWrapper filesWrapper) {
+    public JavaClass(File file, FileManager fileManager) {
         this.file = file;
         this.name = generateName();
         this.functions = new ArrayList<>();
-        this.filesWrapper = filesWrapper;
+        this.fileManager = fileManager;
     }
 
     public String toString() {
@@ -48,7 +48,7 @@ public class JavaClass {
 
     public void readFile() {
         functions = new ArrayList<>();
-        List<String> lines = filesWrapper.readAllLines(file.toPath());
+        List<String> lines = fileManager.readAllLines(file.toPath());
 
         for (String line: lines) {
             addFunctionFromLine(line);

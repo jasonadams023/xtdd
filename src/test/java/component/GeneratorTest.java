@@ -1,8 +1,7 @@
 package component;
 
-import filesWrapper.FilesInterface;
-import filesWrapper.FilesWrapper;
-import filesWrapper.FilesWrapper2;
+import fileManager.FileManager;
+import fileManager.FilesWrapper;
 import generator.Generator;
 import org.junit.jupiter.api.*;
 
@@ -32,9 +31,9 @@ class GeneratorTest {
 
     @Test
     void shouldGenerateClassBasedOnTestFiles() {
-        FilesInterface filesInterface = new FilesWrapper2();
-        FilesWrapper filesWrapper = new FilesWrapper(filesInterface);
-        Generator generator = new Generator(exampleDirectory, filesWrapper);
+        FilesWrapper filesWrapper = new FilesWrapper();
+        FileManager fileManager = new FileManager(filesWrapper);
+        Generator generator = new Generator(exampleDirectory, fileManager);
 
         generator.generate();
 
@@ -55,9 +54,9 @@ class GeneratorTest {
     @Test
     void shouldGenerateEmptyClass() {
         String className = "Empty";
-        FilesInterface filesInterface = new FilesWrapper2();
-        FilesWrapper filesWrapper = new FilesWrapper(filesInterface);
-        Generator generator = new Generator(exampleDirectory, filesWrapper);
+        FilesWrapper filesWrapper = new FilesWrapper();
+        FileManager fileManager = new FileManager(filesWrapper);
+        Generator generator = new Generator(exampleDirectory, fileManager);
 
         generator.generate();
 
@@ -77,9 +76,9 @@ class GeneratorTest {
     @Test
     void shouldGenerateFunctionsBasedOnTestFile() {
         String className = "First";
-        FilesInterface filesInterface = new FilesWrapper2();
-        FilesWrapper filesWrapper = new FilesWrapper(filesInterface);
-        Generator generator = new Generator(exampleDirectory, filesWrapper);
+        FilesWrapper filesWrapper = new FilesWrapper();
+        FileManager fileManager = new FileManager(filesWrapper);
+        Generator generator = new Generator(exampleDirectory, fileManager);
 
         generator.generate();
 
