@@ -17,6 +17,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class GeneratorTest {
     private File exampleDirectory = new File("./example");
     private File exampleSourceDirectory = new File(exampleDirectory.getPath() + "/src");
+    private Generator generator;
+
+    @BeforeEach
+    void setup() {
+        FilesWrapper filesWrapper = new FilesWrapper();
+        FileManager fileManager = new FileManager(filesWrapper);
+        generator = new Generator(exampleDirectory, fileManager);
+    }
 
     @BeforeEach
     @AfterAll
@@ -31,10 +39,6 @@ class GeneratorTest {
 
     @Test
     void shouldGenerateClassBasedOnTestFiles() {
-        FilesWrapper filesWrapper = new FilesWrapper();
-        FileManager fileManager = new FileManager(filesWrapper);
-        Generator generator = new Generator(exampleDirectory, fileManager);
-
         generator.generate();
 
         String data1 = "";
@@ -54,9 +58,6 @@ class GeneratorTest {
     @Test
     void shouldGenerateEmptyClass() {
         String className = "Empty";
-        FilesWrapper filesWrapper = new FilesWrapper();
-        FileManager fileManager = new FileManager(filesWrapper);
-        Generator generator = new Generator(exampleDirectory, fileManager);
 
         generator.generate();
 
@@ -76,9 +77,6 @@ class GeneratorTest {
     @Test
     void shouldGenerateFunctionsBasedOnTestFile() {
         String className = "First";
-        FilesWrapper filesWrapper = new FilesWrapper();
-        FileManager fileManager = new FileManager(filesWrapper);
-        Generator generator = new Generator(exampleDirectory, fileManager);
 
         generator.generate();
 
