@@ -57,7 +57,7 @@ public class Generator {
 
             if(flag) {
                 String className = getClassNameFromImport(line);
-                javaClasses.add(new JavaClass(className));
+                addClass(className);
             }
         }
     }
@@ -72,5 +72,11 @@ public class Generator {
         }
 
         return className;
+    }
+
+    void addClass(String className) {
+        if (className != null && javaClasses.stream().noneMatch(o -> o.getName().equals(className))) {
+            javaClasses.add(new JavaClass(className));
+        }
     }
 }
