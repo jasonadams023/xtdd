@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.BDDMockito.willReturn;
 import static org.mockito.Mockito.mock;
 
-class GetTestDirectory {
+class GetTestDirectoryTest {
     @Test
     void should_ReturnNull_WhenNoTestDirectoryExists() {
         FilesWrapper filesWrapper = mock(FilesWrapper.class);

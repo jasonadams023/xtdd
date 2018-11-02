@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.mock;
 
-class Constructor {
+class ConstructorTest {
     @Test
     void should_ReturnNewFileManager() {
         FilesWrapper filesWrapper = mock(FilesWrapper.class);
