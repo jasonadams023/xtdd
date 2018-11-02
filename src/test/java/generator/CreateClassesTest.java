@@ -34,10 +34,10 @@ class CreateClassesTest {
 
         List<String> lines = new ArrayList<>();
         lines.add("package example;");
-        lines.add("//beginning of classes to generate");
+        lines.add(Generator.startFlag);
         lines.add("import example.Example;");
         lines.add("import example.Different;");
-        lines.add("//end of classes to generate");
+        lines.add(Generator.endFlag);
         lines.add("class Test {");
         willReturn(lines).given(fileManager).readAllLines(any());
 
