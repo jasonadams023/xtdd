@@ -35,7 +35,7 @@ public class FileManager {
         File[] directoryFiles = directory.listFiles();
         if (directoryFiles != null) {
             for (File file : directoryFiles) {
-                if (file.getName().equals("test")) {
+                if (file.getName().equals("test") && file.isDirectory()) {
                     return file;
                 }
             }

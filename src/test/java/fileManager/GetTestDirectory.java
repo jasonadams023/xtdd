@@ -11,7 +11,7 @@ import static org.mockito.Mockito.mock;
 
 class GetTestDirectory {
     @Test
-    void should_ReturnNullIfNoTestDirectoryExists() {
+    void should_ReturnNull_WhenNoTestDirectoryExists() {
         FilesWrapper filesWrapper = mock(FilesWrapper.class);
         FileManager fileManager = new FileManager(filesWrapper);
         File directory = mock(File.class);
@@ -22,7 +22,26 @@ class GetTestDirectory {
     }
 
     @Test
-    void should_ReturnTestDirectoryIfItExists() {
+    void should_ReturnNull_WhenTestFileNotDirectory() {
+        FilesWrapper filesWrapper = mock(FilesWrapper.class);
+        FileManager fileManager = new FileManager(filesWrapper);
+        File directory = mock(File.class);
+
+        File testDirectory = mock(File.class);
+        willReturn("test").given(testDirectory).getName();
+        willReturn(false).given(testDirectory).isDirectory();
+
+        File[] directories = new File[1];
+        directories[0] = testDirectory;
+        willReturn(directories).given(directory).listFiles();
+
+        File output = fileManager.getTestDirectory(directory);
+
+        assertNull(output);
+    }
+
+    @Test
+    void should_ReturnTestDirectory_WhenItExists() {
         FilesWrapper filesWrapper = mock(FilesWrapper.class);
         FileManager fileManager = new FileManager(filesWrapper);
         File directory = mock(File.class);

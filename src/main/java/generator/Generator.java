@@ -59,7 +59,6 @@ public class Generator {
                 String[] split = line.split(Pattern.quote("."));
                 String last = split[split.length - 1];
                 String className = last.split(Pattern.quote(";"))[0];
-                System.out.println(className);
 
                 javaClasses.add(new JavaClass(className));
             }
