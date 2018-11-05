@@ -2,6 +2,7 @@ package generator;
 
 import fileManager.FileManager;
 import javaClass.JavaClass;
+import javaClass.JavaClassFactory;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -17,9 +18,10 @@ import static org.mockito.Mockito.mock;
 class CreateClassesTest {
     @Test
     void should_NotGenerateClasses_WhenNoClassesFlagged() {
-        File directoryMock = mock(File.class);
+        File directory = mock(File.class);
         FileManager fileManager = mock(FileManager.class);
-        Generator generator = new Generator(directoryMock, fileManager);
+        JavaClassFactory javaClassFactory = mock(JavaClassFactory.class);
+        Generator generator = new Generator(directory, fileManager, javaClassFactory);
         Path path = mock(Path.class);
 
         generator.createClasses(path);
@@ -29,9 +31,10 @@ class CreateClassesTest {
 
     @Test
     void should_GenerateClasses_WhenClassesFlagged() {
-        File directoryMock = mock(File.class);
+        File directory = mock(File.class);
         FileManager fileManager = mock(FileManager.class);
-        Generator generator = new Generator(directoryMock, fileManager);
+        JavaClassFactory javaClassFactory = mock(JavaClassFactory.class);
+        Generator generator = new Generator(directory, fileManager, javaClassFactory);
         Path path = mock(Path.class);
 
         List<String> lines = new ArrayList<>();

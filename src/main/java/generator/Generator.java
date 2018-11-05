@@ -2,6 +2,7 @@ package generator;
 
 import fileManager.FileManager;
 import javaClass.JavaClass;
+import javaClass.JavaClassFactory;
 
 import java.io.File;
 import java.nio.file.Path;
@@ -14,13 +15,15 @@ public class Generator {
     List<JavaClass> javaClasses;
     FileManager fileManager;
     File directory;
+    JavaClassFactory javaClassFactory;
 
     static final String startFlag = "//beginning of classes to generate";
     static final String endFlag = "//end of classes to generate";
 
-    public Generator(File directory, FileManager fileManager) {
+    public Generator(File directory, FileManager fileManager, JavaClassFactory javaClassFactory) {
         this.directory = directory;
         this.fileManager = fileManager;
+        this.javaClassFactory = javaClassFactory;
         this.javaClasses = new ArrayList<>();
     }
 

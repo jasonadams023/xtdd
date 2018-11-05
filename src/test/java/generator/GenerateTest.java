@@ -1,6 +1,7 @@
 package generator;
 
 import fileManager.FileManager;
+import javaClass.JavaClassFactory;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -14,33 +15,35 @@ import static org.mockito.Mockito.*;
 class GenerateTest {
     @Test
     void should_NotCreateClassForEmptyFolder() {
-        File directoryMock = mock(File.class);
-        FileManager filesMock = mock(FileManager.class);
-        Generator generator = new Generator(directoryMock, filesMock);
+        File directory = mock(File.class);
+        FileManager fileManager = mock(FileManager.class);
+        JavaClassFactory javaClassFactory = mock(JavaClassFactory.class);
+        Generator generator = new Generator(directory, fileManager, javaClassFactory);
 
         int fileCount = 0;
         File[] returnedFiles = new File[fileCount];
-        willReturn(returnedFiles).given(directoryMock).listFiles();
+        willReturn(returnedFiles).given(directory).listFiles();
 
         File testDirectory = mock(File.class);
         File[] emptyDirectory = new File[0];
         willReturn(emptyDirectory).given(testDirectory).listFiles();
 
-        willReturn(testDirectory).given(filesMock).getTestDirectory(directoryMock);
+        willReturn(testDirectory).given(fileManager).getTestDirectory(directory);
 
         generator.generate();
 
-        verify(filesMock, times(0)).writeFile(any(), any());
+        verify(fileManager, times(0)).writeFile(any(), any());
     }
 
     @Test
     void should_CreateClassesForEachFileInFolder() {
-        File directoryMock = mock(File.class);
+        File directory = mock(File.class);
         String directoryString = "./example";
-        willReturn(directoryString).given(directoryMock).getPath();
+        willReturn(directoryString).given(directory).getPath();
 
-        FileManager filesMock = mock(FileManager.class);
-        Generator generator = new Generator(directoryMock, filesMock);
+        FileManager fileManager = mock(FileManager.class);
+        JavaClassFactory javaClassFactory = mock(JavaClassFactory.class);
+        Generator generator = new Generator(directory, fileManager, javaClassFactory);
 
         String firstClassName = "class1";
         String pathString1 = directoryString + "/src/" + firstClassName + ".java";
@@ -67,11 +70,11 @@ class GenerateTest {
         File testDirectory = mock(File.class);
         willReturn(testFiles).given(testDirectory).listFiles();
 
-        willReturn(testDirectory).given(filesMock).getTestDirectory(directoryMock);
+        willReturn(testDirectory).given(fileManager).getTestDirectory(directory);
 
         generator.generate();
 
-        verify(filesMock, times(1)).writeFile(filePath1, fileText1);
-        verify(filesMock, times(1)).writeFile(filePath2, fileText2);
+        verify(fileManager, times(1)).writeFile(filePath1, fileText1);
+        verify(fileManager, times(1)).writeFile(filePath2, fileText2);
     }
 }

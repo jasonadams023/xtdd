@@ -3,6 +3,7 @@ package component;
 import fileManager.FileManager;
 import fileManager.FilesWrapper;
 import generator.Generator;
+import javaClass.JavaClassFactory;
 import org.junit.jupiter.api.*;
 
 import java.io.File;
@@ -23,7 +24,8 @@ class GeneratorTest {
     void setup() {
         FilesWrapper filesWrapper = new FilesWrapper();
         FileManager fileManager = new FileManager(filesWrapper);
-        generator = new Generator(exampleDirectory, fileManager);
+        JavaClassFactory javaClassFactory = new JavaClassFactory();
+        generator = new Generator(exampleDirectory, fileManager, javaClassFactory);
     }
 
     @BeforeEach
