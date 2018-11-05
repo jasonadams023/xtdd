@@ -78,4 +78,10 @@ public class Generator {
             javaClasses.add(new JavaClass(className));
         }
     }
+
+    void populateClasses(Path path) {
+        for (JavaClass javaClass : javaClasses) {
+            javaClass.createFunctionsFromPath(path);
+        }
+    }
 }

@@ -61,7 +61,7 @@ public class JavaClass {
         }
     }
 
-    void createFunctionsFromPath(Path path) {
+    public void createFunctionsFromPath(Path path) {
         functions = new ArrayList<>();
         List<String> lines = fileManager.readAllLines(path);
 
