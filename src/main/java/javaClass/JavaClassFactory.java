@@ -1,7 +1,7 @@
 package javaClass;
 
 public class JavaClassFactory {
-    static JavaClass newJavaClass(String name) {
+    public JavaClass newJavaClass(String name) {
         return new JavaClass(name);
     }
 }
