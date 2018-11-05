@@ -4,6 +4,7 @@ import fileManager.FileManager;
 import function.Function;
 
 import java.io.File;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -54,6 +55,15 @@ public class JavaClass {
     public void readFile() {
         functions = new ArrayList<>();
         List<String> lines = fileManager.readAllLines(file.toPath());
+
+        for (String line: lines) {
+            addFunctionFromLine(line);
+        }
+    }
+
+    void createFunctionsFromPath(Path path) {
+        functions = new ArrayList<>();
+        List<String> lines = fileManager.readAllLines(path);
 
         for (String line: lines) {
             addFunctionFromLine(line);
