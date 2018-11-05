@@ -39,8 +39,7 @@ public class Generator {
         }
     }
 
-    void createClasses() {
-        Path path = Paths.get("badPath");
+    void createClasses(Path path) {
         List<String> lines = fileManager.readAllLines(path);
         boolean flag = false;
 
