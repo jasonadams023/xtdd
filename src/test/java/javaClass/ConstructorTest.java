@@ -42,4 +42,14 @@ class ConstructorTest {
         assertEquals("Example", javaClass.name);
         assertEquals(new ArrayList<Function>(), javaClass.functions);
     }
+
+    @Test
+    void should_CreateNewJavaClass_WithNameAndFileManager() {
+        FileManager fileManager = mock(FileManager.class);
+        JavaClass javaClass = new JavaClass("Example", fileManager);
+
+        assertEquals("Example", javaClass.name);
+        assertEquals(new ArrayList<Function>(), javaClass.functions);
+        assertNotNull(javaClass.fileManager);
+    }
 }

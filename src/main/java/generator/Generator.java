@@ -28,18 +28,8 @@ public class Generator {
     }
 
     public void generate() {
-        File testDirectory = fileManager.getTestDirectory(directory);
-        File[] testFiles = testDirectory.listFiles();
-
-        for (File testFile : testFiles) {
-            JavaClass javaClass = new JavaClass(testFile, fileManager);
-            javaClass.readFile();
-
-            String className = javaClass.getName();
-            Path path = Paths.get(directory.getPath() + "/src/" + className + ".java");
-
-            fileManager.writeFile(path, javaClass.toString());
-        }
+        readFiles();
+        writeFiles();
     }
 
     void createClasses(Path path) {

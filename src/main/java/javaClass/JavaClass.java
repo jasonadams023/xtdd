@@ -33,6 +33,12 @@ public class JavaClass {
         this.functions = new ArrayList<>();
     }
 
+    public JavaClass(String name, FileManager fileManager) {
+        this.name = name;
+        this.fileManager = fileManager;
+        this.functions = new ArrayList<>();
+    }
+
     public String toString() {
         StringBuilder builder = new StringBuilder();
 
@@ -62,7 +68,6 @@ public class JavaClass {
     }
 
     public void createFunctionsFromPath(Path path) {
-        functions = new ArrayList<>();
         List<String> lines = fileManager.readAllLines(path);
 
         for (String line: lines) {
