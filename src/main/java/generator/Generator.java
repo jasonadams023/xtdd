@@ -32,6 +32,26 @@ public class Generator {
         writeFiles();
     }
 
+    void readFiles() {
+        File testDirectory = fileManager.getTestDirectory(directory);
+        File[] testFiles = testDirectory.listFiles();
+
+        for (File testFile : testFiles) {
+            createClasses(testFile.toPath());
+        }
+
+        for (File testFile : testFiles) {
+            populateClasses(testFile.toPath());
+        }
+    }
+
+    void writeFiles() {
+        for (JavaClass javaClass : javaClasses) {
+            Path path = Paths.get(directory.getPath() + "/src/" + javaClass.getName() + ".java");
+            fileManager.writeFile(path, javaClass.toString());
+        }
+    }
+
     void createClasses(Path path) {
         List<String> lines = fileManager.readAllLines(path);
         boolean flag = false;
@@ -75,26 +95,6 @@ public class Generator {
     void populateClasses(Path path) {
         for (JavaClass javaClass : javaClasses) {
             javaClass.createFunctionsFromPath(path);
-        }
-    }
-
-    void readFiles() {
-        File testDirectory = fileManager.getTestDirectory(directory);
-        File[] testFiles = testDirectory.listFiles();
-
-        for (File testFile : testFiles) {
-            createClasses(testFile.toPath());
-        }
-
-        for (File testFile : testFiles) {
-            populateClasses(testFile.toPath());
-        }
-    }
-
-    void writeFiles() {
-        for (JavaClass javaClass : javaClasses) {
-            Path path = Paths.get(directory.getPath() + "/src/" + javaClass.getName() + ".java");
-            fileManager.writeFile(path, javaClass.toString());
         }
     }
 }
