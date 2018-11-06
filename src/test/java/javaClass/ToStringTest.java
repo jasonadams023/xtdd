@@ -3,7 +3,6 @@ package javaClass;
 import function.Function;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,8 +13,8 @@ import static org.mockito.Mockito.*;
 class ToStringTest {
     @Test
     void should_CallHeaderAndFooter() {
-        File file = new File("./ExampleTest.java");
-        JavaClass javaClass = new JavaClass(file);
+        JavaClassFactory factory = new JavaClassFactory();
+        JavaClass javaClass = factory.newJavaClass("Example");
         JavaClass javaClassSpy = spy(javaClass);
 
         willReturn("header ").given(javaClassSpy).getHeader();
@@ -31,8 +30,8 @@ class ToStringTest {
 
     @Test
     void should_IncludeFunctions() {
-        File file = new File("./ExampleTest.java");
-        JavaClass javaClass = new JavaClass(file);
+        JavaClassFactory factory = new JavaClassFactory();
+        JavaClass javaClass = factory.newJavaClass("Example");
         JavaClass javaClassSpy = spy(javaClass);
         Function functionMock = mock(Function.class);
 

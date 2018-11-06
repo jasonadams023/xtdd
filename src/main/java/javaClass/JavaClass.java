@@ -3,7 +3,6 @@ package javaClass;
 import fileManager.FileManager;
 import function.Function;
 
-import java.io.File;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,15 +10,8 @@ import java.util.regex.Pattern;
 
 public class JavaClass {
     FileManager fileManager;
-    File file;
     String name;
     List<Function> functions;
-
-    public JavaClass(File file) {
-        this.file = file;
-        this.name = generateName();
-        this.functions = new ArrayList<>();
-    }
 
     public JavaClass(String name, FileManager fileManager) {
         this.name = name;
@@ -39,11 +31,6 @@ public class JavaClass {
         builder.append(getFooter());
 
         return  builder.toString();
-    }
-
-    String generateName() {
-        String fileName = file.getName();
-        return fileName.substring(0, fileName.length() - 9);
     }
 
     public void createFunctionsFromPath(Path path) {

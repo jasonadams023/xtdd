@@ -3,17 +3,14 @@ package javaClass;
 import function.Function;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 class GenerateFunctionTest {
     @Test
     void should_ReturnNil_WhenNoFunctionToBeGenerated() {
-        File file = new File("./ExampleTest.java");
-
-        JavaClass javaClass = new JavaClass(file);
+        JavaClassFactory factory = new JavaClassFactory();
+        JavaClass javaClass = factory.newJavaClass("Example");
 
         Function output = javaClass.generateFunction("");
 
@@ -22,11 +19,11 @@ class GenerateFunctionTest {
 
     @Test
     void should_ReturnFunction_WhenNewFunctionToBeGenerated() {
-        File file = new File("./ExampleTest.java");
+        JavaClassFactory factory = new JavaClassFactory();
+        JavaClass javaClass = factory.newJavaClass("Example");
+
         Function expectedOutput = new Function();
         expectedOutput.setName("function");
-
-        JavaClass javaClass = new JavaClass(file);
 
         Function output = javaClass.generateFunction("Example.function()");
 

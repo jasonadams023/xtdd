@@ -2,15 +2,13 @@ package javaClass;
 
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class GetHeaderTest {
     @Test
     void should_ReturnHeader() {
-        File file = new File("./ExampleTest.java");
-        JavaClass javaClass = new JavaClass(file);
+        JavaClassFactory factory = new JavaClassFactory();
+        JavaClass javaClass = factory.newJavaClass("Example");
 
         String header = javaClass.getHeader();
 
@@ -19,8 +17,8 @@ class GetHeaderTest {
 
     @Test
     void should_ReturnHeaderWithDifferentName() {
-        File file = new File("./DifferentTest.java");
-        JavaClass javaClass = new JavaClass(file);
+        JavaClassFactory factory = new JavaClassFactory();
+        JavaClass javaClass = factory.newJavaClass("Different");
 
         String header = javaClass.getHeader();
 

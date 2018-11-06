@@ -2,17 +2,15 @@ package javaClass;
 
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AddFunctionFromLineTest {
     @Test
     void should_NotAddFunction_WhenLineDoesNotContainNewFunction() {
-        File file = new File("./ExampleTest.java");
-        String line = "someLine";
+        JavaClassFactory factory = new JavaClassFactory();
+        JavaClass javaClass = factory.newJavaClass("Example");
 
-        JavaClass javaClass = new JavaClass(file);
+        String line = "someLine";
 
         javaClass.addFunctionFromLine(line);
 
@@ -21,10 +19,10 @@ class AddFunctionFromLineTest {
 
     @Test
     void should_AddFunction_WhenLineDoesContainNewFunction() {
-        File file = new File("./ExampleTest.java");
-        String line = "Example.function();";
+        JavaClassFactory factory = new JavaClassFactory();
+        JavaClass javaClass = factory.newJavaClass("Example");
 
-        JavaClass javaClass = new JavaClass(file);
+        String line = "Example.function();";
 
         javaClass.addFunctionFromLine(line);
 
