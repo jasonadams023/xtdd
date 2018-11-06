@@ -23,19 +23,6 @@ class ConstructorTest {
     }
 
     @Test
-    void should_InjectFileReader() {
-        File file = new File("./ExampleTest.java");
-        FileManager fileManager = mock(FileManager.class);
-
-        JavaClass javaClass = new JavaClass(file, fileManager);
-
-        assertEquals(file, javaClass.file);
-        assertEquals("Example", javaClass.name);
-        assertEquals(0, javaClass.functions.size());
-        assertNotNull(javaClass.fileManager);
-    }
-
-    @Test
     void should_CreateNewJavaClass_WithNameAndFileManager() {
         FileManager fileManager = mock(FileManager.class);
         JavaClass javaClass = new JavaClass("Example", fileManager);

@@ -21,14 +21,6 @@ public class JavaClass {
         this.functions = new ArrayList<>();
     }
 
-    public JavaClass(File file, FileManager fileManager) {
-        this.file = file;
-        this.name = generateName();
-        this.functions = new ArrayList<>();
-        this.fileManager = fileManager;
-    }
-
-
     public JavaClass(String name, FileManager fileManager) {
         this.name = name;
         this.fileManager = fileManager;
@@ -52,15 +44,6 @@ public class JavaClass {
     String generateName() {
         String fileName = file.getName();
         return fileName.substring(0, fileName.length() - 9);
-    }
-
-    public void readFile() {
-        functions = new ArrayList<>();
-        List<String> lines = fileManager.readAllLines(file.toPath());
-
-        for (String line: lines) {
-            addFunctionFromLine(line);
-        }
     }
 
     public void createFunctionsFromPath(Path path) {

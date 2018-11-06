@@ -4,7 +4,6 @@ import fileManager.FileManager;
 import function.Function;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +15,6 @@ import static org.mockito.Mockito.mock;
 class CreateFunctionsFromPathTest {
     @Test
     void should_NotGenerateFunctionsFromGivenPath_WhenNoFunctionCallsInFile() {
-        File file = new File("./ExampleTest.java");
         FileManager fileManager = mock(FileManager.class);
         Path path = mock(Path.class);
 
@@ -29,7 +27,7 @@ class CreateFunctionsFromPathTest {
             e.printStackTrace();
         }
 
-        JavaClass javaClass = new JavaClass(file, fileManager);
+        JavaClass javaClass = new JavaClass("Example", fileManager);
 
         javaClass.createFunctionsFromPath(path);
 
@@ -38,7 +36,6 @@ class CreateFunctionsFromPathTest {
 
     @Test
     void should_NotGenerateFunctionsFromGivenPath_WhenClassNameDoesNotMatch() {
-        File file = new File("./ExampleTest.java");
         FileManager fileManager = mock(FileManager.class);
         Path path = mock(Path.class);
 
@@ -50,7 +47,7 @@ class CreateFunctionsFromPathTest {
             e.printStackTrace();
         }
 
-        JavaClass javaClass = new JavaClass(file, fileManager);
+        JavaClass javaClass = new JavaClass("Example", fileManager);
 
         javaClass.createFunctionsFromPath(path);
 
@@ -59,7 +56,6 @@ class CreateFunctionsFromPathTest {
 
     @Test
     void should_GenerateFunctionFromGivenPath_WhenFunctionCallInFile() {
-        File file = new File("./ExampleTest.java");
         FileManager fileManager = mock(FileManager.class);
         Path path = mock(Path.class);
 
@@ -71,7 +67,7 @@ class CreateFunctionsFromPathTest {
             e.printStackTrace();
         }
 
-        JavaClass javaClass = new JavaClass(file, fileManager);
+        JavaClass javaClass = new JavaClass("Example", fileManager);
 
         javaClass.createFunctionsFromPath(path);
 
