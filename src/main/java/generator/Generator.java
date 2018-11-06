@@ -100,4 +100,11 @@ public class Generator {
             populateClasses(testFile.toPath());
         }
     }
+
+    void writeFiles() {
+        for (JavaClass javaClass : javaClasses) {
+            Path path = Paths.get(directory.getPath() + "/src/" + javaClass.getName() + ".java");
+            fileManager.writeFile(path, javaClass.toString());
+        }
+    }
 }
