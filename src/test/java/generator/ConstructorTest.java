@@ -24,5 +24,6 @@ class ConstructorTest {
         assertEquals(fileManager, generator.fileManager);
         assertEquals(directory, generator.directory);
         assertEquals(new ArrayList<JavaClass>(), generator.javaClasses);
+        assertEquals(javaClassFactory, generator.javaClassFactory);
     }
 }
