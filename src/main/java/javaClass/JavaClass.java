@@ -19,25 +19,19 @@ public class JavaClass {
         this.functions = new ArrayList<>();
     }
 
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-
-        builder.append(getHeader());
-
-        for (Function function : functions) {
-            builder.append(function.toString());
-        }
-
-        builder.append(getFooter());
-
-        return  builder.toString();
-    }
-
     public void createFunctionsFromPath(Path path) {
         List<String> lines = fileManager.readAllLines(path);
 
         for (String line: lines) {
             addFunctionFromLine(line);
+        }
+    }
+
+    void addFunctionFromLine(String line) {
+        Function generated = generateFunction(line);
+
+        if(generated != null) {
+            functions.add(generateFunction(line));
         }
     }
 
@@ -53,12 +47,18 @@ public class JavaClass {
         return output;
     }
 
-    void addFunctionFromLine(String line) {
-        Function generated = generateFunction(line);
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
 
-        if(generated != null) {
-            functions.add(generateFunction(line));
+        builder.append(getHeader());
+
+        for (Function function : functions) {
+            builder.append(function.toString());
         }
+
+        builder.append(getFooter());
+
+        return  builder.toString();
     }
 
     String getHeader() {
