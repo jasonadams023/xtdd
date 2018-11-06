@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.BDDMockito.willReturn;
 import static org.mockito.Mockito.mock;
 
 class AddClassTest {
@@ -29,6 +30,9 @@ class AddClassTest {
         FileManager fileManager = mock(FileManager.class);
         JavaClassFactory javaClassFactory = mock(JavaClassFactory.class);
         Generator generator = new Generator(directory, fileManager, javaClassFactory);
+
+        JavaClass javaClass = new JavaClass("Example");
+        willReturn(javaClass).given(javaClassFactory).newJavaClass("Example");
 
         generator.addClass("Example");
 

@@ -78,13 +78,26 @@ public class Generator {
 
     void addClass(String className) {
         if (className != null && javaClasses.stream().noneMatch(o -> o.getName().equals(className))) {
-            javaClasses.add(new JavaClass(className));
+            javaClasses.add(javaClassFactory.newJavaClass(className));
         }
     }
 
     void populateClasses(Path path) {
         for (JavaClass javaClass : javaClasses) {
             javaClass.createFunctionsFromPath(path);
+        }
+    }
+
+    void readFiles() {
+        File testDirectory = fileManager.getTestDirectory(directory);
+        File[] testFiles = testDirectory.listFiles();
+
+        for (File testFile : testFiles) {
+            createClasses(testFile.toPath());
+        }
+
+        for (File testFile : testFiles) {
+            populateClasses(testFile.toPath());
         }
     }
 }

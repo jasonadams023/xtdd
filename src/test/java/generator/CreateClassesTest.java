@@ -49,6 +49,9 @@ class CreateClassesTest {
         JavaClass exampleClass = new JavaClass("Example");
         JavaClass differentClass = new JavaClass("Different");
 
+        willReturn(exampleClass).given(javaClassFactory).newJavaClass("Example");
+        willReturn(differentClass).given(javaClassFactory).newJavaClass("Different");
+
         generator.createClasses(path);
 
         assertEquals(2, generator.javaClasses.size());
