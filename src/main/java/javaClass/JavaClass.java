@@ -28,10 +28,6 @@ public class JavaClass {
         this.fileManager = fileManager;
     }
 
-    public JavaClass(String name) {
-        this.name = name;
-        this.functions = new ArrayList<>();
-    }
 
     public JavaClass(String name, FileManager fileManager) {
         this.name = name;

@@ -46,8 +46,8 @@ class CreateClassesTest {
         lines.add("class Test {");
         willReturn(lines).given(fileManager).readAllLines(path);
 
-        JavaClass exampleClass = new JavaClass("Example");
-        JavaClass differentClass = new JavaClass("Different");
+        JavaClass exampleClass = new JavaClass("Example", fileManager);
+        JavaClass differentClass = new JavaClass("Different", fileManager);
 
         willReturn(exampleClass).given(javaClassFactory).newJavaClass("Example");
         willReturn(differentClass).given(javaClassFactory).newJavaClass("Different");

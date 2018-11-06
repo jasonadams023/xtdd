@@ -36,14 +36,6 @@ class ConstructorTest {
     }
 
     @Test
-    void should_CreateNewJavaClass_WithName() {
-        JavaClass javaClass = new JavaClass("Example");
-
-        assertEquals("Example", javaClass.name);
-        assertEquals(new ArrayList<Function>(), javaClass.functions);
-    }
-
-    @Test
     void should_CreateNewJavaClass_WithNameAndFileManager() {
         FileManager fileManager = mock(FileManager.class);
         JavaClass javaClass = new JavaClass("Example", fileManager);

@@ -31,7 +31,7 @@ class AddClassTest {
         JavaClassFactory javaClassFactory = mock(JavaClassFactory.class);
         Generator generator = new Generator(directory, fileManager, javaClassFactory);
 
-        JavaClass javaClass = new JavaClass("Example");
+        JavaClass javaClass = new JavaClass("Example", fileManager);
         willReturn(javaClass).given(javaClassFactory).newJavaClass("Example");
 
         generator.addClass("Example");
@@ -47,7 +47,7 @@ class AddClassTest {
         JavaClassFactory javaClassFactory = mock(JavaClassFactory.class);
         Generator generator = new Generator(directory, fileManager, javaClassFactory);
 
-        generator.javaClasses.add(new JavaClass("Example"));
+        generator.javaClasses.add(new JavaClass("Example", fileManager));
 
         generator.addClass("Example");
 
