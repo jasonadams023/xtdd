@@ -71,8 +71,7 @@ class CreateFunctionsFromPathTest {
 
         javaClass.createFunctionsFromPath(path);
 
-        Function expectedFunction = new Function();
-        expectedFunction.setName("function");
+        Function expectedFunction = new Function("function");
 
         assertEquals(1, javaClass.functions.size());
         assertEquals(expectedFunction, javaClass.functions.get(0));

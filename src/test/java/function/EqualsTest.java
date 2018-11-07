@@ -8,10 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class EqualsTest {
     @Test
     void should_ReturnTrue_WhenNamesMatch () {
-        Function function1 = new Function();
-        function1.setName("someName");
-        Function function2 = new Function();
-        function2.setName("someName");
+        Function function1 = new Function("someName");
+        Function function2 = new Function("someName");
 
         boolean output = function1.equals(function2);
 
@@ -20,10 +18,8 @@ class EqualsTest {
 
     @Test
     void should_ReturnFalse_WhenNamesDoNotMatch () {
-        Function function1 = new Function();
-        function1.setName("someName");
-        Function function2 = new Function();
-        function2.setName("someOtherName");
+        Function function1 = new Function("someName");
+        Function function2 = new Function("someOtherName");
 
         boolean output = function1.equals(function2);
 
@@ -32,8 +28,7 @@ class EqualsTest {
 
     @Test
     void should_ReturnFalse_WhenDifferentObjects () {
-        Function function1 = new Function();
-        function1.setName("someName");
+        Function function1 = new Function("someName");
 
         boolean output = function1.equals("Not a function");
 

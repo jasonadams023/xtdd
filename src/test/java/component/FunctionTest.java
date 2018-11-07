@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class FunctionTest {
     @Test
     void should_ReturnFunctionAsString() {
-        Function function = new Function();
+        Function function = new Function("");
 
         String functionString = function.toString();
 

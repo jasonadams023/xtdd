@@ -4,8 +4,8 @@ public class Function {
     String name;
     String returnType;
 
-    public Function() {
-        this.name = "";
+    public Function(String name) {
+        this.name = name;
         this.returnType = "void";
     }
 

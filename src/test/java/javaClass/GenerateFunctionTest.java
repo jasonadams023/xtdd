@@ -22,8 +22,7 @@ class GenerateFunctionTest {
         JavaClassFactory factory = new JavaClassFactory();
         JavaClass javaClass = factory.newJavaClass("Example");
 
-        Function expectedOutput = new Function();
-        expectedOutput.setName("function");
+        Function expectedOutput = new Function("function");
 
         Function output = javaClass.generateFunction("Example.function()");
 

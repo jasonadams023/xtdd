@@ -7,9 +7,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class ConstructorTest {
     @Test
     void should_ReturnNewFunctionObject() {
-        Function function = new Function();
+        Function function = new Function("Example");
 
-        assertEquals("", function.name);
+        assertEquals("Example", function.name);
         assertEquals("void", function.returnType);
     }
 }

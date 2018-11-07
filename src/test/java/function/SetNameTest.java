@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class SetNameTest {
     @Test
     void should_SetName() {
-        Function function = new Function();
+        Function function = new Function("Example");
 
         function.setName("ExampleName");
 

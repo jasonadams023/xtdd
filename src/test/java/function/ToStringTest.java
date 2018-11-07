@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class ToStringTest {
     @Test
     void should_ReturnEmptyString_WhenNameNotSet() {
-        Function function = new Function();
+        Function function = new Function("");
 
         String functionString = function.toString();
 
@@ -16,8 +16,7 @@ class ToStringTest {
 
     @Test
     void should_ReturnVoidFunction_WhenReturnIsNotSet() {
-        Function function = new Function();
-        function.setName("Example");
+        Function function = new Function("Example");
 
         String functionString = function.toString();
 
@@ -26,8 +25,7 @@ class ToStringTest {
 
     @Test
     void should_ReturnFunctionWithProperReturn_WhenReturnIsSet() {
-        Function function = new Function();
-        function.setName("Example");
+        Function function = new Function("Example");
         function.setReturnType("String");
 
         String functionString = function.toString();

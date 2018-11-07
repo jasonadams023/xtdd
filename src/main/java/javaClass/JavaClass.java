@@ -41,8 +41,7 @@ public class JavaClass {
             String functionCall = line.split(Pattern.quote("."))[1];
             String functionName = functionCall.split(Pattern.quote("("))[0];
 
-            output = new Function();
-            output.setName(functionName);
+            output = new Function(functionName);
         }
         return output;
     }

@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class SetReturnValueTest {
     @Test
     void should_SetReturn() {
-        Function function = new Function();
+        Function function = new Function("Name");
 
         function.setReturnType("String");
 
@@ -16,7 +16,7 @@ class SetReturnValueTest {
 
     @Test
     void should_SetDifferentReturn_WhenGivenDifferentInput() {
-        Function function = new Function();
+        Function function = new Function("Name");
 
         function.setReturnType("int");
 
