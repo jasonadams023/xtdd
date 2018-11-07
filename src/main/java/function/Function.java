@@ -23,10 +23,6 @@ public class Function {
         return builder.toString();
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public boolean equals(Object o) {
         if (o instanceof Function) {
             Function compareTo = (Function) o;
