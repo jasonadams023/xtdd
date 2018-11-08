@@ -1,8 +1,10 @@
 package javaClass;
 
+import fileManager.FileManager;
 import function.Function;
 import org.junit.jupiter.api.Test;
 
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,39 +14,31 @@ import static org.mockito.Mockito.*;
 
 class ToStringTest {
     @Test
-    void should_CallHeaderAndFooter() {
-        JavaClassFactory factory = new JavaClassFactory();
-        JavaClass javaClass = factory.newJavaClass("Example");
-        JavaClass javaClassSpy = spy(javaClass);
+    void should_PrintEmptyClass() {
+        FileManager fileManager = mock(FileManager.class);
+        JavaClass javaClass = new JavaClass("Class", fileManager);
 
-        willReturn("header ").given(javaClassSpy).getHeader();
-        willReturn("footer ").given(javaClassSpy).getFooter();
+        String expected = "class Class {\n}\n";
 
-        String output = javaClassSpy.toString();
+        String output = javaClass.toString();
 
-        verify(javaClassSpy, times(1)).getHeader();
-        verify(javaClassSpy, times(1)).getFooter();
-
-        assertEquals("header footer ", output);
+        assertEquals(expected, output);
     }
 
     @Test
-    void should_IncludeFunctions() {
-        JavaClassFactory factory = new JavaClassFactory();
-        JavaClass javaClass = factory.newJavaClass("Example");
-        JavaClass javaClassSpy = spy(javaClass);
-        Function functionMock = mock(Function.class);
+    void should_PrintClass_WithFunctions() {
+        FileManager fileManager = mock(FileManager.class);
+        JavaClass javaClass = new JavaClass("Class", fileManager);
 
-        List<Function> functions = new ArrayList<>();
-        functions.add(functionMock);
-        javaClassSpy.functions = functions;
+        Function function = new Function("function", "void");
+        javaClass.functions.add(function);
 
-        willReturn("header ").given(javaClassSpy).getHeader();
-        willReturn("function ").given(functionMock).toString();
-        willReturn("footer ").given(javaClassSpy).getFooter();
+        String expected = "class Class {\n" +
+                "static void function() {\n}\n" +
+                "}\n";
 
-        String output = javaClassSpy.toString();
+        String output = javaClass.toString();
 
-        assertEquals("header function footer ", output);
+        assertEquals(expected, output);
     }
 }
