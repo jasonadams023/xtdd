@@ -42,8 +42,4 @@ public class Function {
 
         return false;
     }
-
-    void setReturnType(String returnType) {
-        this.returnType = returnType;
-    }
 }

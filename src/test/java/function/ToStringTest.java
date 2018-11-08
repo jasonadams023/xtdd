@@ -25,8 +25,7 @@ class ToStringTest {
 
     @Test
     void should_ReturnFunctionWithProperReturn_WhenReturnIsSet() {
-        Function function = new Function("Example");
-        function.setReturnType("String");
+        Function function = new Function("Example", "String");
 
         String functionString = function.toString();
 
