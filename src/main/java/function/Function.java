@@ -1,8 +1,8 @@
 package function;
 
 public class Function {
-    String name;
-    String returnType;
+    private String name;
+    private String returnType;
 
     public Function(String name) {
         this.name = name;
