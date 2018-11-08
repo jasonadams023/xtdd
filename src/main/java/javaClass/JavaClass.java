@@ -31,7 +31,7 @@ public class JavaClass {
         Function generated = generateFunction(line);
 
         if(generated != null) {
-            functions.add(generateFunction(line));
+            functions.add(generated);
         }
     }
 
