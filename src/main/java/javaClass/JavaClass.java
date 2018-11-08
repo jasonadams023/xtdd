@@ -35,7 +35,7 @@ public class JavaClass {
         }
     }
 
-    Function generateFunction(String line) {
+    private Function generateFunction(String line) {
         Function output = null;
         String functionName = extractFunctionNameFromLine(line);
 
