@@ -27,7 +27,7 @@ public class JavaClass {
         }
     }
 
-    void addFunctionFromLine(String line) {
+    private void addFunctionFromLine(String line) {
         Function generated = generateFunction(line);
 
         if(generated != null) {
