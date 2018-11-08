@@ -88,7 +88,7 @@ public class JavaClass {
         return "class " + name + " {\n";
     }
 
-    String getFooter() {
+    private String getFooter() {
         return "}\n";
     }
 
