@@ -40,16 +40,30 @@ public class JavaClass {
         String functionName = extractFunctionNameFromLine(line);
 
         if (!functionName.equals("")) {
-            output = new Function(functionName);
+            String returnType = extractReturnTypeFromLine(line);
+            output = new Function(functionName, returnType);
         }
 
         return output;
     }
 
+    private String extractReturnTypeFromLine(String line) {
+        String returnType = "void";
+
+        if (line.contains("=")) {
+            returnType = line.trim().split(Pattern.quote(" "))[0];
+        }
+
+        return returnType;
+    }
+
     private String extractFunctionNameFromLine(String line) {
         String name = "";
+
         if (line.contains(this.name + ".")) {
-            String functionCall = line.split(Pattern.quote("."))[1];
+            String[] lineParts = line.split(Pattern.quote(" "));
+            String fullCall = lineParts[lineParts.length - 1];
+            String functionCall = fullCall.split(Pattern.quote("."))[1];
             name = functionCall.split(Pattern.quote("("))[0];
         }
 

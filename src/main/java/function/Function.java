@@ -9,6 +9,11 @@ public class Function {
         this.returnType = "void";
     }
 
+    public Function(String name, String returnType) {
+        this.name = name;
+        this.returnType = returnType;
+    }
+
     public String toString() {
         StringBuilder builder = new StringBuilder();
 
@@ -17,7 +22,13 @@ public class Function {
             builder.append(returnType);
             builder.append(" ");
             builder.append(name);
-            builder.append("() {\n}\n");
+            builder.append("() {\n");
+
+            if(!returnType.equals("void")) {
+                builder.append("return null;\n");
+            }
+
+            builder.append("}\n");
         }
 
         return builder.toString();

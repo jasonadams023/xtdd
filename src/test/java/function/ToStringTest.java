@@ -30,6 +30,6 @@ class ToStringTest {
 
         String functionString = function.toString();
 
-        assertEquals("static String Example() {\n}\n", functionString);
+        assertEquals("static String Example() {\nreturn null;\n}\n", functionString);
     }
 }

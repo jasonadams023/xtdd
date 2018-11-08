@@ -93,4 +93,22 @@ class GeneratorTest {
         assertTrue(data.contains("static void example() {"));
         assertTrue(data.contains("static void different() {"));
     }
+
+    @Test
+    void should_GenerateFunctions_WithDifferentReturns() {
+        String className = "Returns";
+
+        generator.generate();
+
+        String data = "";
+        try {
+            data = new String(Files.readAllBytes(Paths.get(exampleSourceDirectory.getPath() + "/" + className + ".java")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        assertTrue(data.contains("class Returns {"));
+        assertTrue(data.contains("static String getString() {"));
+        assertTrue(data.contains("return null"));
+    }
 }
