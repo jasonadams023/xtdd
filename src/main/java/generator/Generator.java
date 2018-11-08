@@ -13,9 +13,9 @@ import java.util.regex.Pattern;
 
 public class Generator {
     List<JavaClass> javaClasses;
-    FileManager fileManager;
-    File directory;
-    JavaClassFactory javaClassFactory;
+    private FileManager fileManager;
+    private File directory;
+    private JavaClassFactory javaClassFactory;
 
     static final String startFlag = "//beginning of classes to generate";
     static final String endFlag = "//end of classes to generate";
