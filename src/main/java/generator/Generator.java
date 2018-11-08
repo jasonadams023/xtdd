@@ -52,7 +52,7 @@ public class Generator {
         }
     }
 
-    void createClasses(Path path) {
+    private void createClasses(Path path) {
         List<String> lines = fileManager.readAllLines(path);
         boolean flag = false;
 
