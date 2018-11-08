@@ -37,10 +37,12 @@ public class JavaClass {
 
     Function generateFunction(String line) {
         Function output = null;
-        if (line.contains(this.name + ".")) {
-            String functionName = extractFunctionNameFromLine(line);
+        String functionName = extractFunctionNameFromLine(line);
+
+        if (!functionName.equals("")) {
             output = new Function(functionName);
         }
+
         return output;
     }
 
