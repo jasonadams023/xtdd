@@ -18,20 +18,24 @@ public class Function {
         StringBuilder builder = new StringBuilder();
 
         if (!name.equals("")) {
-            builder.append("static ");
-            builder.append(returnType);
-            builder.append(" ");
-            builder.append(name);
-            builder.append("() {\n");
+            builder.append(getHeader());
 
             if(!returnType.equals("void")) {
                 builder.append("return null;\n");
             }
 
-            builder.append("}\n");
+            builder.append(getFooter());
         }
 
         return builder.toString();
+    }
+
+    private String getHeader() {
+        return "static " + returnType + " " + name + "() {\n";
+    }
+
+    private String getFooter() {
+        return "}\n";
     }
 
     public boolean equals(Object o) {
