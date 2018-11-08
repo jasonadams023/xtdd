@@ -5,24 +5,50 @@ import javaClass.JavaClassFactory;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
+import static org.mockito.BDDMockito.willReturn;
 import static org.mockito.Mockito.*;
 
 class GenerateTest {
     @Test
-    void should_ReadAndWriteFiles() {
+    void should_GenerateFilesFromTests() {
         File directory = mock(File.class);
         FileManager fileManager = mock(FileManager.class);
-        JavaClassFactory javaClassFactory = mock(JavaClassFactory.class);
+        JavaClassFactory javaClassFactory = new JavaClassFactory(fileManager);
         Generator generator = new Generator(directory, fileManager, javaClassFactory);
-        Generator generatorSpy = spy(generator);
 
-        doNothing().when(generatorSpy).readFiles();
-        doNothing().when(generatorSpy).writeFiles();
+        File testDirectory = mock(File.class);
+        willReturn(testDirectory).given(fileManager).getTestDirectory(directory);
 
-        generatorSpy.generate();
+        File[] testFiles = new File[1];
+        File testFile = mock(File.class);
+        testFiles[0] = testFile;
+        willReturn(testFiles).given(testDirectory).listFiles();
 
-        verify(generatorSpy, times(1)).readFiles();
-        verify(generatorSpy, times(1)).writeFiles();
+        Path testPath = mock(Path.class);
+        willReturn(testPath).given(testFile).toPath();
+
+        List<String> readLines = new ArrayList<>();
+        readLines.add(generator.startFlag);
+        readLines.add("import example.Example;");
+        readLines.add(generator.endFlag);
+        readLines.add("Example.function();");
+        willReturn(readLines).given(fileManager).readAllLines(testPath);
+
+        willReturn("./example").given(directory).getPath();
+
+        Path expectedPath = Paths.get("./example/src/Example.java");
+        String expectedString = "class Example {\n" +
+                "static void function() {\n" +
+                "}\n" +
+                "}\n";
+
+        generator.generate();
+
+        verify(fileManager, times(1)).writeFile(expectedPath, expectedString);
     }
 }

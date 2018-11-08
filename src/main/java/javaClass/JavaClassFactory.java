@@ -4,9 +4,18 @@ import fileManager.FileManager;
 import fileManager.FilesWrapper;
 
 public class JavaClassFactory {
-    public JavaClass newJavaClass(String name) {
+    private FileManager fileManager;
+
+    public JavaClassFactory() {
         FilesWrapper filesWrapper = new FilesWrapper();
-        FileManager fileManager = new FileManager(filesWrapper);
+        this.fileManager = new FileManager(filesWrapper);
+    }
+
+    public JavaClassFactory(FileManager fileManager) {
+        this.fileManager = fileManager;
+    }
+
+    public JavaClass newJavaClass(String name) {
         return new JavaClass(name, fileManager);
     }
 }
