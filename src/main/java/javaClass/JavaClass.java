@@ -84,7 +84,7 @@ public class JavaClass {
         return  builder.toString();
     }
 
-    String getHeader() {
+    private String getHeader() {
         return "class " + name + " {\n";
     }
 
