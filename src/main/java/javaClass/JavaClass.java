@@ -38,12 +38,20 @@ public class JavaClass {
     Function generateFunction(String line) {
         Function output = null;
         if (line.contains(this.name + ".")) {
-            String functionCall = line.split(Pattern.quote("."))[1];
-            String functionName = functionCall.split(Pattern.quote("("))[0];
-
+            String functionName = extractFunctionNameFromLine(line);
             output = new Function(functionName);
         }
         return output;
+    }
+
+    private String extractFunctionNameFromLine(String line) {
+        String name = "";
+        if (line.contains(this.name + ".")) {
+            String functionCall = line.split(Pattern.quote("."))[1];
+            name = functionCall.split(Pattern.quote("("))[0];
+        }
+
+        return name;
     }
 
     public String toString() {
