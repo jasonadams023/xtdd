@@ -21,11 +21,7 @@ class CreateFunctionsFromPathTest {
         List<String> expectedLines = new ArrayList<>();
         expectedLines.add("class Example{\n");
         expectedLines.add("}\n");
-        try {
-            willReturn(expectedLines).given(fileManager).readAllLines(path);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        willReturn(expectedLines).given(fileManager).readAllLines(path);
 
         JavaClass javaClass = new JavaClass("Example", fileManager);
 
@@ -41,11 +37,7 @@ class CreateFunctionsFromPathTest {
 
         List<String> expectedLines = new ArrayList<>();
         expectedLines.add("Different.function()");
-        try {
-            willReturn(expectedLines).given(fileManager).readAllLines(path);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        willReturn(expectedLines).given(fileManager).readAllLines(path);
 
         JavaClass javaClass = new JavaClass("Example", fileManager);
 
@@ -61,11 +53,7 @@ class CreateFunctionsFromPathTest {
 
         List<String> expectedLines = new ArrayList<>();
         expectedLines.add("Example.function()");
-        try {
-            willReturn(expectedLines).given(fileManager).readAllLines(path);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        willReturn(expectedLines).given(fileManager).readAllLines(path);
 
         JavaClass javaClass = new JavaClass("Example", fileManager);
 
