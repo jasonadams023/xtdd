@@ -18,6 +18,7 @@ class GenerateTest {
     private FileManager fileManager;
     private Generator generator;
     private Path testPath;
+    private Path testPath2;
 
     @BeforeEach
     void setup() {
@@ -29,13 +30,18 @@ class GenerateTest {
         File testDirectory = mock(File.class);
         willReturn(testDirectory).given(fileManager).getTestDirectory(directory);
 
-        File[] testFiles = new File[1];
+        File[] testFiles = new File[2];
         File testFile = mock(File.class);
         testFiles[0] = testFile;
+        File testFile2 = mock(File.class);
+        testFiles[1] = testFile2;
         willReturn(testFiles).given(testDirectory).listFiles();
 
         testPath = mock(Path.class);
         willReturn(testPath).given(testFile).toPath();
+
+        testPath2 = mock(Path.class);
+        willReturn(testPath2).given(testFile2).toPath();
 
         List<String> readLines = new ArrayList<>();
         readLines.add(Generator.startFlag);
@@ -43,6 +49,13 @@ class GenerateTest {
         readLines.add(Generator.endFlag);
         readLines.add("Example.function();");
         willReturn(readLines).given(fileManager).readAllLines(testPath);
+
+        List<String> readLines2 = new ArrayList<>();
+        readLines2.add(Generator.startFlag);
+        readLines2.add("import example.Different;");
+        readLines2.add(Generator.endFlag);
+        readLines2.add("String output = Different.otherFunction();");
+        willReturn(readLines2).given(fileManager).readAllLines(testPath2);
 
         willReturn("./example").given(directory).getPath();
     }
@@ -52,6 +65,7 @@ class GenerateTest {
         List<String> readLines = new ArrayList<>();
         readLines.add("Example.function();");
         willReturn(readLines).given(fileManager).readAllLines(testPath);
+        willReturn(readLines).given(fileManager).readAllLines(testPath2);
 
         generator.generate();
 
@@ -60,14 +74,8 @@ class GenerateTest {
 
     @Test
     void should_GenerateFilesFromTests() {
-        Path expectedPath = Paths.get("./example/src/Example.java");
-        String expectedString = "class Example {\n" +
-                "static void function() {\n" +
-                "}\n" +
-                "}\n";
-
         generator.generate();
 
-        verify(fileManager, times(1)).writeFile(expectedPath, expectedString);
+        verify(fileManager, times(2)).writeFile(any(), any());
     }
 }
