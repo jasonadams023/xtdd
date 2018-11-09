@@ -24,7 +24,7 @@ class GenerateTest {
     void setup() {
         File directory = mock(File.class);
         fileManager = mock(FileManager.class);
-        JavaClassFactory javaClassFactory = new JavaClassFactory(fileManager);
+        JavaClassFactory javaClassFactory = null;
         generator = new Generator(directory, fileManager, javaClassFactory);
 
         File testDirectory = mock(File.class);
