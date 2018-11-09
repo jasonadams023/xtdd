@@ -92,7 +92,7 @@ public class Generator {
         }
     }
 
-    void populateClasses(Path path) {
+    private void populateClasses(Path path) {
         for (JavaClass javaClass : javaClasses) {
             javaClass.createFunctionsFromPath(path);
         }
