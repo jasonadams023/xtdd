@@ -2,6 +2,7 @@ package generator;
 
 import fileManager.FileManager;
 import javaClass.JavaClassFactory;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -14,12 +15,16 @@ import static org.mockito.BDDMockito.willReturn;
 import static org.mockito.Mockito.*;
 
 class GenerateTest {
-    @Test
-    void should_NotGenerateFilesFromTests_WhenNothingToGenerate() {
+    private FileManager fileManager;
+    private Generator generator;
+    private Path testPath;
+
+    @BeforeEach
+    void setup() {
         File directory = mock(File.class);
-        FileManager fileManager = mock(FileManager.class);
+        fileManager = mock(FileManager.class);
         JavaClassFactory javaClassFactory = new JavaClassFactory(fileManager);
-        Generator generator = new Generator(directory, fileManager, javaClassFactory);
+        generator = new Generator(directory, fileManager, javaClassFactory);
 
         File testDirectory = mock(File.class);
         willReturn(testDirectory).given(fileManager).getTestDirectory(directory);
@@ -29,36 +34,7 @@ class GenerateTest {
         testFiles[0] = testFile;
         willReturn(testFiles).given(testDirectory).listFiles();
 
-        Path testPath = mock(Path.class);
-        willReturn(testPath).given(testFile).toPath();
-
-        List<String> readLines = new ArrayList<>();
-        readLines.add("Example.function();");
-        willReturn(readLines).given(fileManager).readAllLines(testPath);
-
-        willReturn("./example").given(directory).getPath();
-
-        generator.generate();
-
-        verify(fileManager, times(0)).writeFile(any(), any());
-    }
-
-    @Test
-    void should_GenerateFilesFromTests() {
-        File directory = mock(File.class);
-        FileManager fileManager = mock(FileManager.class);
-        JavaClassFactory javaClassFactory = new JavaClassFactory(fileManager);
-        Generator generator = new Generator(directory, fileManager, javaClassFactory);
-
-        File testDirectory = mock(File.class);
-        willReturn(testDirectory).given(fileManager).getTestDirectory(directory);
-
-        File[] testFiles = new File[1];
-        File testFile = mock(File.class);
-        testFiles[0] = testFile;
-        willReturn(testFiles).given(testDirectory).listFiles();
-
-        Path testPath = mock(Path.class);
+        testPath = mock(Path.class);
         willReturn(testPath).given(testFile).toPath();
 
         List<String> readLines = new ArrayList<>();
@@ -69,7 +45,21 @@ class GenerateTest {
         willReturn(readLines).given(fileManager).readAllLines(testPath);
 
         willReturn("./example").given(directory).getPath();
+    }
 
+    @Test
+    void should_NotGenerateFilesFromTests_WhenNothingToGenerate() {
+        List<String> readLines = new ArrayList<>();
+        readLines.add("Example.function();");
+        willReturn(readLines).given(fileManager).readAllLines(testPath);
+
+        generator.generate();
+
+        verify(fileManager, times(0)).writeFile(any(), any());
+    }
+
+    @Test
+    void should_GenerateFilesFromTests() {
         Path expectedPath = Paths.get("./example/src/Example.java");
         String expectedString = "class Example {\n" +
                 "static void function() {\n" +
