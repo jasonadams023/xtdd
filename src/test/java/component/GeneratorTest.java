@@ -108,7 +108,27 @@ class GeneratorTest {
         }
 
         assertTrue(data.contains("class Returns {"));
-        assertTrue(data.contains("static String getString() {"));
+        assertTrue(data.contains("static String getNullString() {"));
         assertTrue(data.contains("return null"));
+        assertTrue(data.contains("static int getNullInt() {"));
+    }
+
+    @Disabled
+    @Test
+    void should_GenerateFunctions_WithNonNullReturns() {
+        String className = "Returns";
+
+        generator.generate();
+
+        String data = "";
+        try {
+            data = new String(Files.readAllBytes(Paths.get(exampleSourceDirectory.getPath() + "/" + className + ".java")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        assertTrue(data.contains("class Returns {"));
+        assertTrue(data.contains("static int getInt() {"));
+        assertTrue(data.contains("return 7"));
     }
 }

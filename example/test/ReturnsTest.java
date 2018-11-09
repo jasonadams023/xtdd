@@ -8,7 +8,19 @@ import example.Returns;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class FirstTest {
     @Test
-    void should_ReturnString() {
-        String output = Returns.getString();
+    void should_ReturnNullString() {
+        String output = Returns.getNullString();
+    }
+
+    @Test
+    void should_ReturnNullInt() {
+        int output = Returns.getNullInt();
+    }
+
+    @Test
+    void should_ReturnInt() {
+        int output = Returns.getInt();
+
+        assertEquals(7, output);
     }
 }
