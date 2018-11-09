@@ -32,7 +32,7 @@ public class Generator {
         writeFiles();
     }
 
-    void readFiles() {
+    private void readFiles() {
         File testDirectory = fileManager.getTestDirectory(directory);
         File[] testFiles = testDirectory.listFiles();
 
