@@ -1,5 +1,7 @@
 package generator;
 
+import Requirement.Requirement;
+import TestParser.TestParser;
 import fileManager.FileManager;
 import javaClass.JavaClass;
 
@@ -50,24 +52,11 @@ public class Generator {
     }
 
     private void createClasses(Path path) {
-        List<String> lines = fileManager.readAllLines(path);
-        boolean flag = false;
+        TestParser testParser = new TestParser(fileManager);
+        List<Requirement> requirements = testParser.parseTestFile(path);
 
-        for (String line : lines) {
-            if(line.equals(startFlag)) {
-                flag = true;
-                continue;
-            }
-
-            if (line.equals(endFlag)) {
-                flag = false;
-                continue;
-            }
-
-            if(flag) {
-                String className = getClassNameFromImport(line);
-                addClass(className);
-            }
+        for (Requirement requirement : requirements) {
+            addClass(requirement.className);
         }
     }
 

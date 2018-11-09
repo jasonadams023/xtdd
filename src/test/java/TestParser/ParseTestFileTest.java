@@ -45,4 +45,15 @@ class ParseTestFileTest {
         assertEquals(1, output.size());
         assertEquals("Example", output.get(0).className);
     }
+
+    @Test
+    void should_NotReturnRequirements_ForNonGeneratedClasses() {
+        List<String> lines = new ArrayList<>();
+        lines.add("import example.Example;");
+        willReturn(lines).given(fileManager).readAllLines(path);
+
+        List<Requirement> output = parser.parseTestFile(path);
+
+        assertEquals(0, output.size());
+    }
 }

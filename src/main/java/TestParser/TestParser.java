@@ -8,23 +8,35 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-class TestParser {
+public class TestParser {
     private FileManager fileManager;
 
     static final String startFlag = "//beginning of classes to generate";
     static final String endFlag = "//end of classes to generate";
 
-    TestParser(FileManager fileManager) {
+    public TestParser(FileManager fileManager) {
         this.fileManager = fileManager;
     }
 
-    List<Requirement> parseTestFile(Path path) {
+    public List<Requirement> parseTestFile(Path path) {
         List<Requirement> requirements = new ArrayList<>();
         List<String> lines = fileManager.readAllLines(path);
 
+        boolean flag = false;
         for (String line : lines) {
-            String className = getClassNameFromImport(line);
-            if (className != null) {
+
+            if(line.equals(startFlag)) {
+                flag = true;
+                continue;
+            }
+
+            if (line.equals(endFlag)) {
+                flag = false;
+                continue;
+            }
+
+            if(flag) {
+                String className = getClassNameFromImport(line);
                 requirements.add(new Requirement(className));
             }
         }
@@ -36,10 +48,6 @@ class TestParser {
         String[] split = line.split(Pattern.quote("."));
         String last = split[split.length - 1];
         String className = last.split(Pattern.quote(";"))[0];
-
-        if (className.contains(" ") || className.equals("")) {
-            return null;
-        }
 
         return className;
     }
