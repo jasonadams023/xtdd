@@ -1,13 +1,11 @@
 package generator;
 
 import fileManager.FileManager;
-import javaClass.JavaClassFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,8 +22,7 @@ class GenerateTest {
     void setup() {
         File directory = mock(File.class);
         fileManager = mock(FileManager.class);
-        JavaClassFactory javaClassFactory = null;
-        generator = new Generator(directory, fileManager, javaClassFactory);
+        generator = new Generator(directory, fileManager);
 
         File testDirectory = mock(File.class);
         willReturn(testDirectory).given(fileManager).getTestDirectory(directory);

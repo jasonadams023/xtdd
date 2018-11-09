@@ -2,13 +2,11 @@ package generator;
 
 import fileManager.FileManager;
 import javaClass.JavaClass;
-import javaClass.JavaClassFactory;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.BDDMockito.willReturn;
 import static org.mockito.Mockito.mock;
 
 class AddClassTest {
@@ -16,8 +14,7 @@ class AddClassTest {
     void should_NotAddClass_WhenClassNameIsNull() {
         File directory = mock(File.class);
         FileManager fileManager = mock(FileManager.class);
-        JavaClassFactory javaClassFactory = mock(JavaClassFactory.class);
-        Generator generator = new Generator(directory, fileManager, javaClassFactory);
+        Generator generator = new Generator(directory, fileManager);
 
         generator.addClass(null);
 
@@ -28,8 +25,7 @@ class AddClassTest {
     void should_AddClass_WhenClassNameIsValid() {
         File directory = mock(File.class);
         FileManager fileManager = mock(FileManager.class);
-        JavaClassFactory javaClassFactory = mock(JavaClassFactory.class);
-        Generator generator = new Generator(directory, fileManager, javaClassFactory);
+        Generator generator = new Generator(directory, fileManager);
 
         generator.addClass("Example");
 
@@ -41,8 +37,7 @@ class AddClassTest {
     void should_NotAddDuplicateClass() {
         File directory = mock(File.class);
         FileManager fileManager = mock(FileManager.class);
-        JavaClassFactory javaClassFactory = mock(JavaClassFactory.class);
-        Generator generator = new Generator(directory, fileManager, javaClassFactory);
+        Generator generator = new Generator(directory, fileManager);
 
         generator.javaClasses.add(new JavaClass("Example", fileManager));
 
