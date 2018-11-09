@@ -8,9 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class EqualsTest {
     @Test
     void should_ReturnTrue_WhenNamesMatch() {
-        JavaClassFactory factory = new JavaClassFactory();
-        JavaClass javaClass1 = factory.newJavaClass("someName");
-        JavaClass javaClass2 = factory.newJavaClass("someName");
+        JavaClass javaClass1 = new JavaClass("someName", null);
+        JavaClass javaClass2 = new JavaClass("someName", null);
 
         boolean output = javaClass1.equals(javaClass2);
 
@@ -19,9 +18,8 @@ class EqualsTest {
 
     @Test
     void should_ReturnFalse_WhenNamesDoNotMatch() {
-        JavaClassFactory factory = new JavaClassFactory();
-        JavaClass javaClass1 = factory.newJavaClass("someName");
-        JavaClass javaClass2 = factory.newJavaClass("someOtherName");
+        JavaClass javaClass1 = new JavaClass("someName", null);
+        JavaClass javaClass2 = new JavaClass("someOtherName", null);
 
         boolean output = javaClass1.equals(javaClass2);
 
@@ -30,8 +28,7 @@ class EqualsTest {
 
     @Test
     void should_ReturnFalse_WhenDifferentObjects() {
-        JavaClassFactory factory = new JavaClassFactory();
-        JavaClass javaClass1 = factory.newJavaClass("someName");
+        JavaClass javaClass1 = new JavaClass("someName", null);
 
         boolean output = javaClass1.equals("Not a JavaClass");
 

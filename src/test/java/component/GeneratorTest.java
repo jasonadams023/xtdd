@@ -24,7 +24,7 @@ class GeneratorTest {
     void setup() {
         FilesWrapper filesWrapper = new FilesWrapper();
         FileManager fileManager = new FileManager(filesWrapper);
-        JavaClassFactory javaClassFactory = new JavaClassFactory();
+        JavaClassFactory javaClassFactory = null;
         generator = new Generator(exampleDirectory, fileManager, javaClassFactory);
     }
 

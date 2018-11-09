@@ -7,8 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class GetNameTest {
     @Test
     void should_ReturnName() {
-        JavaClassFactory factory = new JavaClassFactory();
-        JavaClass javaClass = factory.newJavaClass("Example");
+        JavaClass javaClass = new JavaClass("Example", null);
 
         String name = javaClass.getName();
 
