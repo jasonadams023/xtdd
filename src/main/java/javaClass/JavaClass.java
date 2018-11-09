@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public class JavaClass {
-    FileManager fileManager;
-    String name;
+    private FileManager fileManager;
+    private String name;
     List<Function> functions;
 
     public JavaClass(String name, FileManager fileManager) {
