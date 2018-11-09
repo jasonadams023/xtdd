@@ -17,9 +17,6 @@ public class Generator {
     private FileManager fileManager;
     private File directory;
 
-    static final String startFlag = "//beginning of classes to generate";
-    static final String endFlag = "//end of classes to generate";
-
     public Generator(File directory, FileManager fileManager) {
         this.directory = directory;
         this.fileManager = fileManager;

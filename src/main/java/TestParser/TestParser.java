@@ -11,8 +11,8 @@ import java.util.regex.Pattern;
 public class TestParser {
     private FileManager fileManager;
 
-    static final String startFlag = "//beginning of classes to generate";
-    static final String endFlag = "//end of classes to generate";
+    public static final String startFlag = "//beginning of classes to generate";
+    public static final String endFlag = "//end of classes to generate";
 
     public TestParser(FileManager fileManager) {
         this.fileManager = fileManager;
