@@ -45,7 +45,7 @@ public class Generator {
         }
     }
 
-    void writeFiles() {
+    private void writeFiles() {
         for (JavaClass javaClass : javaClasses) {
             Path path = Paths.get(directory.getPath() + "/src/" + javaClass.getName() + ".java");
             fileManager.writeFile(path, javaClass.toString());
