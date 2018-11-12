@@ -10,16 +10,19 @@ import java.util.regex.Pattern;
 
 public class TestParser {
     private FileManager fileManager;
+    private List<String> classNames;
+    private List<Requirement> requirements;
 
     public static final String startFlag = "//beginning of classes to generate";
     public static final String endFlag = "//end of classes to generate";
 
     public TestParser(FileManager fileManager) {
         this.fileManager = fileManager;
+        this.requirements = new ArrayList<>();
+        this.classNames = new ArrayList<>();
     }
 
     public List<Requirement> parseTestFile(Path path) {
-        List<Requirement> requirements = new ArrayList<>();
         List<String> lines = fileManager.readAllLines(path);
 
         boolean flag = false;
@@ -31,15 +34,17 @@ public class TestParser {
             }
 
             if (line.equals(endFlag)) {
-                flag = false;
-                continue;
+                break;
             }
 
             if(flag) {
                 String className = getClassNameFromImport(line);
-                requirements.add(new Requirement(className));
+                classNames.add(className);
+                requirements.add(new Requirement(className, null, null));
             }
         }
+
+        setFunctionRequirements(lines);
 
         return requirements;
     }
@@ -50,5 +55,36 @@ public class TestParser {
         String className = last.split(Pattern.quote(";"))[0];
 
         return className;
+    }
+
+    private void setFunctionRequirements(List<String> lines) {
+        for (String line : lines) {
+            for (String className : classNames) {
+                if (line.contains(className + ".")) {
+                    String returnType = extractReturnTypeFromLine(line);
+                    String functionName = extractFunctionNameFromLine(line);
+                    requirements.add(new Requirement(className, returnType, functionName));
+                }
+            }
+        }
+    }
+
+    private String extractReturnTypeFromLine(String line) {
+        String returnType = "void";
+
+        if (line.contains("=")) {
+            returnType = line.trim().split(Pattern.quote(" "))[0];
+        }
+
+        return returnType;
+    }
+
+    private String extractFunctionNameFromLine(String line) {
+        String[] lineParts = line.split(Pattern.quote(" "));
+        String fullCall = lineParts[lineParts.length - 1];
+        String functionCall = fullCall.split(Pattern.quote("."))[1];
+        String name = functionCall.split(Pattern.quote("("))[0];
+
+        return name;
     }
 }
