@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Generator {
-    List<JavaClass> javaClasses;
+    private List<JavaClass> javaClasses;
     private FileManager fileManager;
     private File directory;
 
