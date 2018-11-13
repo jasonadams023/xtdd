@@ -1,5 +1,7 @@
 package function;
 
+import Requirement.FunctionRequirement;
+
 public class Function {
     private String name;
     private String returnType;
@@ -45,5 +47,9 @@ public class Function {
         }
 
         return false;
+    }
+
+    public boolean matchesRequirement(FunctionRequirement requirement) {
+        return (requirement.name.equals(name) && requirement.returnType.equals(returnType));
     }
 }
