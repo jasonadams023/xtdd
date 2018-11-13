@@ -10,7 +10,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 
 public class Generator {
     List<JavaClass> javaClasses;
@@ -32,12 +31,21 @@ public class Generator {
         File testDirectory = fileManager.getTestDirectory(directory);
         File[] testFiles = testDirectory.listFiles();
 
-        for (File testFile : testFiles) {
-            createClasses(testFile.toPath());
-        }
+        TestParser testParser = new TestParser(fileManager);
+        List<Requirement> requirements = new ArrayList<>();
 
         for (File testFile : testFiles) {
-            populateClasses(testFile.toPath());
+            requirements = testParser.parseTestFile(testFile.toPath());
+        }
+
+        for (Requirement requirement : requirements) {
+            addClass(requirement.className);
+
+            for (JavaClass javaClass : javaClasses) {
+                if (javaClass.getName().equals(requirement.className)) {
+                    javaClass.addRequirement(requirement.function);
+                }
+            }
         }
     }
 
@@ -48,36 +56,9 @@ public class Generator {
         }
     }
 
-    private void createClasses(Path path) {
-        TestParser testParser = new TestParser(fileManager);
-        List<Requirement> requirements = testParser.parseTestFile(path);
-
-        for (Requirement requirement : requirements) {
-            addClass(requirement.className);
-        }
-    }
-
-    String getClassNameFromImport(String line) {
-        String[] split = line.split(Pattern.quote("."));
-        String last = split[split.length - 1];
-        String className = last.split(Pattern.quote(";"))[0];
-
-        if (className.contains(" ") || className.equals("")) {
-            return null;
-        }
-
-        return className;
-    }
-
     void addClass(String className) {
         if (className != null && javaClasses.stream().noneMatch(o -> o.getName().equals(className))) {
             javaClasses.add(new JavaClass(className, fileManager));
-        }
-    }
-
-    private void populateClasses(Path path) {
-        for (JavaClass javaClass : javaClasses) {
-            javaClass.createFunctionsFromPath(path);
         }
     }
 }
