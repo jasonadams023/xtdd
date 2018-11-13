@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class GetNameTest {
     @Test
     void should_ReturnName() {
-        JavaClass javaClass = new JavaClass("Example", null);
+        JavaClass javaClass = new JavaClass("Example");
 
         String name = javaClass.getName();
 

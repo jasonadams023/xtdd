@@ -1,20 +1,17 @@
 package javaClass;
 
 import Requirement.FunctionRequirement;
-import fileManager.FileManager;
 import function.Function;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class JavaClass {
-    private FileManager fileManager;
     private String name;
     List<Function> functions;
 
-    public JavaClass(String name, FileManager fileManager) {
+    public JavaClass(String name) {
         this.name = name;
-        this.fileManager = fileManager;
         this.functions = new ArrayList<>();
     }
 

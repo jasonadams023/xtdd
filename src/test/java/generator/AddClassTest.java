@@ -39,7 +39,7 @@ class AddClassTest {
         FileManager fileManager = mock(FileManager.class);
         Generator generator = new Generator(directory, fileManager);
 
-        generator.javaClasses.add(new JavaClass("Example", fileManager));
+        generator.javaClasses.add(new JavaClass("Example"));
 
         generator.addClass("Example");
 
