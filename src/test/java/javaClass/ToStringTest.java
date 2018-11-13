@@ -1,5 +1,6 @@
 package javaClass;
 
+import Requirement.FunctionRequirement;
 import function.Function;
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +22,8 @@ class ToStringTest {
     void should_PrintClass_WithFunctions() {
         JavaClass javaClass = new JavaClass("Class");
 
-        Function function = new Function("function", "void");
+        FunctionRequirement functionRequirement = new FunctionRequirement("function", "void");
+        Function function = Function.createFromRequirement(functionRequirement);
         javaClass.functions.add(function);
 
         String expected = "class Class {\n" +

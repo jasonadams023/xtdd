@@ -6,11 +6,6 @@ public class Function {
     private String name;
     private String returnType;
 
-    public Function(String name, String returnType) {
-        this.name = name;
-        this.returnType = returnType;
-    }
-
     private Function(FunctionRequirement requirement) {
         this.name = requirement.name;
         this.returnType = requirement.returnType;
