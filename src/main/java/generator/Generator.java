@@ -56,8 +56,8 @@ public class Generator {
         }
     }
 
-    void addClass(String className) {
-        if (className != null && javaClasses.stream().noneMatch(o -> o.getName().equals(className))) {
+    private void addClass(String className) {
+        if (javaClasses.stream().noneMatch(o -> o.getName().equals(className))) {
             javaClasses.add(new JavaClass(className));
         }
     }

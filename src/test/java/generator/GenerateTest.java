@@ -59,7 +59,14 @@ class GenerateTest {
     }
 
     @Test
-    void should_NotGenerateFilesFromTests_WhenNothingToGenerate() {
+    void should_GenerateFiles() {
+        generator.generate();
+
+        verify(fileManager, times(2)).writeFile(any(), any());
+    }
+
+    @Test
+    void should_NotGenerateFiles_WhenNothingToGenerate() {
         List<String> readLines = new ArrayList<>();
         readLines.add("Example.function();");
         willReturn(readLines).given(fileManager).readAllLines(testPath);
@@ -68,12 +75,5 @@ class GenerateTest {
         generator.generate();
 
         verify(fileManager, times(0)).writeFile(any(), any());
-    }
-
-    @Test
-    void should_GenerateFilesFromTests() {
-        generator.generate();
-
-        verify(fileManager, times(2)).writeFile(any(), any());
     }
 }
