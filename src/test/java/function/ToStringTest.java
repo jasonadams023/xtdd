@@ -1,5 +1,6 @@
 package function;
 
+import Requirement.FunctionRequirement;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -7,7 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class ToStringTest {
     @Test
     void should_ReturnEmptyString_WhenNameNotSet() {
-        Function function = new Function("");
+        FunctionRequirement functionRequirement = new FunctionRequirement("", "void");
+        Function function = Function.createFromRequirement(functionRequirement);
 
         String functionString = function.toString();
 
@@ -15,17 +17,9 @@ class ToStringTest {
     }
 
     @Test
-    void should_ReturnVoidFunction_WhenReturnIsNotSet() {
-        Function function = new Function("Example");
-
-        String functionString = function.toString();
-
-        assertEquals("static void Example() {\n}\n", functionString);
-    }
-
-    @Test
     void should_ReturnFunctionWithProperReturn_WhenReturnIsSet() {
-        Function function = new Function("Example", "String");
+        FunctionRequirement functionRequirement = new FunctionRequirement("Example", "String");
+        Function function = Function.createFromRequirement(functionRequirement);
 
         String functionString = function.toString();
 
