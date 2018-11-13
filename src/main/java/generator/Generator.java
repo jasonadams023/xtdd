@@ -12,53 +12,62 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Generator {
-    private List<JavaClass> javaClasses;
-    private FileManager fileManager;
     private File directory;
+    private FileManager fileManager;
+    private List<JavaClass> javaClasses;
+    private List<Requirement> requirements;
 
     public Generator(File directory, FileManager fileManager) {
         this.directory = directory;
         this.fileManager = fileManager;
         this.javaClasses = new ArrayList<>();
+        this.requirements = new ArrayList<>();
     }
 
     public void generate() {
-        readFiles();
+        getRequirementsFromTestFiles();
+        passRequirements();
         writeFiles();
     }
 
-    private void readFiles() {
-        File testDirectory = fileManager.getTestDirectory(directory);
-        File[] testFiles = testDirectory.listFiles();
-
+    private void getRequirementsFromTestFiles() {
         TestParser testParser = new TestParser(fileManager);
-        List<Requirement> requirements = new ArrayList<>();
 
-        for (File testFile : testFiles) {
+        for (File testFile : getTestFiles()) {
             requirements = testParser.parseTestFile(testFile.toPath());
-        }
-
-        for (Requirement requirement : requirements) {
-            addClass(requirement.className);
-
-            for (JavaClass javaClass : javaClasses) {
-                if (javaClass.getName().equals(requirement.className)) {
-                    javaClass.addRequirement(requirement.function);
-                }
-            }
         }
     }
 
-    private void writeFiles() {
-        for (JavaClass javaClass : javaClasses) {
-            Path path = Paths.get(directory.getPath() + "/src/" + javaClass.getName() + ".java");
-            fileManager.writeFile(path, javaClass.toString());
+    private void passRequirements() {
+        for (Requirement requirement : requirements) {
+            addClass(requirement.className);
+            passRequirementToClass(requirement);
         }
     }
 
     private void addClass(String className) {
         if (javaClasses.stream().noneMatch(o -> o.getName().equals(className))) {
             javaClasses.add(new JavaClass(className));
+        }
+    }
+
+    private void passRequirementToClass(Requirement requirement) {
+        for (JavaClass javaClass : javaClasses) {
+            if (javaClass.getName().equals(requirement.className)) {
+                javaClass.addRequirement(requirement.function);
+            }
+        }
+    }
+
+    private File[] getTestFiles() {
+        File testDirectory = fileManager.getTestDirectory(directory);
+        return testDirectory.listFiles();
+    }
+
+    private void writeFiles() {
+        for (JavaClass javaClass : javaClasses) {
+            Path path = Paths.get(directory.getPath() + "/src/" + javaClass.getName() + ".java");
+            fileManager.writeFile(path, javaClass.toString());
         }
     }
 }
