@@ -16,6 +16,19 @@ public class Function {
         this.returnType = returnType;
     }
 
+    private Function(FunctionRequirement requirement) {
+        this.name = requirement.name;
+        this.returnType = requirement.returnType;
+    }
+
+    public static Function createFromRequirement(FunctionRequirement requirement) {
+        if (requirement == null) {
+            return null;
+        }
+
+        return new Function(requirement);
+    }
+
     public String toString() {
         StringBuilder builder = new StringBuilder();
 
