@@ -4,10 +4,8 @@ import Requirement.FunctionRequirement;
 import fileManager.FileManager;
 import function.Function;
 
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 
 public class JavaClass {
     private FileManager fileManager;
@@ -20,55 +18,22 @@ public class JavaClass {
         this.functions = new ArrayList<>();
     }
 
-    public void createFunctionsFromPath(Path path) {
-        List<String> lines = fileManager.readAllLines(path);
-
-        for (String line: lines) {
-            addFunctionFromLine(line);
-        }
-    }
-
-    private void addFunctionFromLine(String line) {
-        Function generated = generateFunction(line);
-
-        if(generated != null) {
-            functions.add(generated);
-        }
-    }
-
-    private Function generateFunction(String line) {
-        Function output = null;
-        String functionName = extractFunctionNameFromLine(line);
-
-        if (!functionName.equals("")) {
-            String returnType = extractReturnTypeFromLine(line);
-            output = new Function(functionName, returnType);
+    public void addRequirement(FunctionRequirement requirement) {
+        if (requirement == null) {
+            return;
         }
 
-        return output;
-    }
+        boolean functionExists = false;
 
-    private String extractReturnTypeFromLine(String line) {
-        String returnType = "void";
-
-        if (line.contains("=")) {
-            returnType = line.trim().split(Pattern.quote(" "))[0];
+        for (Function function : functions) {
+            if(function.matchesRequirement(requirement)) {
+                functionExists = true;
+            }
         }
 
-        return returnType;
-    }
-
-    private String extractFunctionNameFromLine(String line) {
-        String name = "";
-
-        if (line.contains(this.name + ".")) {
-            String[] lineParts = line.split(Pattern.quote(" "));
-            String fullCall = lineParts[lineParts.length - 1];
-            String functionCall = fullCall.split(Pattern.quote("."))[1];
-            name = functionCall.split(Pattern.quote("("))[0];
+        if (!functionExists) {
+            functions.add(Function.createFromRequirement(requirement));
         }
-
-        return name;
     }
 
     public String toString() {
@@ -104,23 +69,5 @@ public class JavaClass {
         }
 
         return false;
-    }
-
-    public void addRequirement(FunctionRequirement requirement) {
-        if (requirement == null) {
-            return;
-        }
-
-        boolean functionExists = false;
-
-        for (Function function : functions) {
-            if(function.matchesRequirement(requirement)) {
-                functionExists = true;
-            }
-        }
-
-        if (!functionExists) {
-            functions.add(Function.createFromRequirement(requirement));
-        }
     }
 }
