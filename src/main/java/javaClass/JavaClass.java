@@ -20,17 +20,17 @@ public class JavaClass {
             return;
         }
 
-        boolean functionExists = false;
+        addFunction(requirement);
+    }
 
+    private void addFunction(FunctionRequirement requirement) {
         for (Function function : functions) {
             if(function.matchesRequirement(requirement)) {
-                functionExists = true;
+                return;
             }
         }
 
-        if (!functionExists) {
-            functions.add(Function.createFromRequirement(requirement));
-        }
+        functions.add(Function.createFromRequirement(requirement));
     }
 
     public String toString() {
