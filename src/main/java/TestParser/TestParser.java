@@ -1,6 +1,7 @@
 package TestParser;
 
 import Requirement.Requirement;
+import Requirement.FunctionRequirement;
 import fileManager.FileManager;
 
 import java.nio.file.Path;
@@ -40,7 +41,7 @@ public class TestParser {
             if(flag) {
                 String className = getClassNameFromImport(line);
                 classNames.add(className);
-                requirements.add(new Requirement(className, null, null));
+                requirements.add(new Requirement(className, null));
             }
         }
 
@@ -63,7 +64,8 @@ public class TestParser {
                 if (line.contains(className + ".")) {
                     String returnType = extractReturnTypeFromLine(line);
                     String functionName = extractFunctionNameFromLine(line);
-                    requirements.add(new Requirement(className, returnType, functionName));
+                    FunctionRequirement functionRequirement = new FunctionRequirement(functionName, returnType);
+                    requirements.add(new Requirement(className, functionRequirement));
                 }
             }
         }

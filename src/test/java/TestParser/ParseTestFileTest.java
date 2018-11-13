@@ -56,7 +56,7 @@ class ParseTestFileTest {
 
         assertEquals(1, output.size());
         assertEquals("Example", output.get(0).className);
-        assertNull(output.get(0).functionName);
+        assertNull(output.get(0).function);
     }
 
     @Test
@@ -72,7 +72,7 @@ class ParseTestFileTest {
 
         assertEquals(2, output.size());
         assertEquals("Example", output.get(1).className);
-        assertEquals("String", output.get(1).returnType);
-        assertEquals("function", output.get(1).functionName);
+        assertEquals("String", output.get(1).function.returnType);
+        assertEquals("function", output.get(1).function.name);
     }
 }
