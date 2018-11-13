@@ -1,5 +1,6 @@
 package javaClass;
 
+import Requirement.FunctionRequirement;
 import fileManager.FileManager;
 import function.Function;
 
@@ -103,5 +104,23 @@ public class JavaClass {
         }
 
         return false;
+    }
+
+    public void addRequirement(FunctionRequirement requirement) {
+        if (requirement == null) {
+            return;
+        }
+
+        boolean functionExists = false;
+
+        for (Function function : functions) {
+            if(function.matchesRequirement(requirement)) {
+                functionExists = true;
+            }
+        }
+
+        if (!functionExists) {
+            functions.add(Function.createFromRequirement(requirement));
+        }
     }
 }
