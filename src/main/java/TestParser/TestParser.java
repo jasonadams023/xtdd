@@ -26,9 +26,16 @@ public class TestParser {
     public List<Requirement> parseTestFile(Path path) {
         List<String> lines = fileManager.readAllLines(path);
 
+        getClassNames(lines);
+        setClassRequirements();
+        setFunctionRequirements(lines);
+
+        return requirements;
+    }
+
+    private void getClassNames(List<String> lines) {
         boolean flag = false;
         for (String line : lines) {
-
             if(line.equals(startFlag)) {
                 flag = true;
                 continue;
@@ -41,13 +48,14 @@ public class TestParser {
             if(flag) {
                 String className = getClassNameFromImport(line);
                 classNames.add(className);
-                requirements.add(new Requirement(className, null));
             }
         }
+    }
 
-        setFunctionRequirements(lines);
-
-        return requirements;
+    private void setClassRequirements() {
+        for(String className : classNames) {
+            requirements.add(new Requirement(className, null));
+        }
     }
 
     private String getClassNameFromImport(String line) {
