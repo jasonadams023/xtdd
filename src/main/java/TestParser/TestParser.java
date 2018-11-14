@@ -3,6 +3,7 @@ package TestParser;
 import requirement.Requirement;
 import requirement.FunctionRequirement;
 import fileManager.FileManager;
+import testCase.TestCase;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -67,82 +68,41 @@ public class TestParser {
     }
 
     private void setFunctionRequirements(List<String> lines) {
-        FunctionRequirement functionRequirement = null;
-        String tempClassName = "";
-        String returnType = "";
-        int building = 0;
+        List<List<String>> testCaseSets = getTestCaseSets(lines);
+
+        for(List<String> testLines : testCaseSets) {
+            for(String className : classNames) {
+                FunctionRequirement functionRequirement = TestCase.parse(testLines, className);
+
+                if (functionRequirement != null) {
+                    requirements.add(new Requirement(className, functionRequirement));
+                }
+            }
+        }
+    }
+
+    private List<List<String>> getTestCaseSets(List<String> lines) {
+        List<List<String>> output = new ArrayList<>();
+        int nestingLevel = 0;
+        List<String> testCaseLines = new ArrayList<>();
 
         for (String line : lines) {
-            for (String className : classNames) {
-                if (line.contains(className + ".")) {
-                    returnType = extractReturnTypeFromLine(line);
-                    String functionName = extractFunctionNameFromLine(line);
-                    functionRequirement = new FunctionRequirement(functionName, returnType, null);
-
-                    if (!returnType.equals("void")) {
-                        tempClassName = className;
-                        building = 1;
-                    } else {
-                        requirements.add(new Requirement(className, functionRequirement));
-                    }
-                }
+            if(line.contains("@Test")) {
+                testCaseLines = new ArrayList<>();
+                nestingLevel = 1;
+                continue;
             }
 
-            if (building == 2) {
-                building = 0;
-
-                if (line.contains("assertEquals")) {
-                    Object returnValue;
-
-                    String args = line.split(Pattern.quote("("))[1];
-                    String returnValueString = args.split(Pattern.quote(","))[0];
-                    returnValue = returnValueString.replaceAll("\"", "");
-
-                    returnValue = prepareValue(returnValue, returnType);
-
-                    functionRequirement.returnValue = returnValue;
-                }
-                requirements.add(new Requirement(tempClassName, functionRequirement));
+            if(nestingLevel == 1) {
+                testCaseLines.add(line);
             }
 
-            if (building == 1) {
-                building++;
+            if(nestingLevel == 1 && line.trim().equals("}")) {
+                output.add(testCaseLines);
+                nestingLevel = 0;
             }
         }
 
-        if (building == 2) {
-            requirements.add(new Requirement(tempClassName, functionRequirement));
-        }
-    }
-
-    private Object prepareValue(Object value, String returnType) {
-        if (returnType.equals("int")) {
-            value = Integer.parseInt((String) value);
-        }
-
-        if(value instanceof String) {
-            value = "\"" + value + "\"";
-        }
-
-        return value;
-    }
-
-    private String extractReturnTypeFromLine(String line) {
-        String returnType = "void";
-
-        if (line.contains("=")) {
-            returnType = line.trim().split(Pattern.quote(" "))[0];
-        }
-
-        return returnType;
-    }
-
-    private String extractFunctionNameFromLine(String line) {
-        String[] lineParts = line.split(Pattern.quote(" "));
-        String fullCall = lineParts[lineParts.length - 1];
-        String functionCall = fullCall.split(Pattern.quote("."))[1];
-        String name = functionCall.split(Pattern.quote("("))[0];
-
-        return name;
+        return output;
     }
 }

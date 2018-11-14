@@ -65,7 +65,10 @@ class ParseTestFileTest {
         lines.add(TestParser.startFlag);
         lines.add("import example.Example;");
         lines.add(TestParser.endFlag);
+        lines.add("@Test");
+        lines.add("void should_Return() {");
         lines.add("String output = Example.function();");
+        lines.add("}");
         willReturn(lines).given(fileManager).readAllLines(path);
 
         List<Requirement> output = parser.parseTestFile(path);
@@ -82,8 +85,11 @@ class ParseTestFileTest {
         lines.add(TestParser.startFlag);
         lines.add("import example.Example;");
         lines.add(TestParser.endFlag);
+        lines.add("@Test");
+        lines.add("void should_ReturnString() {");
         lines.add("String output = Example.function();");
         lines.add("assertEquals(\"a string\", output);");
+        lines.add("}");
         willReturn(lines).given(fileManager).readAllLines(path);
 
         List<Requirement> output = parser.parseTestFile(path);
@@ -101,8 +107,11 @@ class ParseTestFileTest {
         lines.add(TestParser.startFlag);
         lines.add("import example.Example;");
         lines.add(TestParser.endFlag);
+        lines.add("@Test");
+        lines.add("void should_ReturnInt() {");
         lines.add("int output = Example.function();");
         lines.add("assertEquals(7, output);");
+        lines.add("}");
         willReturn(lines).given(fileManager).readAllLines(path);
 
         List<Requirement> output = parser.parseTestFile(path);

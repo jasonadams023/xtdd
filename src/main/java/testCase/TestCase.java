@@ -5,8 +5,8 @@ import requirement.FunctionRequirement;
 import java.util.List;
 import java.util.regex.Pattern;
 
-class TestCase {
-    static FunctionRequirement parse(List<String> lines, String className) {
+public class TestCase {
+    public static FunctionRequirement parse(List<String> lines, String className) {
         String functionName = "";
         String returnType = "void";
         Object returnValue = null;
