@@ -75,4 +75,42 @@ class ParseTestFileTest {
         assertEquals("String", output.get(1).function.returnType);
         assertEquals("function", output.get(1).function.name);
     }
+
+    @Test
+    void should_ReturnRequirements_ForFunctions_WithReturnValues() {
+        List<String> lines = new ArrayList<>();
+        lines.add(TestParser.startFlag);
+        lines.add("import example.Example;");
+        lines.add(TestParser.endFlag);
+        lines.add("String output = Example.function();");
+        lines.add("assertEquals(\"a string\", output);");
+        willReturn(lines).given(fileManager).readAllLines(path);
+
+        List<Requirement> output = parser.parseTestFile(path);
+
+        assertEquals(2, output.size());
+        assertEquals("Example", output.get(1).className);
+        assertEquals("String", output.get(1).function.returnType);
+        assertEquals("function", output.get(1).function.name);
+        assertEquals("\"a string\"", output.get(1).function.returnValue);
+    }
+
+    @Test
+    void should_ReturnRequirements_ForFunctions_WithDifferentReturnValues() {
+        List<String> lines = new ArrayList<>();
+        lines.add(TestParser.startFlag);
+        lines.add("import example.Example;");
+        lines.add(TestParser.endFlag);
+        lines.add("int output = Example.function();");
+        lines.add("assertEquals(7, output);");
+        willReturn(lines).given(fileManager).readAllLines(path);
+
+        List<Requirement> output = parser.parseTestFile(path);
+
+        assertEquals(2, output.size());
+        assertEquals("Example", output.get(1).className);
+        assertEquals("int", output.get(1).function.returnType);
+        assertEquals("function", output.get(1).function.name);
+        assertEquals(7, (int) output.get(1).function.returnValue);
+    }
 }

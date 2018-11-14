@@ -111,7 +111,7 @@ class GeneratorTest {
         assertTrue(data.contains("static int getNullInt() {"));
     }
 
-    @Disabled
+//    @Disabled
     @Test
     void should_GenerateFunctions_WithNonNullReturns() {
         String className = "Returns";

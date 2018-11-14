@@ -67,16 +67,64 @@ public class TestParser {
     }
 
     private void setFunctionRequirements(List<String> lines) {
+        FunctionRequirement functionRequirement = null;
+        String tempClassName = "";
+        String returnType = "";
+        int building = 0;
+
         for (String line : lines) {
             for (String className : classNames) {
                 if (line.contains(className + ".")) {
-                    String returnType = extractReturnTypeFromLine(line);
+                    returnType = extractReturnTypeFromLine(line);
                     String functionName = extractFunctionNameFromLine(line);
-                    FunctionRequirement functionRequirement = new FunctionRequirement(functionName, returnType);
-                    requirements.add(new Requirement(className, functionRequirement));
+                    functionRequirement = new FunctionRequirement(functionName, returnType, null);
+
+                    if (!returnType.equals("void")) {
+                        tempClassName = className;
+                        building = 1;
+                    } else {
+                        requirements.add(new Requirement(className, functionRequirement));
+                    }
                 }
             }
+
+            if (building == 2) {
+                building = 0;
+
+                if (line.contains("assertEquals")) {
+                    Object returnValue;
+
+                    String args = line.split(Pattern.quote("("))[1];
+                    String returnValueString = args.split(Pattern.quote(","))[0];
+                    returnValue = returnValueString.replaceAll("\"", "");
+
+                    returnValue = prepareValue(returnValue, returnType);
+
+                    functionRequirement.returnValue = returnValue;
+                }
+                requirements.add(new Requirement(tempClassName, functionRequirement));
+            }
+
+            if (building == 1) {
+                building++;
+            }
         }
+
+        if (building == 2) {
+            requirements.add(new Requirement(tempClassName, functionRequirement));
+        }
+    }
+
+    private Object prepareValue(Object value, String returnType) {
+        if (returnType.equals("int")) {
+            value = Integer.parseInt((String) value);
+        }
+
+        if(value instanceof String) {
+            value = "\"" + value + "\"";
+        }
+
+        return value;
     }
 
     private String extractReturnTypeFromLine(String line) {

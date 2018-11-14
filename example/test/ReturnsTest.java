@@ -20,7 +20,6 @@ class FirstTest {
     @Test
     void should_ReturnInt() {
         int output = Returns.getInt();
-
         assertEquals(7, output);
     }
 }
