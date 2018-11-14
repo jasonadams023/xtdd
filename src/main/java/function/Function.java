@@ -5,10 +5,12 @@ import Requirement.FunctionRequirement;
 public class Function {
     private String name;
     private String returnType;
+    private Object returnValue;
 
     private Function(FunctionRequirement requirement) {
         this.name = requirement.name;
         this.returnType = requirement.returnType;
+        this.returnValue = requirement.returnValue;
     }
 
     public static Function createFromRequirement(FunctionRequirement requirement) {
@@ -24,11 +26,7 @@ public class Function {
 
         if (!name.equals("")) {
             builder.append(getHeader());
-
-            if(!returnType.equals("void")) {
-                builder.append("return null;\n");
-            }
-
+            getReturnStatement(builder);
             builder.append(getFooter());
         }
 
@@ -37,6 +35,12 @@ public class Function {
 
     private String getHeader() {
         return "static " + returnType + " " + name + "() {\n";
+    }
+
+    private void getReturnStatement(StringBuilder builder) {
+        if(!returnType.equals("void")) {
+            builder.append("return " + returnValue + ";\n");
+        }
     }
 
     private String getFooter() {
