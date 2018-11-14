@@ -1,6 +1,6 @@
 package generator;
 
-import Requirement.Requirement;
+import requirement.Requirement;
 import TestParser.TestParser;
 import fileManager.FileManager;
 import projectStructure.javaClass.JavaClass;

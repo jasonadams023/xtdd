@@ -1,6 +1,6 @@
 package projectStructure.javaClass;
 
-import Requirement.FunctionRequirement;
+import requirement.FunctionRequirement;
 import projectStructure.function.Function;
 import org.junit.jupiter.api.Test;
 

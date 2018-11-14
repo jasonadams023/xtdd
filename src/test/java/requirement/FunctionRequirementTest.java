@@ -1,4 +1,4 @@
-package Requirement;
+package requirement;
 
 import org.junit.jupiter.api.Test;
 

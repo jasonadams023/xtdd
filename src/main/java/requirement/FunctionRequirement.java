@@ -1,4 +1,4 @@
-package Requirement;
+package requirement;
 
 public class FunctionRequirement {
     public String name;

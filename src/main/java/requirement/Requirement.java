@@ -1,4 +1,4 @@
-package Requirement;
+package requirement;
 
 public class Requirement {
     public String className;

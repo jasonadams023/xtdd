@@ -1,6 +1,6 @@
 package projectStructure.function;
 
-import Requirement.FunctionRequirement;
+import requirement.FunctionRequirement;
 
 public class Function {
     private String name;

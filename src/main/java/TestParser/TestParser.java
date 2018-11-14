@@ -1,7 +1,7 @@
 package TestParser;
 
-import Requirement.Requirement;
-import Requirement.FunctionRequirement;
+import requirement.Requirement;
+import requirement.FunctionRequirement;
 import fileManager.FileManager;
 
 import java.nio.file.Path;
