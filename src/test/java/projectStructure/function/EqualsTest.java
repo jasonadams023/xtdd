@@ -1,4 +1,4 @@
-package function;
+package projectStructure.function;
 
 import Requirement.FunctionRequirement;
 import org.junit.jupiter.api.Test;
@@ -35,7 +35,7 @@ class EqualsTest {
         FunctionRequirement functionRequirement1 = new FunctionRequirement("someName", "void");
         Function function1 = Function.createFromRequirement(functionRequirement1);
 
-        boolean output = function1.equals("Not a function");
+        boolean output = function1.equals("Not a projectStructure.function");
 
         assertFalse(output);
     }

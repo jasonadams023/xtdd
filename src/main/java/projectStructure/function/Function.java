@@ -1,4 +1,4 @@
-package function;
+package projectStructure.function;
 
 import Requirement.FunctionRequirement;
 

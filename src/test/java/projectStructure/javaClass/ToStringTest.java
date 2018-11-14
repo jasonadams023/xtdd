@@ -1,7 +1,7 @@
-package javaClass;
+package projectStructure.javaClass;
 
 import Requirement.FunctionRequirement;
-import function.Function;
+import projectStructure.function.Function;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

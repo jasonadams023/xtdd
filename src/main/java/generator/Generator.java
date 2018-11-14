@@ -3,7 +3,7 @@ package generator;
 import Requirement.Requirement;
 import TestParser.TestParser;
 import fileManager.FileManager;
-import javaClass.JavaClass;
+import projectStructure.javaClass.JavaClass;
 
 import java.io.File;
 import java.nio.file.Path;
