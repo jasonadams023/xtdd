@@ -82,27 +82,27 @@ public class TestParser {
     }
 
     private List<List<String>> getTestCaseSets(List<String> lines) {
-        List<List<String>> output = new ArrayList<>();
         int nestingLevel = 0;
-        List<String> testCaseLines = new ArrayList<>();
+        List<String> testLines = new ArrayList<>();
+        List<List<String>> testCaseSets = new ArrayList<>();
 
         for (String line : lines) {
             if(line.contains("@Test")) {
-                testCaseLines = new ArrayList<>();
+                testLines = new ArrayList<>();
                 nestingLevel = 1;
                 continue;
             }
 
             if(nestingLevel == 1) {
-                testCaseLines.add(line);
+                testLines.add(line);
             }
 
             if(nestingLevel == 1 && line.trim().equals("}")) {
-                output.add(testCaseLines);
+                testCaseSets.add(testLines);
                 nestingLevel = 0;
             }
         }
 
-        return output;
+        return testCaseSets;
     }
 }
