@@ -18,11 +18,7 @@ public class TestCase {
             }
 
             if (line.contains("assertEquals")) {
-                String args = line.split(Pattern.quote("("))[1];
-                String returnValueString = args.split(Pattern.quote(","))[0];
-                returnValue = returnValueString.replaceAll("\"", "");
-
-                returnValue = prepareValue(returnValue, returnType);
+                returnValue = extractReturnValueFromLine(returnType, line);
             }
         }
 
@@ -48,6 +44,16 @@ public class TestCase {
         String fullCall = lineParts[lineParts.length - 1];
         String functionCall = fullCall.split(Pattern.quote("."))[1];
         return functionCall.split(Pattern.quote("("))[0];
+    }
+
+    private static Object extractReturnValueFromLine(String returnType, String line) {
+        Object returnValue;
+        String args = line.split(Pattern.quote("("))[1];
+        String returnValueString = args.split(Pattern.quote(","))[0];
+        returnValue = returnValueString.replaceAll("\"", "");
+
+        returnValue = prepareValue(returnValue, returnType);
+        return returnValue;
     }
 
     private static Object prepareValue(Object value, String returnType) {
