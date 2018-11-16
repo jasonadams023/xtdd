@@ -41,6 +41,16 @@ public class Function {
     private String getHeader() {
         String output = "static " + returnType + " " + name + "(";
 
+        output += getInputs();
+
+        output += ") {\n";
+
+        return output;
+    }
+
+    private String getInputs() {
+        String output = "";
+
         for (int i = 0; i < inputs.size(); i++) {
             if(i > 0) {
                 output += ", ";
@@ -49,8 +59,6 @@ public class Function {
             output += inputs.get(i).type;
             output += " arg" + (i + 1);
         }
-
-        output += ") {\n";
 
         return output;
     }
