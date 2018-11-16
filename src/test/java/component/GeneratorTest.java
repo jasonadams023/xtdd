@@ -129,7 +129,6 @@ class GeneratorTest {
         assertTrue(data.contains("return 7"));
     }
 
-    @Disabled
     @Test
     void should_GenerateFunctions_WithInput() {
         String className = "Inputs";

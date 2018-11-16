@@ -67,6 +67,21 @@ class ParseTest {
     }
 
     @Test
+    void should_ReturnRequirements_ForSingleInput() {
+        String className = "InputClass";
+
+        List<String> lines = new ArrayList<>();
+        lines.add("     int num = 7;");
+        lines.add("int output = InputClass.inputFunction(num);");
+        lines.add("assertEquals(7, output);");
+
+        FunctionRequirement output = TestCase.parse(lines, className);
+
+        assertEquals(1, output.inputs.size());
+        assertEquals("int", output.inputs.get(0).type);
+    }
+
+    @Test
     void should_ReturnRequirements_ForInputs() {
         String className = "InputClass";
 
