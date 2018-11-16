@@ -1,16 +1,21 @@
 package projectStructure.function;
 
+import projectStructure.Variable.Variable;
 import requirement.FunctionRequirement;
+
+import java.util.List;
 
 public class Function {
     private String name;
     private String returnType;
     private Object returnValue;
+    private List<Variable> inputs;
 
     private Function(FunctionRequirement requirement) {
         this.name = requirement.name;
         this.returnType = requirement.returnType;
         this.returnValue = requirement.returnValue;
+        this.inputs = requirement.inputs;
     }
 
     public static Function createFromRequirement(FunctionRequirement requirement) {
@@ -34,7 +39,20 @@ public class Function {
     }
 
     private String getHeader() {
-        return "static " + returnType + " " + name + "() {\n";
+        String output = "static " + returnType + " " + name + "(";
+
+        for (int i = 0; i < inputs.size(); i++) {
+            if(i > 0) {
+                output += ", ";
+            }
+
+            output += inputs.get(i).type;
+            output += " arg" + (i + 1);
+        }
+
+        output += ") {\n";
+
+        return output;
     }
 
     private void getReturnStatement(StringBuilder builder) {

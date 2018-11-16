@@ -1,7 +1,11 @@
 package projectStructure.function;
 
+import projectStructure.Variable.Variable;
 import requirement.FunctionRequirement;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -34,5 +38,18 @@ class ToStringTest {
         String functionString = function.toString();
 
         assertEquals("static int Example() {\nreturn 7;\n}\n", functionString);
+    }
+
+    @Test
+    void should_ReturnFunctionWithProperInputs() {
+        List<Variable> inputs = new ArrayList<>();
+        inputs.add(new Variable("int", 7));
+        inputs.add(new Variable("String", "a string"));
+        FunctionRequirement functionRequirement = new FunctionRequirement("Example", "void", inputs, null);
+        Function function = Function.createFromRequirement(functionRequirement);
+
+        String functionString = function.toString();
+
+        assertEquals("static void Example(int arg1, String arg2) {\n}\n", functionString);
     }
 }
