@@ -1,7 +1,9 @@
 package testCase;
 
+import projectStructure.Variable.Variable;
 import requirement.FunctionRequirement;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -10,8 +12,13 @@ public class TestCase {
         String functionName = "";
         String returnType = "void";
         Object returnValue = null;
+        List<Variable> variables = new ArrayList<>();
 
         for(String line : lines) {
+            if (!line.contains(className) && line.contains(" = ")) {
+                variables.add(extractVariableFromLine(line));
+            }
+
             if (line.contains(className + ".")) {
                 returnType = extractReturnTypeFromLine(line);
                 functionName = extractFunctionNameFromLine(line);
@@ -26,7 +33,13 @@ public class TestCase {
             return null;
         }
 
-        return new FunctionRequirement(functionName, returnType, returnValue);
+        return new FunctionRequirement(functionName, returnType, variables, returnValue);
+    }
+
+    private static Variable extractVariableFromLine(String line) {
+        String type = line.split(Pattern.quote(" "))[0];
+
+        return new Variable(type);
     }
 
     private static String extractReturnTypeFromLine(String line) {
@@ -40,10 +53,14 @@ public class TestCase {
     }
 
     private static String extractFunctionNameFromLine(String line) {
-        String[] lineParts = line.split(Pattern.quote(" "));
-        String fullCall = lineParts[lineParts.length - 1];
-        String functionCall = fullCall.split(Pattern.quote("."))[1];
-        return functionCall.split(Pattern.quote("("))[0];
+        if(line.contains("=")) {
+            line = line.split(Pattern.quote("="))[1];
+        }
+
+        line = line.split(Pattern.quote("."))[1];
+        line = line.split(Pattern.quote("("))[0];
+
+        return line;
     }
 
     private static Object extractReturnValueFromLine(String returnType, String line) {

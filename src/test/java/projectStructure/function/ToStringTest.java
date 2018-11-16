@@ -53,8 +53,8 @@ class ToStringTest {
     @Test
     void should_ReturnFunctionWithProperInputs() {
         List<Variable> inputs = new ArrayList<>();
-        inputs.add(new Variable("int", 7));
-        inputs.add(new Variable("String", "a string"));
+        inputs.add(new Variable("int"));
+        inputs.add(new Variable("String"));
         FunctionRequirement functionRequirement = new FunctionRequirement("Example", "void", inputs, null);
         Function function = Function.createFromRequirement(functionRequirement);
 

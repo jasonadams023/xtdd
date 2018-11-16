@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 class ParseTest {
     @Test
-    void should_ReturnVoid_WhenNoRequirementsForGivenClass() {
+    void should_ReturnNull_WhenNoRequirementsForGivenClass() {
         String className = "VoidClass";
 
         List<String> lines = new ArrayList<>();
@@ -64,5 +64,20 @@ class ParseTest {
         assertEquals("intFunction", output.name);
         assertEquals("int", output.returnType);
         assertEquals(7, output.returnValue);
+    }
+
+    @Test
+    void should_ReturnRequirements_ForInputs() {
+        String className = "InputClass";
+
+        List<String> lines = new ArrayList<>();
+        lines.add("int num = 7;");
+        lines.add("String line = \"a string\";");
+        lines.add("int output = InputClass.inputFunction(num, line);");
+        lines.add("assertEquals(7, output);");
+
+        FunctionRequirement output = TestCase.parse(lines, className);
+
+        assertEquals(2, output.inputs.size());
     }
 }
