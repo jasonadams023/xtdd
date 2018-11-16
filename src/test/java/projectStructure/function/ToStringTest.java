@@ -21,6 +21,16 @@ class ToStringTest {
     }
 
     @Test
+    void should_ReturnVoidFunction() {
+        FunctionRequirement functionRequirement = new FunctionRequirement("Example", "void");
+        Function function = Function.createFromRequirement(functionRequirement);
+
+        String functionString = function.toString();
+
+        assertEquals("static void Example() {\n}\n", functionString);
+    }
+
+    @Test
     void should_ReturnFunctionWithNullReturn_WhenReturnTypeIsSetAndReturnValueIsNot() {
         FunctionRequirement functionRequirement = new FunctionRequirement("Example", "String");
         Function function = Function.createFromRequirement(functionRequirement);
