@@ -49,18 +49,19 @@ public class Function {
     }
 
     private String getInputs() {
-        String output = "";
+        StringBuilder builder = new StringBuilder();
 
         for (int i = 0; i < inputs.size(); i++) {
             if(i > 0) {
-                output += ", ";
+                builder.append(", ");
             }
 
-            output += inputs.get(i).type;
-            output += " arg" + (i + 1);
+            builder.append(inputs.get(i).type);
+            builder.append(" arg");
+            builder.append(i + 1);
         }
 
-        return output;
+        return builder.toString();
     }
 
     private void getReturnStatement(StringBuilder builder) {
