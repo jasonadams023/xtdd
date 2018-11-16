@@ -146,7 +146,6 @@ class GeneratorTest {
         assertTrue(data.contains("static void setInt(int arg1) {"));
     }
 
-    @Disabled
     @Test
     void should_GenerateFunctions_WithMultipleInputs() {
         String className = "Inputs";
@@ -162,6 +161,5 @@ class GeneratorTest {
 
         assertTrue(data.contains("class Inputs {"));
         assertTrue(data.contains("static void setArgs(int arg1, String arg2) {"));
-
     }
 }

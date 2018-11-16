@@ -13,4 +13,12 @@ class FirstTest {
 
         Inputs.setInt(var);
     }
+
+    @Test
+    void should_TakeArgs() {
+        int var = 7;
+        String line = "a string";
+
+        Inputs.setArgs(var, line);
+    }
 }
