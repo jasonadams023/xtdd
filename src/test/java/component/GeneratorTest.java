@@ -162,4 +162,24 @@ class GeneratorTest {
         assertTrue(data.contains("class Inputs {"));
         assertTrue(data.contains("static void setArgs(int arg1, String arg2) {"));
     }
+
+    @Disabled
+    @Test
+    void should_GenerateFunctions_WithOutputsDependentOnInputs() {
+        String className = "InputOutput";
+
+        generator.generate();
+
+        String data = "";
+        try {
+            data = new String(Files.readAllBytes(Paths.get(exampleSourceDirectory.getPath() + "/" + className + ".java")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        assertTrue(data.contains("class InputOutput {"));
+        assertTrue(data.contains("static int add(int arg1, int arg2) {"));
+        assertTrue(data.contains("return 10;"));
+        assertTrue(data.contains("return 11;"));
+    }
 }
