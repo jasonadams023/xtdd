@@ -1,4 +1,4 @@
-package TestParser;
+package testParser;
 
 import requirement.Requirement;
 import requirement.FunctionRequirement;
