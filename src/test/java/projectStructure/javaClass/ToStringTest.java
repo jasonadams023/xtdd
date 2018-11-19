@@ -1,8 +1,11 @@
 package projectStructure.javaClass;
 
+import projectStructure.function.Signature;
 import requirement.FunctionRequirement;
 import projectStructure.function.Function;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -22,7 +25,8 @@ class ToStringTest {
     void should_PrintClass_WithFunctions() {
         JavaClass javaClass = new JavaClass("Class");
 
-        FunctionRequirement functionRequirement = new FunctionRequirement("function", "void");
+        Signature signature = new Signature("function", "void", new ArrayList<>());
+        FunctionRequirement functionRequirement = FunctionRequirement.create(signature, null, null);
         Function function = Function.createFromRequirement(functionRequirement);
         javaClass.functions.add(function);
 

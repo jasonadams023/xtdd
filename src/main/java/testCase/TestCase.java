@@ -1,6 +1,7 @@
 package testCase;
 
 import projectStructure.Variable.Variable;
+import projectStructure.function.Signature;
 import requirement.FunctionRequirement;
 
 import java.util.ArrayList;
@@ -33,7 +34,14 @@ public class TestCase {
             return null;
         }
 
-        return new FunctionRequirement(functionName, returnType, variables, returnValue);
+        List<String> inputTypes = new ArrayList<>();
+        for(Variable variable : variables) {
+            inputTypes.add(variable.type);
+        }
+
+        Signature signature = new Signature(functionName, returnType, inputTypes);
+
+        return FunctionRequirement.create(signature, variables, returnValue);
     }
 
     private static Variable extractVariableFromLine(String line) {

@@ -31,8 +31,8 @@ class ParseTest {
 
         FunctionRequirement output = TestCase.parse(lines, className);
 
-        assertEquals("voidFunction", output.name);
-        assertEquals("void", output.returnType);
+        assertEquals("voidFunction", output.signature.name);
+        assertEquals("void", output.signature.returnType);
         assertEquals(null, output.returnValue);
     }
 
@@ -46,8 +46,8 @@ class ParseTest {
 
         FunctionRequirement output = TestCase.parse(lines, className);
 
-        assertEquals("stringFunction", output.name);
-        assertEquals("String", output.returnType);
+        assertEquals("stringFunction", output.signature.name);
+        assertEquals("String", output.signature.returnType);
         assertEquals("\"a string\"", output.returnValue);
     }
 
@@ -61,8 +61,8 @@ class ParseTest {
 
         FunctionRequirement output = TestCase.parse(lines, className);
 
-        assertEquals("intFunction", output.name);
-        assertEquals("int", output.returnType);
+        assertEquals("intFunction", output.signature.name);
+        assertEquals("int", output.signature.returnType);
         assertEquals(7, output.returnValue);
     }
 

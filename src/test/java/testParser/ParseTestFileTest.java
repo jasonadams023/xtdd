@@ -75,8 +75,8 @@ class ParseTestFileTest {
 
         assertEquals(2, output.size());
         assertEquals("Example", output.get(1).className);
-        assertEquals("String", output.get(1).function.returnType);
-        assertEquals("function", output.get(1).function.name);
+        assertEquals("String", output.get(1).function.signature.returnType);
+        assertEquals("function", output.get(1).function.signature.name);
     }
 
     @Test
@@ -96,8 +96,8 @@ class ParseTestFileTest {
 
         assertEquals(2, output.size());
         assertEquals("Example", output.get(1).className);
-        assertEquals("String", output.get(1).function.returnType);
-        assertEquals("function", output.get(1).function.name);
+        assertEquals("String", output.get(1).function.signature.returnType);
+        assertEquals("function", output.get(1).function.signature.name);
         assertEquals("\"a string\"", output.get(1).function.returnValue);
     }
 
@@ -118,8 +118,8 @@ class ParseTestFileTest {
 
         assertEquals(2, output.size());
         assertEquals("Example", output.get(1).className);
-        assertEquals("int", output.get(1).function.returnType);
-        assertEquals("function", output.get(1).function.name);
+        assertEquals("int", output.get(1).function.signature.returnType);
+        assertEquals("function", output.get(1).function.signature.name);
         assertEquals(7, (int) output.get(1).function.returnValue);
     }
 }

@@ -1,5 +1,6 @@
 package projectStructure.javaClass;
 
+import projectStructure.function.Signature;
 import requirement.FunctionRequirement;
 import org.junit.jupiter.api.Test;
 
@@ -8,7 +9,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class AddRequirementTest {
     @Test
     void should_AddFunction_BasedOnRequirement() {
-        FunctionRequirement functionRequirement = new FunctionRequirement("function", "void");
+        Signature signature = new Signature("function", "void", null);
+        FunctionRequirement functionRequirement = FunctionRequirement.create(signature, null, null);
         JavaClass javaClass = new JavaClass("Example");
 
         javaClass.addRequirement(functionRequirement);
@@ -18,7 +20,8 @@ class AddRequirementTest {
 
     @Test
     void should_NotAddFunction_WhenItAlreadyExists() {
-        FunctionRequirement functionRequirement = new FunctionRequirement("function", "void");
+        Signature signature = new Signature("function", "void", null);
+        FunctionRequirement functionRequirement = FunctionRequirement.create(signature, null, null);
         JavaClass javaClass = new JavaClass("Example");
 
         javaClass.addRequirement(functionRequirement);

@@ -1,21 +1,18 @@
 package projectStructure.function;
 
-import projectStructure.Variable.Variable;
 import requirement.FunctionRequirement;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Function {
-    private String name;
-    private String returnType;
-    private Object returnValue;
-    private List<Variable> inputs;
+    private Signature signature;
+    private List<FunctionRequirement> requirements;
 
     private Function(FunctionRequirement requirement) {
-        this.name = requirement.name;
-        this.returnType = requirement.returnType;
-        this.returnValue = requirement.returnValue;
-        this.inputs = requirement.inputs;
+        this.requirements = new ArrayList<>();
+        this.requirements.add(requirement);
+        this.signature = requirement.signature;
     }
 
     public static Function createFromRequirement(FunctionRequirement requirement) {
@@ -29,7 +26,7 @@ public class Function {
     public String toString() {
         StringBuilder builder = new StringBuilder();
 
-        if (!name.equals("")) {
+        if (!signature.name.equals("")) {
             builder.append(getHeader());
             getReturnStatement(builder);
             builder.append(getFooter());
@@ -39,7 +36,7 @@ public class Function {
     }
 
     private String getHeader() {
-        String output = "static " + returnType + " " + name + "(";
+        String output = "static " + signature.returnType + " " + signature.name + "(";
 
         output += getInputs();
 
@@ -51,12 +48,12 @@ public class Function {
     private String getInputs() {
         StringBuilder builder = new StringBuilder();
 
-        for (int i = 0; i < inputs.size(); i++) {
+        for (int i = 0; i < signature.inputTypes.size(); i++) {
             if(i > 0) {
                 builder.append(", ");
             }
 
-            builder.append(inputs.get(i).type);
+            builder.append(signature.inputTypes.get(i));
             builder.append(" arg");
             builder.append(i + 1);
         }
@@ -65,8 +62,8 @@ public class Function {
     }
 
     private void getReturnStatement(StringBuilder builder) {
-        if(!returnType.equals("void")) {
-            builder.append("return " + returnValue + ";\n");
+        if(!signature.returnType.equals("void")) {
+            builder.append("return " + requirements.get(0).returnValue + ";\n");
         }
     }
 
@@ -77,13 +74,13 @@ public class Function {
     public boolean equals(Object o) {
         if (o instanceof Function) {
             Function compareTo = (Function) o;
-            return name.equals(compareTo.name);
+            return signature.name.equals(compareTo.signature.name);
         }
 
         return false;
     }
 
     public boolean matchesRequirement(FunctionRequirement requirement) {
-        return (requirement.name.equals(name) && requirement.returnType.equals(returnType));
+        return (requirement.signature.name.equals(signature.name) && requirement.signature.returnType.equals(signature.returnType));
     }
 }

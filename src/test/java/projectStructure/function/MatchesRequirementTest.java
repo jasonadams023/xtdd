@@ -12,13 +12,15 @@ class MatchesRequirementTest {
 
     @BeforeEach
     void setup() {
-        FunctionRequirement functionRequirement = new FunctionRequirement("name", "void");
+        Signature signature = new Signature("name", "void", null);
+        FunctionRequirement functionRequirement = FunctionRequirement.create(signature, null, null);
         function = Function.createFromRequirement(functionRequirement);
     }
 
     @Test
     void should_ReturnFalse_WhenNameDoesNotMatch() {
-        FunctionRequirement functionRequirement = new FunctionRequirement("wrong", "void");
+        Signature signature = new Signature("wrong", "void", null);
+        FunctionRequirement functionRequirement = FunctionRequirement.create(signature, null, null);
 
         boolean output = function.matchesRequirement(functionRequirement);
 
@@ -27,7 +29,8 @@ class MatchesRequirementTest {
 
     @Test
     void should_ReturnFalse_WhenReturnTypeDoesNotMatch() {
-        FunctionRequirement functionRequirement = new FunctionRequirement("name", "String");
+        Signature signature = new Signature("name", "String", null);
+        FunctionRequirement functionRequirement = FunctionRequirement.create(signature, null, null);
 
         boolean output = function.matchesRequirement(functionRequirement);
 
@@ -36,7 +39,8 @@ class MatchesRequirementTest {
 
     @Test
     void should_ReturnTrue_WhenRequirementDoesMatchSignature() {
-        FunctionRequirement functionRequirement = new FunctionRequirement("name", "void");
+        Signature signature = new Signature("name", "void", null);
+        FunctionRequirement functionRequirement = FunctionRequirement.create(signature, null, null);
 
         boolean output = function.matchesRequirement(functionRequirement);
 

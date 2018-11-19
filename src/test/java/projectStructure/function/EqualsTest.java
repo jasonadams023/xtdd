@@ -9,7 +9,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class EqualsTest {
     @Test
     void should_ReturnTrue_WhenNamesMatch () {
-        FunctionRequirement functionRequirement = new FunctionRequirement("someName", "void");
+        Signature signature = new Signature("someName", "void", null);
+        FunctionRequirement functionRequirement = FunctionRequirement.create(signature, null, null);
         Function function1 = Function.createFromRequirement(functionRequirement);
         Function function2 = Function.createFromRequirement(functionRequirement);
 
@@ -20,9 +21,12 @@ class EqualsTest {
 
     @Test
     void should_ReturnFalse_WhenNamesDoNotMatch () {
-        FunctionRequirement functionRequirement1 = new FunctionRequirement("someName", "void");
+        Signature signature = new Signature("someName", "void", null);
+        FunctionRequirement functionRequirement1 = FunctionRequirement.create(signature, null, null);
         Function function1 = Function.createFromRequirement(functionRequirement1);
-        FunctionRequirement functionRequirement2 = new FunctionRequirement("someOtherName", "void");
+
+        Signature signature2 = new Signature("someOtherName", "void", null);
+        FunctionRequirement functionRequirement2 = FunctionRequirement.create(signature2, null, null);
         Function function2 = Function.createFromRequirement(functionRequirement2);
 
         boolean output = function1.equals(function2);
@@ -32,8 +36,9 @@ class EqualsTest {
 
     @Test
     void should_ReturnFalse_WhenDifferentObjects () {
-        FunctionRequirement functionRequirement1 = new FunctionRequirement("someName", "void");
-        Function function1 = Function.createFromRequirement(functionRequirement1);
+        Signature signature = new Signature("someName", "void", null);
+        FunctionRequirement functionRequirement = FunctionRequirement.create(signature, null, null);
+        Function function1 = Function.createFromRequirement(functionRequirement);
 
         boolean output = function1.equals("Not a projectStructure.function");
 

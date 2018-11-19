@@ -1,31 +1,22 @@
 package requirement;
 
 import projectStructure.Variable.Variable;
+import projectStructure.function.Signature;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FunctionRequirement {
-    public String name;
-    public String returnType;
-    public Object returnValue;
+    public Signature signature;
     public List<Variable> inputs;
+    public Object returnValue;
 
-    public FunctionRequirement(String name, String returnType) {
-        this.name = name;
-        this.returnType = returnType;
-        if (inputs == null) {
-            this.inputs = new ArrayList<>();
-        }
-    }
-
-    public FunctionRequirement(String name, String returnType, Object returnValue) {
-        this(name, returnType);
+    private FunctionRequirement(Signature signature, List<Variable> inputs, Object returnValue) {
+        this.signature = signature;
+        this.inputs = inputs;
         this.returnValue = returnValue;
     }
 
-    public FunctionRequirement(String name, String returnType, List<Variable> inputs, Object returnValue) {
-        this(name, returnType, returnValue);
-        this.inputs = inputs;
+    public static FunctionRequirement create(Signature signature, List<Variable> inputs, Object returnValue) {
+        return new FunctionRequirement(signature, inputs, returnValue);
     }
 }

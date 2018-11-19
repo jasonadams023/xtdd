@@ -12,7 +12,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class ToStringTest {
     @Test
     void should_ReturnEmptyString_WhenNameNotSet() {
-        FunctionRequirement functionRequirement = new FunctionRequirement("", "void");
+        Signature signature = new Signature("", "void", null);
+        FunctionRequirement functionRequirement = FunctionRequirement.create(signature, null, null);
         Function function = Function.createFromRequirement(functionRequirement);
 
         String functionString = function.toString();
@@ -22,7 +23,8 @@ class ToStringTest {
 
     @Test
     void should_ReturnVoidFunction() {
-        FunctionRequirement functionRequirement = new FunctionRequirement("Example", "void");
+        Signature signature = new Signature("Example", "void", new ArrayList<>());
+        FunctionRequirement functionRequirement = FunctionRequirement.create(signature, null, null);
         Function function = Function.createFromRequirement(functionRequirement);
 
         String functionString = function.toString();
@@ -32,7 +34,8 @@ class ToStringTest {
 
     @Test
     void should_ReturnFunctionWithNullReturn_WhenReturnTypeIsSetAndReturnValueIsNot() {
-        FunctionRequirement functionRequirement = new FunctionRequirement("Example", "String");
+        Signature signature = new Signature("Example", "String", new ArrayList<>());
+        FunctionRequirement functionRequirement = FunctionRequirement.create(signature, null, null);
         Function function = Function.createFromRequirement(functionRequirement);
 
         String functionString = function.toString();
@@ -42,7 +45,8 @@ class ToStringTest {
 
     @Test
     void should_ReturnFunctionWithProperReturnValue_WhenReturnTypeAndReturnValueIsSet() {
-        FunctionRequirement functionRequirement = new FunctionRequirement("Example", "int", 7);
+        Signature signature = new Signature("Example", "int", new ArrayList<>());
+        FunctionRequirement functionRequirement = FunctionRequirement.create(signature, null, 7);
         Function function = Function.createFromRequirement(functionRequirement);
 
         String functionString = function.toString();
@@ -55,7 +59,13 @@ class ToStringTest {
         List<Variable> inputs = new ArrayList<>();
         inputs.add(new Variable("int"));
         inputs.add(new Variable("String"));
-        FunctionRequirement functionRequirement = new FunctionRequirement("Example", "void", inputs, null);
+
+        List<String> inputTypes = new ArrayList<>();
+        inputTypes.add(("int"));
+        inputTypes.add("String");
+
+        Signature signature = new Signature("Example", "void", inputTypes);
+        FunctionRequirement functionRequirement = FunctionRequirement.create(signature, inputs, null);
         Function function = Function.createFromRequirement(functionRequirement);
 
         String functionString = function.toString();

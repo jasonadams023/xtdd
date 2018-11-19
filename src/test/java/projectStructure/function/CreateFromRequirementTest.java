@@ -16,9 +16,10 @@ class CreateFromRequirementTest {
 
     @Test
     void should_ReturnFunction_WhenGivenNonNull() {
-        FunctionRequirement requirement = new FunctionRequirement("name", "void");
+        Signature signature = new Signature("name", "void", null);
+        FunctionRequirement functionRequirement = FunctionRequirement.create(signature, null, null);
 
-        Function output = Function.createFromRequirement(requirement);
+        Function output = Function.createFromRequirement(functionRequirement);
 
         assertNotNull(output);
     }
