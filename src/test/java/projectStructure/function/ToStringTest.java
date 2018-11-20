@@ -1,6 +1,7 @@
 package projectStructure.function;
 
 import projectStructure.Variable.Variable;
+import projectStructure.function.signature.Signature;
 import requirement.FunctionRequirement;
 import org.junit.jupiter.api.Test;
 

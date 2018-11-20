@@ -1,7 +1,7 @@
 package testCase;
 
 import projectStructure.Variable.Variable;
-import projectStructure.function.Signature;
+import projectStructure.function.signature.Signature;
 import requirement.FunctionRequirement;
 
 import java.util.ArrayList;

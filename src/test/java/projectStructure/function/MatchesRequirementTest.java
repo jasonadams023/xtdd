@@ -1,5 +1,6 @@
 package projectStructure.function;
 
+import projectStructure.function.signature.Signature;
 import requirement.FunctionRequirement;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,18 +19,8 @@ class MatchesRequirementTest {
     }
 
     @Test
-    void should_ReturnFalse_WhenNameDoesNotMatch() {
+    void should_ReturnFalse_WhenRequirementDoesNotMatch() {
         Signature signature = new Signature("wrong", "void", null);
-        FunctionRequirement functionRequirement = FunctionRequirement.create(signature, null, null);
-
-        boolean output = function.matchesRequirement(functionRequirement);
-
-        assertFalse(output);
-    }
-
-    @Test
-    void should_ReturnFalse_WhenReturnTypeDoesNotMatch() {
-        Signature signature = new Signature("name", "String", null);
         FunctionRequirement functionRequirement = FunctionRequirement.create(signature, null, null);
 
         boolean output = function.matchesRequirement(functionRequirement);

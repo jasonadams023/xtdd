@@ -1,5 +1,6 @@
 package projectStructure.function;
 
+import projectStructure.function.signature.Signature;
 import requirement.FunctionRequirement;
 
 import java.util.ArrayList;
@@ -71,16 +72,7 @@ public class Function {
         return "}\n";
     }
 
-    public boolean equals(Object o) {
-        if (o instanceof Function) {
-            Function compareTo = (Function) o;
-            return signature.name.equals(compareTo.signature.name);
-        }
-
-        return false;
-    }
-
     public boolean matchesRequirement(FunctionRequirement requirement) {
-        return (requirement.signature.name.equals(signature.name) && requirement.signature.returnType.equals(signature.returnType));
+        return (requirement.signature.equals(signature));
     }
 }
