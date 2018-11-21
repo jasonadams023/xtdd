@@ -1,5 +1,6 @@
 package projectStructure.function.signature;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Signature {
@@ -10,7 +11,32 @@ public class Signature {
     public Signature(String name, String returnType, List<String> inputTypes) {
         this.name = name;
         this.returnType = returnType;
+
+        if(inputTypes == null) {
+            inputTypes = new ArrayList<>();
+        }
+
         this.inputTypes = inputTypes;
+    }
+
+    public String toString() {
+        return "static " + returnType + " " + name + "(" + argsToString() + ")";
+    }
+
+    private String argsToString() {
+        StringBuilder builder = new StringBuilder();
+
+        for (int i = 0; i < inputTypes.size(); i++) {
+            if(i > 0) {
+                builder.append(", ");
+            }
+
+            builder.append(inputTypes.get(i));
+            builder.append(" arg");
+            builder.append(i + 1);
+        }
+
+        return builder.toString();
     }
 
     public boolean equals(Object o) {
