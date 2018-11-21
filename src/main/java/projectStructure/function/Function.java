@@ -29,7 +29,7 @@ public class Function {
 
         if (!signature.name.equals("")) {
             builder.append(getHeader());
-            getReturnStatement(builder);
+            builder.append(getBody());
             builder.append(getFooter());
         }
 
@@ -62,10 +62,12 @@ public class Function {
         return builder.toString();
     }
 
-    private void getReturnStatement(StringBuilder builder) {
+    private String getBody() {
         if(!signature.returnType.equals("void")) {
-            builder.append("return " + requirements.get(0).returnValue + ";\n");
+            return "return " + requirements.get(0).returnValue + ";\n";
         }
+
+        return "";
     }
 
     private String getFooter() {
