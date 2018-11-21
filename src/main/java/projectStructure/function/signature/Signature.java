@@ -59,4 +59,8 @@ public class Signature {
 
         return false;
     }
+
+    public boolean hasReturn() {
+        return !returnType.equals("void");
+    }
 }
