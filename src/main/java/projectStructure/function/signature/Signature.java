@@ -50,11 +50,7 @@ public class Signature {
                 return false;
             }
 
-            if(compareTo.inputTypes != null) {
-                return compareTo.inputTypes.equals(inputTypes);
-            } else {
-                return inputTypes == null;
-            }
+            return compareTo.inputTypes.equals(inputTypes);
         }
 
         return false;
