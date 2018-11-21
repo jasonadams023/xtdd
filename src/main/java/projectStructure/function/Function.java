@@ -37,29 +37,7 @@ public class Function {
     }
 
     private String getHeader() {
-        String output = "static " + signature.returnType + " " + signature.name + "(";
-
-        output += getInputs();
-
-        output += ") {\n";
-
-        return output;
-    }
-
-    private String getInputs() {
-        StringBuilder builder = new StringBuilder();
-
-        for (int i = 0; i < signature.inputTypes.size(); i++) {
-            if(i > 0) {
-                builder.append(", ");
-            }
-
-            builder.append(signature.inputTypes.get(i));
-            builder.append(" arg");
-            builder.append(i + 1);
-        }
-
-        return builder.toString();
+        return signature.toString() + " {\n";
     }
 
     private String getBody() {
