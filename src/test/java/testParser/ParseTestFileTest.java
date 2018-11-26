@@ -1,5 +1,6 @@
 package testParser;
 
+import projectStructure.function.signature.Signature;
 import requirement.Requirement;
 import fileManager.FileManager;
 import org.junit.jupiter.api.BeforeEach;
@@ -71,12 +72,13 @@ class ParseTestFileTest {
         lines.add("}");
         willReturn(lines).given(fileManager).readAllLines(path);
 
+        Signature expectedSignature = new Signature("function", "String", new ArrayList<>());
+
         List<Requirement> output = parser.parseTestFile(path);
 
         assertEquals(2, output.size());
         assertEquals("Example", output.get(1).className);
-        assertEquals("String", output.get(1).function.signature.returnType);
-        assertEquals("function", output.get(1).function.signature.name);
+        assertEquals(expectedSignature, output.get(1).function.signature);
     }
 
     @Test
@@ -92,12 +94,13 @@ class ParseTestFileTest {
         lines.add("}");
         willReturn(lines).given(fileManager).readAllLines(path);
 
+        Signature expectedSignature = new Signature("function", "String", new ArrayList<>());
+
         List<Requirement> output = parser.parseTestFile(path);
 
         assertEquals(2, output.size());
         assertEquals("Example", output.get(1).className);
-        assertEquals("String", output.get(1).function.signature.returnType);
-        assertEquals("function", output.get(1).function.signature.name);
+        assertEquals(expectedSignature, output.get(1).function.signature);
         assertEquals("\"a string\"", output.get(1).function.returnValue);
     }
 
@@ -114,12 +117,13 @@ class ParseTestFileTest {
         lines.add("}");
         willReturn(lines).given(fileManager).readAllLines(path);
 
+        Signature expectedSignature = new Signature("function", "int", new ArrayList<>());
+
         List<Requirement> output = parser.parseTestFile(path);
 
         assertEquals(2, output.size());
         assertEquals("Example", output.get(1).className);
-        assertEquals("int", output.get(1).function.signature.returnType);
-        assertEquals("function", output.get(1).function.signature.name);
+        assertEquals(expectedSignature, output.get(1).function.signature);
         assertEquals(7, (int) output.get(1).function.returnValue);
     }
 }

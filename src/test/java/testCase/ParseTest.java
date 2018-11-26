@@ -1,6 +1,7 @@
 package testCase;
 
 import org.junit.jupiter.api.Test;
+import projectStructure.function.signature.Signature;
 import requirement.FunctionRequirement;
 
 import java.util.ArrayList;
@@ -29,10 +30,11 @@ class ParseTest {
         List<String> lines = new ArrayList<>();
         lines.add("VoidClass.voidFunction();");
 
+        Signature expectedSignature = new Signature("voidFunction", "void", new ArrayList<>());
+
         FunctionRequirement output = TestCase.parse(lines, className);
 
-        assertEquals("voidFunction", output.signature.name);
-        assertEquals("void", output.signature.returnType);
+        assertEquals(expectedSignature, output.signature);
         assertEquals(null, output.returnValue);
     }
 
@@ -44,10 +46,11 @@ class ParseTest {
         lines.add("String output = StringClass.stringFunction();");
         lines.add("assertEquals(\"a string\", output);");
 
+        Signature expectedSignature = new Signature("stringFunction", "String", new ArrayList<>());
+
         FunctionRequirement output = TestCase.parse(lines, className);
 
-        assertEquals("stringFunction", output.signature.name);
-        assertEquals("String", output.signature.returnType);
+        assertEquals(expectedSignature, output.signature);
         assertEquals("\"a string\"", output.returnValue);
     }
 
@@ -59,10 +62,11 @@ class ParseTest {
         lines.add("int output = IntClass.intFunction();");
         lines.add("assertEquals(7, output);");
 
+        Signature expectedSignature = new Signature("intFunction", "int", new ArrayList<>());
+
         FunctionRequirement output = TestCase.parse(lines, className);
 
-        assertEquals("intFunction", output.signature.name);
-        assertEquals("int", output.signature.returnType);
+        assertEquals(expectedSignature, output.signature);
         assertEquals(7, output.returnValue);
     }
 
