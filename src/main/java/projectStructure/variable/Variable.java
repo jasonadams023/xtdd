@@ -1,4 +1,4 @@
-package projectStructure.Variable;
+package projectStructure.variable;
 
 public class Variable {
     public String type;

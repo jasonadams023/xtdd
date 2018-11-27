@@ -1,8 +1,8 @@
 package projectStructure.function;
 
-import projectStructure.Variable.Variable;
-import projectStructure.function.signature.Signature;
-import requirement.FunctionRequirement;
+import projectStructure.variable.Variable;
+import projectStructure.signature.Signature;
+import requirements.FunctionRequirement;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

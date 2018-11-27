@@ -1,6 +1,6 @@
 package projectStructure.javaClass;
 
-import requirement.FunctionRequirement;
+import requirements.FunctionRequirement;
 import projectStructure.function.Function;
 
 import java.util.ArrayList;

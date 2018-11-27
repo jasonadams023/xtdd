@@ -1,8 +1,8 @@
 package testCase;
 
-import projectStructure.Variable.Variable;
-import projectStructure.function.signature.Signature;
-import requirement.FunctionRequirement;
+import projectStructure.variable.Variable;
+import projectStructure.signature.Signature;
+import requirements.FunctionRequirement;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package projectStructure.function.signature;
+package projectStructure.signature;
 
 import java.util.ArrayList;
 import java.util.List;

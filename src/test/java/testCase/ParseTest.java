@@ -1,8 +1,8 @@
 package testCase;
 
 import org.junit.jupiter.api.Test;
-import projectStructure.function.signature.Signature;
-import requirement.FunctionRequirement;
+import projectStructure.signature.Signature;
+import requirements.FunctionRequirement;
 
 import java.util.ArrayList;
 import java.util.List;

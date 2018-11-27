@@ -1,6 +1,6 @@
 package generator;
 
-import requirement.Requirement;
+import requirements.ClassRequirement;
 import testParser.TestParser;
 import fileManager.FileManager;
 import projectStructure.javaClass.JavaClass;
@@ -15,13 +15,13 @@ public class Generator {
     private File directory;
     private FileManager fileManager;
     private List<JavaClass> javaClasses;
-    private List<Requirement> requirements;
+    private List<ClassRequirement> classRequirements;
 
     public Generator(File directory, FileManager fileManager) {
         this.directory = directory;
         this.fileManager = fileManager;
         this.javaClasses = new ArrayList<>();
-        this.requirements = new ArrayList<>();
+        this.classRequirements = new ArrayList<>();
     }
 
     public void generate() {
@@ -34,14 +34,14 @@ public class Generator {
         TestParser testParser = new TestParser(fileManager);
 
         for (File testFile : getTestFiles()) {
-            requirements = testParser.parseTestFile(testFile.toPath());
+            classRequirements = testParser.parseTestFile(testFile.toPath());
         }
     }
 
     private void passRequirements() {
-        for (Requirement requirement : requirements) {
-            addClass(requirement.className);
-            passRequirementToClass(requirement);
+        for (ClassRequirement classRequirement : classRequirements) {
+            addClass(classRequirement.name);
+            passRequirementToClass(classRequirement);
         }
     }
 
@@ -51,10 +51,10 @@ public class Generator {
         }
     }
 
-    private void passRequirementToClass(Requirement requirement) {
+    private void passRequirementToClass(ClassRequirement classRequirement) {
         for (JavaClass javaClass : javaClasses) {
-            if (javaClass.getName().equals(requirement.className)) {
-                javaClass.addRequirement(requirement.function);
+            if (javaClass.getName().equals(classRequirement.name)) {
+                javaClass.addRequirement(classRequirement.function);
             }
         }
     }

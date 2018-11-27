@@ -1,12 +1,12 @@
 package projectStructure.javaClass;
 
-import projectStructure.function.signature.Signature;
-import requirement.FunctionRequirement;
+import projectStructure.signature.Signature;
+import requirements.FunctionRequirement;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class AddRequirementTest {
+class AddClassRequirementTest {
     @Test
     void should_AddFunction_BasedOnRequirement() {
         Signature signature = new Signature("function", "void", null);

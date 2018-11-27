@@ -1,7 +1,7 @@
 package testParser;
 
-import requirement.Requirement;
-import requirement.FunctionRequirement;
+import requirements.ClassRequirement;
+import requirements.FunctionRequirement;
 import fileManager.FileManager;
 import testCase.TestCase;
 
@@ -13,25 +13,25 @@ import java.util.regex.Pattern;
 public class TestParser {
     private FileManager fileManager;
     private List<String> classNames;
-    private List<Requirement> requirements;
+    private List<ClassRequirement> classRequirements;
 
     public static final String startFlag = "//beginning of classes to generate";
     public static final String endFlag = "//end of classes to generate";
 
     public TestParser(FileManager fileManager) {
         this.fileManager = fileManager;
-        this.requirements = new ArrayList<>();
+        this.classRequirements = new ArrayList<>();
         this.classNames = new ArrayList<>();
     }
 
-    public List<Requirement> parseTestFile(Path path) {
+    public List<ClassRequirement> parseTestFile(Path path) {
         List<String> lines = fileManager.readAllLines(path);
 
         getClassNames(lines);
         setClassRequirements();
         setFunctionRequirements(lines);
 
-        return requirements;
+        return classRequirements;
     }
 
     private void getClassNames(List<String> lines) {
@@ -55,7 +55,7 @@ public class TestParser {
 
     private void setClassRequirements() {
         for(String className : classNames) {
-            requirements.add(new Requirement(className, null));
+            classRequirements.add(new ClassRequirement(className, null));
         }
     }
 
@@ -75,7 +75,7 @@ public class TestParser {
                 FunctionRequirement functionRequirement = TestCase.parse(testLines, className);
 
                 if (functionRequirement != null) {
-                    requirements.add(new Requirement(className, functionRequirement));
+                    classRequirements.add(new ClassRequirement(className, functionRequirement));
                 }
             }
         }
