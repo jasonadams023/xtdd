@@ -1,5 +1,6 @@
 package projectStructure.functionObjects;
 
+import projectStructure.functionObjects.inputOutput.InputOutput;
 import projectStructure.functionObjects.variable.Variable;
 import projectStructure.functionObjects.signature.Signature;
 
@@ -7,16 +8,18 @@ import java.util.List;
 
 public class FunctionRequirement {
     public Signature signature;
-    public List<Variable> inputs;
-    public Object returnValue;
+    public InputOutput inputOutput;
 
-    private FunctionRequirement(Signature signature, List<Variable> inputs, Object returnValue) {
+    private FunctionRequirement(Signature signature, InputOutput inputOutput) {
         this.signature = signature;
-        this.inputs = inputs;
-        this.returnValue = returnValue;
+        this.inputOutput = inputOutput;
     }
 
     public static FunctionRequirement create(Signature signature, List<Variable> inputs, Object returnValue) {
-        return new FunctionRequirement(signature, inputs, returnValue);
+        InputOutput io = new InputOutput();
+        io.inputs = inputs;
+        io.returnValue = returnValue;
+
+        return new FunctionRequirement(signature, io);
     }
 }

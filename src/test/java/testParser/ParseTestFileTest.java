@@ -101,7 +101,7 @@ class ParseTestFileTest {
         assertEquals(2, output.size());
         assertEquals("Example", output.get(1).name);
         assertEquals(expectedSignature, output.get(1).function.signature);
-        assertEquals("\"a string\"", output.get(1).function.returnValue);
+        assertEquals("\"a string\"", output.get(1).function.inputOutput.returnValue);
     }
 
     @Test
@@ -124,6 +124,6 @@ class ParseTestFileTest {
         assertEquals(2, output.size());
         assertEquals("Example", output.get(1).name);
         assertEquals(expectedSignature, output.get(1).function.signature);
-        assertEquals(7, (int) output.get(1).function.returnValue);
+        assertEquals(7, (int) output.get(1).function.inputOutput.returnValue);
     }
 }
