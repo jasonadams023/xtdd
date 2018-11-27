@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Signature {
-    public String name;
+    private String name;
     private String returnType;
     private List<String> inputTypes;
 

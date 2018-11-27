@@ -25,15 +25,13 @@ public class Function {
     }
 
     public String toString() {
-        StringBuilder builder = new StringBuilder();
+        String output = "";
 
-        if (!signature.name.equals("")) {
-            builder.append(getHeader());
-            builder.append(getBody());
-            builder.append(getFooter());
-        }
+        output += getHeader();
+        output += getBody();
+        output += getFooter();
 
-        return builder.toString();
+        return output;
     }
 
     private String getHeader() {

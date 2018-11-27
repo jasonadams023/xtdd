@@ -12,17 +12,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ToStringTest {
     @Test
-    void should_ReturnEmptyString_WhenNameNotSet() {
-        Signature signature = new Signature("", "void", null);
-        FunctionRequirement functionRequirement = FunctionRequirement.create(signature, null, null);
-        Function function = Function.createFromRequirement(functionRequirement);
-
-        String functionString = function.toString();
-
-        assertEquals("", functionString);
-    }
-
-    @Test
     void should_ReturnVoidFunction() {
         Signature signature = new Signature("Example", "void", new ArrayList<>());
         FunctionRequirement functionRequirement = FunctionRequirement.create(signature, null, null);
