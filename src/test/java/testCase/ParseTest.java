@@ -2,7 +2,7 @@ package testCase;
 
 import org.junit.jupiter.api.Test;
 import projectStructure.functionObjects.signature.Signature;
-import projectStructure.functionObjects.FunctionRequirement;
+import projectStructure.functionObjects.functionRequirement.FunctionRequirement;
 
 import java.util.ArrayList;
 import java.util.List;

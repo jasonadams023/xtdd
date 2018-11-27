@@ -1,7 +1,7 @@
 package projectStructure.functionObjects.function;
 
 import projectStructure.functionObjects.signature.Signature;
-import projectStructure.functionObjects.FunctionRequirement;
+import projectStructure.functionObjects.functionRequirement.FunctionRequirement;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;

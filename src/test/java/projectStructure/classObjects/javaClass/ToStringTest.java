@@ -1,7 +1,7 @@
 package projectStructure.classObjects.javaClass;
 
 import projectStructure.functionObjects.signature.Signature;
-import projectStructure.functionObjects.FunctionRequirement;
+import projectStructure.functionObjects.functionRequirement.FunctionRequirement;
 import projectStructure.functionObjects.function.Function;
 import org.junit.jupiter.api.Test;
 

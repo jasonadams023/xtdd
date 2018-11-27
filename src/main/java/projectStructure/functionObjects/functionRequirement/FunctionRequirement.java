@@ -1,4 +1,4 @@
-package projectStructure.functionObjects;
+package projectStructure.functionObjects.functionRequirement;
 
 import projectStructure.functionObjects.inputOutput.InputOutput;
 import projectStructure.functionObjects.variable.Variable;

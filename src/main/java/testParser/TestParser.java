@@ -1,7 +1,7 @@
 package testParser;
 
-import projectStructure.classObjects.ClassRequirement;
-import projectStructure.functionObjects.FunctionRequirement;
+import projectStructure.classObjects.classRequirement.ClassRequirement;
+import projectStructure.functionObjects.functionRequirement.FunctionRequirement;
 import fileManager.FileManager;
 import testCase.TestCase;
 
