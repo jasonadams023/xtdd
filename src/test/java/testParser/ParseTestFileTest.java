@@ -1,7 +1,7 @@
 package testParser;
 
-import projectStructure.signature.Signature;
-import requirements.ClassRequirement;
+import projectStructure.functionObjects.signature.Signature;
+import projectStructure.classObjects.ClassRequirement;
 import fileManager.FileManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

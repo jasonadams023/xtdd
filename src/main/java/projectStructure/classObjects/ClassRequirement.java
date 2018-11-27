@@ -1,4 +1,6 @@
-package requirements;
+package projectStructure.classObjects;
+
+import projectStructure.functionObjects.FunctionRequirement;
 
 public class ClassRequirement {
     public String name;

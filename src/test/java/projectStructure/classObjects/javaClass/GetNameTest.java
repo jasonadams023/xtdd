@@ -1,4 +1,4 @@
-package projectStructure.javaClass;
+package projectStructure.classObjects.javaClass;
 
 import org.junit.jupiter.api.Test;
 

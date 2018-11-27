@@ -1,7 +1,7 @@
-package projectStructure.javaClass;
+package projectStructure.classObjects.javaClass;
 
-import projectStructure.signature.Signature;
-import requirements.FunctionRequirement;
+import projectStructure.functionObjects.signature.Signature;
+import projectStructure.functionObjects.FunctionRequirement;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

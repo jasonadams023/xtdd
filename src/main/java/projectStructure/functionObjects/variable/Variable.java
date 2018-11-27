@@ -1,4 +1,4 @@
-package projectStructure.variable;
+package projectStructure.functionObjects.variable;
 
 public class Variable {
     public String type;

@@ -1,7 +1,7 @@
-package projectStructure.function;
+package projectStructure.functionObjects.function;
 
-import projectStructure.signature.Signature;
-import requirements.FunctionRequirement;
+import projectStructure.functionObjects.signature.Signature;
+import projectStructure.functionObjects.FunctionRequirement;
 
 import java.util.ArrayList;
 import java.util.List;

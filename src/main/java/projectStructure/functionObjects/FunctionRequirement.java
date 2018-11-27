@@ -1,7 +1,7 @@
-package requirements;
+package projectStructure.functionObjects;
 
-import projectStructure.variable.Variable;
-import projectStructure.signature.Signature;
+import projectStructure.functionObjects.variable.Variable;
+import projectStructure.functionObjects.signature.Signature;
 
 import java.util.List;
 

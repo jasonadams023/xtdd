@@ -1,4 +1,4 @@
-package projectStructure.signature;
+package projectStructure.functionObjects.signature;
 
 import org.junit.jupiter.api.Test;
 

@@ -1,9 +1,9 @@
 package generator;
 
-import requirements.ClassRequirement;
+import projectStructure.classObjects.ClassRequirement;
 import testParser.TestParser;
 import fileManager.FileManager;
-import projectStructure.javaClass.JavaClass;
+import projectStructure.classObjects.javaClass.JavaClass;
 
 import java.io.File;
 import java.nio.file.Path;

@@ -1,8 +1,8 @@
-package projectStructure.javaClass;
+package projectStructure.classObjects.javaClass;
 
-import projectStructure.signature.Signature;
-import requirements.FunctionRequirement;
-import projectStructure.function.Function;
+import projectStructure.functionObjects.signature.Signature;
+import projectStructure.functionObjects.FunctionRequirement;
+import projectStructure.functionObjects.function.Function;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
