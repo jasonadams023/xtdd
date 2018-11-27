@@ -35,7 +35,7 @@ class ParseTest {
         FunctionRequirement output = TestCase.parse(lines, className);
 
         assertEquals(expectedSignature, output.signature);
-        assertEquals(null, output.inputOutput.returnValue);
+        assertEquals(null, output.inputOutput.getReturnValue());
     }
 
     @Test
@@ -51,7 +51,7 @@ class ParseTest {
         FunctionRequirement output = TestCase.parse(lines, className);
 
         assertEquals(expectedSignature, output.signature);
-        assertEquals("\"a string\"", output.inputOutput.returnValue);
+        assertEquals("\"a string\"", output.inputOutput.getReturnValue());
     }
 
     @Test
@@ -67,7 +67,7 @@ class ParseTest {
         FunctionRequirement output = TestCase.parse(lines, className);
 
         assertEquals(expectedSignature, output.signature);
-        assertEquals(7, output.inputOutput.returnValue);
+        assertEquals(7, output.inputOutput.getReturnValue());
     }
 
     @Test
@@ -81,8 +81,8 @@ class ParseTest {
 
         FunctionRequirement output = TestCase.parse(lines, className);
 
-        assertEquals(1, output.inputOutput.inputs.size());
-        assertEquals("int", output.inputOutput.inputs.get(0).type);
+        assertEquals(1, output.inputOutput.getInputs().size());
+        assertEquals("int", output.inputOutput.getInputs().get(0).type);
     }
 
     @Test
@@ -97,6 +97,6 @@ class ParseTest {
 
         FunctionRequirement output = TestCase.parse(lines, className);
 
-        assertEquals(2, output.inputOutput.inputs.size());
+        assertEquals(2, output.inputOutput.getInputs().size());
     }
 }
