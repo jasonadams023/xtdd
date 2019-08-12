@@ -76,7 +76,7 @@ class GeneratorTest {
         generator.generate();
         String data = readGeneratedClass(className);
 
-        assertTrue(data.contains("class First {"));
+        assertTrue(data.contains("class " + className + " {"));
         assertTrue(data.contains("static void example() {"));
         assertTrue(data.contains("static void different() {"));
     }
@@ -88,7 +88,7 @@ class GeneratorTest {
         generator.generate();
         String data = readGeneratedClass(className);
 
-        assertTrue(data.contains("class Returns {"));
+        assertTrue(data.contains("class " + className + " {"));
         assertTrue(data.contains("static String getNullString() {"));
         assertTrue(data.contains("return null"));
         assertTrue(data.contains("static int getNullInt() {"));
@@ -101,7 +101,7 @@ class GeneratorTest {
         generator.generate();
         String data = readGeneratedClass(className);
 
-        assertTrue(data.contains("class Returns {"));
+        assertTrue(data.contains("class " + className + " {"));
         assertTrue(data.contains("static int getInt() {"));
         assertTrue(data.contains("return 7"));
     }
@@ -113,7 +113,7 @@ class GeneratorTest {
         generator.generate();
         String data = readGeneratedClass(className);
 
-        assertTrue(data.contains("class Inputs {"));
+        assertTrue(data.contains("class " + className + " {"));
         assertTrue(data.contains("static void setInt(int arg1) {"));
     }
 
@@ -124,7 +124,7 @@ class GeneratorTest {
         generator.generate();
         String data = readGeneratedClass(className);
 
-        assertTrue(data.contains("class Inputs {"));
+        assertTrue(data.contains("class " + className + " {"));
         assertTrue(data.contains("static void setArgs(int arg1, String arg2) {"));
     }
 
@@ -136,7 +136,7 @@ class GeneratorTest {
         generator.generate();
         String data = readGeneratedClass(className);
 
-        assertTrue(data.contains("class InputOutput {"));
+        assertTrue(data.contains("class " + className + " {"));
         assertTrue(data.contains("static int add(int arg1, int arg2) {"));
         assertTrue(data.contains("return 10;"));
         assertTrue(data.contains("return 11;"));
