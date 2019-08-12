@@ -69,17 +69,15 @@ class GeneratorTest {
         generator.generate();
 
         String data = "";
-        try {
-            data = new String(Files.readAllBytes(Paths.get(exampleSourceDirectory.getPath() + "/" + className + ".java")));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        data = readGeneratedClass(className, data);
 
         String expected = "class Empty {\n" +
                 "}\n";
 
         assertEquals(expected, data);
     }
+
+
 
     @Test
     void shouldGenerateFunctionsBasedOnTestFile() {
@@ -88,11 +86,7 @@ class GeneratorTest {
         generator.generate();
 
         String data = "";
-        try {
-            data = new String(Files.readAllBytes(Paths.get(exampleSourceDirectory.getPath() + "/" + className + ".java")));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        data = readGeneratedClass(className, data);
 
         assertTrue(data.contains("class First {"));
         assertTrue(data.contains("static void example() {"));
@@ -106,11 +100,7 @@ class GeneratorTest {
         generator.generate();
 
         String data = "";
-        try {
-            data = new String(Files.readAllBytes(Paths.get(exampleSourceDirectory.getPath() + "/" + className + ".java")));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        data = readGeneratedClass(className, data);
 
         assertTrue(data.contains("class Returns {"));
         assertTrue(data.contains("static String getNullString() {"));
@@ -125,11 +115,7 @@ class GeneratorTest {
         generator.generate();
 
         String data = "";
-        try {
-            data = new String(Files.readAllBytes(Paths.get(exampleSourceDirectory.getPath() + "/" + className + ".java")));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        data = readGeneratedClass(className, data);
 
         assertTrue(data.contains("class Returns {"));
         assertTrue(data.contains("static int getInt() {"));
@@ -143,11 +129,7 @@ class GeneratorTest {
         generator.generate();
 
         String data = "";
-        try {
-            data = new String(Files.readAllBytes(Paths.get(exampleSourceDirectory.getPath() + "/" + className + ".java")));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        data = readGeneratedClass(className, data);
 
         assertTrue(data.contains("class Inputs {"));
         assertTrue(data.contains("static void setInt(int arg1) {"));
@@ -160,11 +142,7 @@ class GeneratorTest {
         generator.generate();
 
         String data = "";
-        try {
-            data = new String(Files.readAllBytes(Paths.get(exampleSourceDirectory.getPath() + "/" + className + ".java")));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        data = readGeneratedClass(className, data);
 
         assertTrue(data.contains("class Inputs {"));
         assertTrue(data.contains("static void setArgs(int arg1, String arg2) {"));
@@ -178,15 +156,20 @@ class GeneratorTest {
         generator.generate();
 
         String data = "";
-        try {
-            data = new String(Files.readAllBytes(Paths.get(exampleSourceDirectory.getPath() + "/" + className + ".java")));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        data = readGeneratedClass(className, data);
 
         assertTrue(data.contains("class InputOutput {"));
         assertTrue(data.contains("static int add(int arg1, int arg2) {"));
         assertTrue(data.contains("return 10;"));
         assertTrue(data.contains("return 11;"));
+    }
+
+    private String readGeneratedClass(String className, String data) {
+        try {
+            data = new String(Files.readAllBytes(Paths.get(exampleSourceDirectory.getPath() + "/" + className + ".java")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return data;
     }
 }
