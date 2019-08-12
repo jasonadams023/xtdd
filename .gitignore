@@ -3,6 +3,7 @@
 out/
 xtdd.ipr
 xtdd.iws
+example/src/*
 
 //Gradle
 .gradle/
