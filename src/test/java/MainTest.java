@@ -22,7 +22,7 @@ class MainTest {
 
     @Test
     void should_RunGenerate() {
-        String[] args = new String[2];
+        String[] args = new String[1];
         args[0] = exampleDirectory.toString();
 
         Main.main(args);
