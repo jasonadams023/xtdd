@@ -19,6 +19,13 @@ class GeneratorTest {
     private File exampleSourceDirectory = new File(exampleDirectory.getPath() + "/src");
     private Generator generator;
 
+    @BeforeAll
+    void validateDirectory() throws IOException {
+        if (!exampleSourceDirectory.exists()) {
+            Files.createDirectory(exampleSourceDirectory.toPath());
+        }
+    }
+
     @BeforeEach
     void setup() {
         FilesWrapper filesWrapper = new FilesWrapper();
