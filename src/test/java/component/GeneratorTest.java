@@ -36,8 +36,7 @@ class GeneratorTest {
     @BeforeEach
     @AfterAll
     void cleanup() {
-        File directory = new File(exampleDirectory.getPath() + "/src");
-        for(File file: directory.listFiles()) {
+        for(File file: exampleSourceDirectory.listFiles()) {
             if (!file.isDirectory()) {
                 file.delete();
             }
