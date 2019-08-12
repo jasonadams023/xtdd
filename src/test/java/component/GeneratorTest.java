@@ -47,16 +47,8 @@ class GeneratorTest {
     @Test
     void shouldGenerateClassBasedOnTestFiles() {
         generator.generate();
-
-        String data1 = "";
-        String data2 = "";
-
-        try {
-            data1 = new String(Files.readAllBytes(Paths.get(exampleDirectory.getPath() + "/src/First.java")));
-            data2 = new String(Files.readAllBytes(Paths.get(exampleDirectory.getPath() + "/src/Second.java")));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String data1 = readGeneratedClass("First");
+        String data2 = readGeneratedClass("Second");
 
         assertTrue(data1.contains("class First {"));
         assertTrue(data2.contains("class Second {"));
@@ -67,9 +59,7 @@ class GeneratorTest {
         String className = "Empty";
 
         generator.generate();
-
-        String data = "";
-        data = readGeneratedClass(className, data);
+        String data = readGeneratedClass(className);
 
         String expected = "class Empty {\n" +
                 "}\n";
@@ -84,9 +74,7 @@ class GeneratorTest {
         String className = "First";
 
         generator.generate();
-
-        String data = "";
-        data = readGeneratedClass(className, data);
+        String data = readGeneratedClass(className);
 
         assertTrue(data.contains("class First {"));
         assertTrue(data.contains("static void example() {"));
@@ -98,9 +86,7 @@ class GeneratorTest {
         String className = "Returns";
 
         generator.generate();
-
-        String data = "";
-        data = readGeneratedClass(className, data);
+        String data = readGeneratedClass(className);
 
         assertTrue(data.contains("class Returns {"));
         assertTrue(data.contains("static String getNullString() {"));
@@ -113,9 +99,7 @@ class GeneratorTest {
         String className = "Returns";
 
         generator.generate();
-
-        String data = "";
-        data = readGeneratedClass(className, data);
+        String data = readGeneratedClass(className);
 
         assertTrue(data.contains("class Returns {"));
         assertTrue(data.contains("static int getInt() {"));
@@ -127,9 +111,7 @@ class GeneratorTest {
         String className = "Inputs";
 
         generator.generate();
-
-        String data = "";
-        data = readGeneratedClass(className, data);
+        String data = readGeneratedClass(className);
 
         assertTrue(data.contains("class Inputs {"));
         assertTrue(data.contains("static void setInt(int arg1) {"));
@@ -140,9 +122,7 @@ class GeneratorTest {
         String className = "Inputs";
 
         generator.generate();
-
-        String data = "";
-        data = readGeneratedClass(className, data);
+        String data = readGeneratedClass(className);
 
         assertTrue(data.contains("class Inputs {"));
         assertTrue(data.contains("static void setArgs(int arg1, String arg2) {"));
@@ -154,9 +134,7 @@ class GeneratorTest {
         String className = "InputOutput";
 
         generator.generate();
-
-        String data = "";
-        data = readGeneratedClass(className, data);
+        String data = readGeneratedClass(className);
 
         assertTrue(data.contains("class InputOutput {"));
         assertTrue(data.contains("static int add(int arg1, int arg2) {"));
@@ -164,12 +142,15 @@ class GeneratorTest {
         assertTrue(data.contains("return 11;"));
     }
 
-    private String readGeneratedClass(String className, String data) {
+    private String readGeneratedClass(String className) {
+        String data = "";
+
         try {
             data = new String(Files.readAllBytes(Paths.get(exampleSourceDirectory.getPath() + "/" + className + ".java")));
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         return data;
     }
 }
