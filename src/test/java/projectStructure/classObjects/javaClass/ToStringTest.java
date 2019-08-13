@@ -31,7 +31,8 @@ class ToStringTest {
         javaClass.functions.add(function);
 
         String expected = "class Class {\n" +
-                "static void function() {\n}\n" +
+                "\tstatic void function() {\n" +
+                "\t}\n" +
                 "}\n";
 
         String output = javaClass.toString();

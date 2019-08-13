@@ -40,6 +40,9 @@ public class JavaClass {
 
         for (Function function : functions) {
             for (String line : function.toStrings()) {
+                if (!line.isEmpty()) {
+                    builder.append("\t");
+                }
                 builder.append(line);
             }
         }
