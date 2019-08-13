@@ -23,10 +23,7 @@ class ToStringTest {
 
     @Test
     void should_PrintClass_WithFunctions() {
-        Signature signature = new Signature("function", "void", new ArrayList<>());
-        FunctionRequirement functionRequirement = FunctionRequirement.create(signature, null, null);
-        Function function = Function.createFromRequirement(functionRequirement);
-        javaClass.functions.add(function);
+        addFunctionToClass("function");
 
         String expected = "class Class {\n" +
                 "\tstatic void function() {\n" +
@@ -40,15 +37,8 @@ class ToStringTest {
 
     @Test
     void should_PrintClass_WithSpaceBetweenFunctions() {
-        Signature functionSignature = new Signature("function", "void", new ArrayList<>());
-        FunctionRequirement functionRequirement = FunctionRequirement.create(functionSignature, null, null);
-        Function function = Function.createFromRequirement(functionRequirement);
-        javaClass.functions.add(function);
-
-        Signature otherSignature = new Signature("other", "void", new ArrayList<>());
-        FunctionRequirement otherRequirement = FunctionRequirement.create(otherSignature, null, null);
-        Function other = Function.createFromRequirement(otherRequirement);
-        javaClass.functions.add(other);
+        addFunctionToClass("function");
+        addFunctionToClass("other");
 
         String expected = "class Class {\n" +
                 "\tstatic void function() {\n" +
@@ -61,5 +51,12 @@ class ToStringTest {
         String output = javaClass.toString();
 
         assertEquals(expected, output);
+    }
+
+    private void addFunctionToClass(String name) {
+        Signature functionSignature = new Signature(name, "void", new ArrayList<>());
+        FunctionRequirement functionRequirement = FunctionRequirement.create(functionSignature, null, null);
+        Function function = Function.createFromRequirement(functionRequirement);
+        javaClass.functions.add(function);
     }
 }
