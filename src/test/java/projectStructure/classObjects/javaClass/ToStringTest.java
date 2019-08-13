@@ -10,10 +10,10 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ToStringTest {
+    private JavaClass javaClass = new JavaClass("Class");
+
     @Test
     void should_PrintEmptyClass() {
-        JavaClass javaClass = new JavaClass("Class");
-
         String expected = "class Class {\n}\n";
 
         String output = javaClass.toString();
@@ -23,8 +23,6 @@ class ToStringTest {
 
     @Test
     void should_PrintClass_WithFunctions() {
-        JavaClass javaClass = new JavaClass("Class");
-
         Signature signature = new Signature("function", "void", new ArrayList<>());
         FunctionRequirement functionRequirement = FunctionRequirement.create(signature, null, null);
         Function function = Function.createFromRequirement(functionRequirement);
@@ -42,8 +40,6 @@ class ToStringTest {
 
     @Test
     void should_PrintClass_WithSpaceBetweenFunctions() {
-        JavaClass javaClass = new JavaClass("Class");
-
         Signature functionSignature = new Signature("function", "void", new ArrayList<>());
         FunctionRequirement functionRequirement = FunctionRequirement.create(functionSignature, null, null);
         Function function = Function.createFromRequirement(functionRequirement);
