@@ -66,8 +66,6 @@ class GeneratorTest {
         assertEquals(expected, data);
     }
 
-
-
     @Test
     void shouldGenerateFunctionsBasedOnTestFile() {
         String className = "First";

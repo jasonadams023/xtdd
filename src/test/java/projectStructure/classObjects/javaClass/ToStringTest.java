@@ -39,4 +39,31 @@ class ToStringTest {
 
         assertEquals(expected, output);
     }
+
+    @Test
+    void should_PrintClass_WithSpaceBetweenFunctions() {
+        JavaClass javaClass = new JavaClass("Class");
+
+        Signature functionSignature = new Signature("function", "void", new ArrayList<>());
+        FunctionRequirement functionRequirement = FunctionRequirement.create(functionSignature, null, null);
+        Function function = Function.createFromRequirement(functionRequirement);
+        javaClass.functions.add(function);
+
+        Signature otherSignature = new Signature("other", "void", new ArrayList<>());
+        FunctionRequirement otherRequirement = FunctionRequirement.create(otherSignature, null, null);
+        Function other = Function.createFromRequirement(otherRequirement);
+        javaClass.functions.add(other);
+
+        String expected = "class Class {\n" +
+                "\tstatic void function() {\n" +
+                "\t}\n" +
+                "\n" +
+                "\tstatic void other() {\n" +
+                "\t}\n" +
+                "}\n";
+
+        String output = javaClass.toString();
+
+        assertEquals(expected, output);
+    }
 }

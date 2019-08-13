@@ -38,12 +38,18 @@ public class JavaClass {
 
         builder.append(getHeader());
 
-        for (Function function : functions) {
+        for (int i = 0; i < functions.size(); i++) {
+            Function function = functions.get(i);
+
             for (String line : function.toStrings()) {
                 if (!line.isEmpty()) {
                     builder.append("\t");
                 }
                 builder.append(line);
+            }
+
+            if (i < functions.size() - 1) {
+                builder.append("\n");
             }
         }
 
