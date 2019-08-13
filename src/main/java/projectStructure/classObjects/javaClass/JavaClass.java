@@ -15,6 +15,19 @@ public class JavaClass {
         this.functions = new ArrayList<>();
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public boolean equals(Object o) {
+        if (o instanceof JavaClass) {
+            JavaClass compareTo = (JavaClass) o;
+            return name.equals(compareTo.name);
+        }
+
+        return false;
+    }
+
     public void addRequirement(FunctionRequirement requirement) {
         if (requirement == null) {
             return;
@@ -43,45 +56,48 @@ public class JavaClass {
         return output;
     }
 
-    private String getBody() {
-        StringBuilder builder = new StringBuilder();
-
-        for (int i = 0; i < functions.size(); i++) {
-            Function function = functions.get(i);
-
-            for (String line : function.toStrings()) {
-                if (!line.isEmpty()) {
-                    builder.append("\t");
-                }
-                builder.append(line);
-            }
-
-            if (i < functions.size() - 1) {
-                builder.append("\n");
-            }
-        }
-
-        return builder.toString();
-    }
-
     private String getHeader() {
         return "class " + name + " {\n";
+    }
+
+    private String getBody() {
+        String output = "";
+
+        output += getFunctions();
+
+        return output;
     }
 
     private String getFooter() {
         return "}\n";
     }
 
-    public String getName() {
-        return name;
-    }
+    private StringBuilder getFunctions() {
+        StringBuilder builder = new StringBuilder();
 
-    public boolean equals(Object o) {
-        if (o instanceof JavaClass) {
-            JavaClass compareTo = (JavaClass) o;
-            return name.equals(compareTo.name);
+        for (int i = 0; i < functions.size(); i++) {
+            Function function = functions.get(i);
+
+            builder.append(formatFunction(function));
+
+            if (i < functions.size() - 1) {
+                builder.append("\n");
+            }
         }
 
-        return false;
+        return builder;
+    }
+
+    private StringBuilder formatFunction(Function function) {
+        StringBuilder builder = new StringBuilder();
+
+        for (String line : function.toStrings()) {
+            if (!line.isEmpty()) {
+                builder.append("\t");
+            }
+            builder.append(line);
+        }
+
+        return builder;
     }
 }
