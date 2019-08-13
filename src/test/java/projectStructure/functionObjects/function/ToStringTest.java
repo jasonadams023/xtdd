@@ -10,16 +10,19 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class ToStringTest {
+class ToStringsTest {
     @Test
     void should_ReturnVoidFunction() {
         Signature signature = new Signature("Example", "void", new ArrayList<>());
         FunctionRequirement functionRequirement = FunctionRequirement.create(signature, null, null);
         Function function = Function.createFromRequirement(functionRequirement);
 
-        String functionString = function.toString();
+        List<String> functionStrings = function.toStrings();
 
-        assertEquals("static void Example() {\n}\n", functionString);
+        assertEquals("", functionStrings.get(0));
+        assertEquals("static void Example() {\n", functionStrings.get(1));
+        assertEquals("", functionStrings.get(2));
+        assertEquals("}\n", functionStrings.get(3));
     }
 
     @Test
@@ -28,9 +31,12 @@ class ToStringTest {
         FunctionRequirement functionRequirement = FunctionRequirement.create(signature, null, null);
         Function function = Function.createFromRequirement(functionRequirement);
 
-        String functionString = function.toString();
+        List<String> functionStrings = function.toStrings();
 
-        assertEquals("static String Example() {\n\treturn null;\n}\n", functionString);
+        assertEquals("", functionStrings.get(0));
+        assertEquals("static String Example() {\n", functionStrings.get(1));
+        assertEquals("\treturn null;\n", functionStrings.get(2));
+        assertEquals("}\n", functionStrings.get(3));
     }
 
     @Test
@@ -39,9 +45,12 @@ class ToStringTest {
         FunctionRequirement functionRequirement = FunctionRequirement.create(signature, null, 7);
         Function function = Function.createFromRequirement(functionRequirement);
 
-        String functionString = function.toString();
+        List<String> functionStrings = function.toStrings();
 
-        assertEquals("static int Example() {\n\treturn 7;\n}\n", functionString);
+        assertEquals("", functionStrings.get(0));
+        assertEquals("static int Example() {\n", functionStrings.get(1));
+        assertEquals("\treturn 7;\n", functionStrings.get(2));
+        assertEquals("}\n", functionStrings.get(3));
     }
 
     @Test
@@ -58,8 +67,11 @@ class ToStringTest {
         FunctionRequirement functionRequirement = FunctionRequirement.create(signature, inputs, null);
         Function function = Function.createFromRequirement(functionRequirement);
 
-        String functionString = function.toString();
+        List<String> functionStrings = function.toStrings();
 
-        assertEquals("static void Example(int arg1, String arg2) {\n}\n", functionString);
+        assertEquals("", functionStrings.get(0));
+        assertEquals("static void Example(int arg1, String arg2) {\n", functionStrings.get(1));
+        assertEquals("", functionStrings.get(2));
+        assertEquals("}\n", functionStrings.get(3));
     }
 }

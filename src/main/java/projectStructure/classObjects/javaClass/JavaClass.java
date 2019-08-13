@@ -39,7 +39,9 @@ public class JavaClass {
         builder.append(getHeader());
 
         for (Function function : functions) {
-            builder.append(function.toString());
+            for (String line : function.toStrings()) {
+                builder.append(line);
+            }
         }
 
         builder.append(getFooter());

@@ -24,12 +24,13 @@ public class Function {
         return new Function(requirement);
     }
 
-    public String toString() {
-        String output = "";
+    public List<String> toStrings() {
+        List<String> output = new ArrayList<>();
+        output.add("");
 
-        output += getHeader();
-        output += getBody();
-        output += getFooter();
+        output.add(getHeader());
+        output.add(getBody());
+        output.add(getFooter());
 
         return output;
     }
