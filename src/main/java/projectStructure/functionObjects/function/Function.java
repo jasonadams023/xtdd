@@ -1,5 +1,6 @@
 package projectStructure.functionObjects.function;
 
+import projectStructure.functionObjects.inputOutput.InputOutput;
 import projectStructure.functionObjects.signature.Signature;
 import projectStructure.functionObjects.functionRequirement.FunctionRequirement;
 
@@ -8,11 +9,11 @@ import java.util.List;
 
 public class Function {
     private Signature signature;
-    private List<FunctionRequirement> requirements;
+    private List<InputOutput> inputOutputs;
 
     private Function(FunctionRequirement requirement) {
-        this.requirements = new ArrayList<>();
-        this.requirements.add(requirement);
+        this.inputOutputs = new ArrayList<>();
+        this.inputOutputs.add(requirement.inputOutput);
         this.signature = requirement.signature;
     }
 
@@ -41,7 +42,7 @@ public class Function {
 
     private String getBody() {
         if(signature.hasReturn()) {
-            return "\treturn " + requirements.get(0).inputOutput.getReturnValue() + ";\n";
+            return "\treturn " + inputOutputs.get(0).getReturnValue() + ";\n";
         }
 
         return "";
