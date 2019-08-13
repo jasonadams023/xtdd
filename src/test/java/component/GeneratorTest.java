@@ -127,16 +127,18 @@ class GeneratorTest {
 
     @Disabled
     @Test
-    void should_GenerateFunctions_WithOutputsDependentOnInputs() {
-        String className = "InputOutput";
+    void should_GenerateFunctions_WithIfElseStatements() {
+        String className = "IfElse";
 
         generator.generate();
         String data = readGeneratedClass(className);
 
         assertTrue(data.contains("class " + className + " {"));
-        assertTrue(data.contains("static int add(int arg1, int arg2) {"));
-        assertTrue(data.contains("return 10;"));
-        assertTrue(data.contains("return 11;"));
+        assertTrue(data.contains("static String add(int arg1) {"));
+        assertTrue(data.contains("if (arg1 =="));
+        assertTrue(data.contains("return \"hello\";"));
+        assertTrue(data.contains("else {"));
+        assertTrue(data.contains("return \"bye\";"));
     }
 
     private String readGeneratedClass(String className) {
