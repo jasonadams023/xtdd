@@ -40,7 +40,7 @@ public class Function {
 
     private String getBody() {
         if(signature.hasReturn()) {
-            return "return " + requirements.get(0).inputOutput.getReturnValue() + ";\n";
+            return "\treturn " + requirements.get(0).inputOutput.getReturnValue() + ";\n";
         }
 
         return "";

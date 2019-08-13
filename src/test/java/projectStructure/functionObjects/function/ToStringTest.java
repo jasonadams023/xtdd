@@ -30,7 +30,7 @@ class ToStringTest {
 
         String functionString = function.toString();
 
-        assertEquals("static String Example() {\nreturn null;\n}\n", functionString);
+        assertEquals("static String Example() {\n\treturn null;\n}\n", functionString);
     }
 
     @Test
@@ -41,7 +41,7 @@ class ToStringTest {
 
         String functionString = function.toString();
 
-        assertEquals("static int Example() {\nreturn 7;\n}\n", functionString);
+        assertEquals("static int Example() {\n\treturn 7;\n}\n", functionString);
     }
 
     @Test
