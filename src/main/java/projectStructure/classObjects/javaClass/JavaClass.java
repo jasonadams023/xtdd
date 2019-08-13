@@ -34,9 +34,17 @@ public class JavaClass {
     }
 
     public String toString() {
-        StringBuilder builder = new StringBuilder();
+        String output = "";
 
-        builder.append(getHeader());
+        output += getHeader();
+        output += getBody();
+        output += getFooter();
+
+        return output;
+    }
+
+    private String getBody() {
+        StringBuilder builder = new StringBuilder();
 
         for (int i = 0; i < functions.size(); i++) {
             Function function = functions.get(i);
@@ -53,9 +61,7 @@ public class JavaClass {
             }
         }
 
-        builder.append(getFooter());
-
-        return  builder.toString();
+        return builder.toString();
     }
 
     private String getHeader() {
