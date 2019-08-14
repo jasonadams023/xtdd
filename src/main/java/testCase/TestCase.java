@@ -46,8 +46,9 @@ public class TestCase {
 
     private static Variable extractVariableFromLine(String line) {
         String type = line.trim().split(Pattern.quote(" "))[0];
+        Object value = "";
 
-        return new Variable(type);
+        return new Variable(type, value);
     }
 
     private static String extractReturnTypeFromLine(String line) {

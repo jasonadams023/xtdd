@@ -19,7 +19,7 @@ class AddInputOutputTest {
         Signature signature = new Signature("function", "int", inputTypes);
 
         List<Variable> inputs = new ArrayList<>();
-        Variable arg1 = new Variable("int");
+        Variable arg1 = new Variable("int", null);
         inputs.add(arg1);
 
         Object returnValue = "output";
@@ -28,7 +28,7 @@ class AddInputOutputTest {
         Function function = Function.createFromRequirement(requirement);
 
         List<Variable> newInputs = new ArrayList<>();
-        Variable arg2 = new Variable("int");
+        Variable arg2 = new Variable("int", null);
         inputs.add(arg2);
 
         Object newReturnValue = "new output";
