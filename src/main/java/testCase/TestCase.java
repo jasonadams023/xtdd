@@ -49,17 +49,21 @@ public class TestCase {
         String type = line.trim().split(Pattern.quote(" "))[0];
         String className = "java.lang." + type;
         String valueString = line.split(Pattern.quote("="))[1].trim().split(Pattern.quote(";"))[0];
-        Object value = "";
+        Object object = "";
 
         try {
-            Class<?> dynamicClass = Class.forName(className);
-            Constructor<?> cons = dynamicClass.getConstructor(String.class);
-            value = cons.newInstance(valueString);
+            object = dynamicallyCreateObject(className, valueString);
         } catch (ReflectiveOperationException e) {
             System.out.println(e);
         }
 
-        return new Variable(type, value);
+        return new Variable(type, object);
+    }
+
+    private static Object dynamicallyCreateObject(String className, String value) throws ReflectiveOperationException {
+        Class<?> dynamicClass = Class.forName(className);
+        Constructor<?> cons = dynamicClass.getConstructor(String.class);
+        return cons.newInstance(value);
     }
 
     private static String extractReturnTypeFromLine(String line) {
