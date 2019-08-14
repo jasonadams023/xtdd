@@ -8,4 +8,8 @@ public class Variable {
         this.type = type;
         this.value = value;
     }
+
+    public String getType() {
+        return value.getClass().getSimpleName();
+    }
 }
