@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Function {
     private Signature signature;
-    private List<InputOutput> inputOutputs;
+    List<InputOutput> inputOutputs;
 
     private Function(FunctionRequirement requirement) {
         this.inputOutputs = new ArrayList<>();
@@ -54,5 +54,9 @@ public class Function {
 
     public boolean matchesRequirement(FunctionRequirement requirement) {
         return (requirement.signature.equals(signature));
+    }
+
+    public void addInputOutput(InputOutput inputOutput) {
+        inputOutputs.add(inputOutput);
     }
 }
