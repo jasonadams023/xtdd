@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 import projectStructure.functionObjects.signature.Signature;
 import projectStructure.functionObjects.functionRequirement.FunctionRequirement;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -90,7 +92,7 @@ class ParseTest {
         String className = "InputClass";
 
         List<String> lines = new ArrayList<>();
-        lines.add("int num = 7;");
+        lines.add("Integer num = 7;");
         lines.add("String line = \"a string\";");
         lines.add("int output = InputClass.inputFunction(num, line);");
         lines.add("assertEquals(7, output);");
@@ -98,5 +100,9 @@ class ParseTest {
         FunctionRequirement output = TestCase.parse(lines, className);
 
         assertEquals(2, output.inputOutput.getInputs().size());
+        assertEquals(7, output.inputOutput.getInputs().get(0).getObject());
+        assertEquals("Integer", output.inputOutput.getInputs().get(0).getType());
+        assertEquals("\"a string\"", output.inputOutput.getInputs().get(1).getObject());
+        assertEquals("String", output.inputOutput.getInputs().get(1).getType());
     }
 }

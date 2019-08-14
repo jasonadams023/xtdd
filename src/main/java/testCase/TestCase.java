@@ -4,6 +4,7 @@ import projectStructure.functionObjects.variable.Variable;
 import projectStructure.functionObjects.signature.Signature;
 import projectStructure.functionObjects.functionRequirement.FunctionRequirement;
 
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -46,7 +47,17 @@ public class TestCase {
 
     private static Variable extractVariableFromLine(String line) {
         String type = line.trim().split(Pattern.quote(" "))[0];
+        String className = "java.lang." + type;
+        String valueString = line.split(Pattern.quote("="))[1].trim().split(Pattern.quote(";"))[0];
         Object value = "";
+
+        try {
+            Class<?> dynamicClass = Class.forName(className);
+            Constructor<?> cons = dynamicClass.getConstructor(String.class);
+            value = cons.newInstance(valueString);
+        } catch (ReflectiveOperationException e) {
+            System.out.println(e);
+        }
 
         return new Variable(type, value);
     }
