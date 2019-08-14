@@ -12,4 +12,8 @@ public class Variable {
     public String getType() {
         return value.getClass().getSimpleName();
     }
+
+    public Object getObject() {
+        return value;
+    }
 }
