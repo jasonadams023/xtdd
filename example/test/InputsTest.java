@@ -9,14 +9,14 @@ import example.Inputs;
 class FirstTest {
     @Test
     void should_TakeInt() {
-        int var = 7;
+        Integer var = 7;
 
         Inputs.setInt(var);
     }
 
     @Test
     void should_TakeArgs() {
-        int var = 7;
+        Integer var = 7;
         String line = "a string";
 
         Inputs.setArgs(var, line);

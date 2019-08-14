@@ -37,7 +37,7 @@ public class TestCase {
 
         List<String> inputTypes = new ArrayList<>();
         for(Variable variable : variables) {
-            inputTypes.add(variable.type);
+            inputTypes.add(variable.getType());
         }
 
         Signature signature = new Signature(functionName, returnType, inputTypes);
@@ -57,7 +57,7 @@ public class TestCase {
             System.out.println(e);
         }
 
-        return new Variable(type, object);
+        return new Variable(object);
     }
 
     private static Object dynamicallyCreateObject(String className, String value) throws ReflectiveOperationException {

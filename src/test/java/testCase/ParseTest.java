@@ -77,14 +77,14 @@ class ParseTest {
         String className = "InputClass";
 
         List<String> lines = new ArrayList<>();
-        lines.add("     int num = 7;");
-        lines.add("int output = InputClass.inputFunction(num);");
+        lines.add("Integer num = 7;");
+        lines.add("Integer output = InputClass.inputFunction(num);");
         lines.add("assertEquals(7, output);");
 
         FunctionRequirement output = TestCase.parse(lines, className);
 
         assertEquals(1, output.inputOutput.getInputs().size());
-        assertEquals("int", output.inputOutput.getInputs().get(0).type);
+        assertEquals("Integer", output.inputOutput.getInputs().get(0).getType());
     }
 
     @Test

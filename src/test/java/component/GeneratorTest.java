@@ -111,7 +111,7 @@ class GeneratorTest {
         String data = readGeneratedClass(className);
 
         assertTrue(data.contains("class " + className + " {"));
-        assertTrue(data.contains("static void setInt(int arg1) {"));
+        assertTrue(data.contains("static void setInt(Integer arg1) {"));
     }
 
     @Test
@@ -122,7 +122,7 @@ class GeneratorTest {
         String data = readGeneratedClass(className);
 
         assertTrue(data.contains("class " + className + " {"));
-        assertTrue(data.contains("static void setArgs(int arg1, String arg2) {"));
+        assertTrue(data.contains("static void setArgs(Integer arg1, String arg2) {"));
     }
 
     @Disabled

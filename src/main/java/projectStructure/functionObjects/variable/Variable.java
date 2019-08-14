@@ -1,11 +1,9 @@
 package projectStructure.functionObjects.variable;
 
 public class Variable {
-    public String type;
-    public Object value;
+    private Object value;
 
-    public Variable(String type, Object value) {
-        this.type = type;
+    public Variable(Object value) {
         this.value = value;
     }
 
