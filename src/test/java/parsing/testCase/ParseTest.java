@@ -1,11 +1,9 @@
-package testCase;
+package parsing.testCase;
 
 import org.junit.jupiter.api.Test;
 import projectStructure.functionObjects.signature.Signature;
 import projectStructure.functionObjects.functionRequirement.FunctionRequirement;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 

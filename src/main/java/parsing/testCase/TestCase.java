@@ -1,4 +1,4 @@
-package testCase;
+package parsing.testCase;
 
 import projectStructure.variable.Variable;
 import projectStructure.functionObjects.signature.Signature;

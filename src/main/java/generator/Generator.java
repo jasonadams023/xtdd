@@ -1,7 +1,7 @@
 package generator;
 
 import projectStructure.classObjects.classRequirement.ClassRequirement;
-import testParser.TestParser;
+import parsing.testParser.TestParser;
 import fileManager.FileManager;
 import projectStructure.classObjects.javaClass.JavaClass;
 

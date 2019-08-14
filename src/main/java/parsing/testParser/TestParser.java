@@ -1,9 +1,9 @@
-package testParser;
+package parsing.testParser;
 
 import projectStructure.classObjects.classRequirement.ClassRequirement;
 import projectStructure.functionObjects.functionRequirement.FunctionRequirement;
 import fileManager.FileManager;
-import testCase.TestCase;
+import parsing.testCase.TestCase;
 
 import java.nio.file.Path;
 import java.util.ArrayList;

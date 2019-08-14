@@ -1,6 +1,6 @@
 package generator;
 
-import testParser.TestParser;
+import parsing.testParser.TestParser;
 import fileManager.FileManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

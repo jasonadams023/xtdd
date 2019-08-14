@@ -1,4 +1,4 @@
-package testParser;
+package parsing.testParser;
 
 import projectStructure.functionObjects.signature.Signature;
 import projectStructure.classObjects.classRequirement.ClassRequirement;
