@@ -1,6 +1,6 @@
 package testCase;
 
-import projectStructure.functionObjects.variable.Variable;
+import projectStructure.variable.Variable;
 import projectStructure.functionObjects.signature.Signature;
 import projectStructure.functionObjects.functionRequirement.FunctionRequirement;
 

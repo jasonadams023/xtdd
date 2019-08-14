@@ -1,7 +1,7 @@
 package projectStructure.functionObjects.functionRequirement;
 
 import projectStructure.functionObjects.inputOutput.InputOutput;
-import projectStructure.functionObjects.variable.Variable;
+import projectStructure.variable.Variable;
 import projectStructure.functionObjects.signature.Signature;
 
 import java.util.List;

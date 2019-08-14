@@ -1,6 +1,6 @@
 package projectStructure.functionObjects.inputOutput;
 
-import projectStructure.functionObjects.variable.Variable;
+import projectStructure.variable.Variable;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package projectStructure.functionObjects.variable;
+package projectStructure.variable;
 
 import org.junit.jupiter.api.Test;
 

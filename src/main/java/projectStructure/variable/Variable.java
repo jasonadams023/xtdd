@@ -1,4 +1,4 @@
-package projectStructure.functionObjects.variable;
+package projectStructure.variable;
 
 public class Variable {
     private Object value;

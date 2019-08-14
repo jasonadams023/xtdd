@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import projectStructure.functionObjects.functionRequirement.FunctionRequirement;
 import projectStructure.functionObjects.inputOutput.InputOutput;
 import projectStructure.functionObjects.signature.Signature;
-import projectStructure.functionObjects.variable.Variable;
+import projectStructure.variable.Variable;
 
 import java.util.ArrayList;
 import java.util.List;
