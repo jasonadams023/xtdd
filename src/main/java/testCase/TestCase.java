@@ -46,9 +46,8 @@ public class TestCase {
     }
 
     private static Variable extractVariableFromLine(String line) {
-        String type = line.trim().split(Pattern.quote(" "))[0];
-        String className = "java.lang." + type;
-        String valueString = line.split(Pattern.quote("="))[1].trim().split(Pattern.quote(";"))[0];
+        String className = extractClassName(line);
+        String valueString = extractValueString(line);
         Object object = "";
 
         try {
@@ -58,6 +57,15 @@ public class TestCase {
         }
 
         return new Variable(object);
+    }
+
+    private static String extractClassName(String line) {
+        String type = line.trim().split(Pattern.quote(" "))[0];
+        return "java.lang." + type;
+    }
+
+    private static String extractValueString(String line) {
+        return line.split(Pattern.quote("="))[1].trim().split(Pattern.quote(";"))[0];
     }
 
     private static Object dynamicallyCreateObject(String className, String value) throws ReflectiveOperationException {
