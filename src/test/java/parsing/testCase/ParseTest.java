@@ -98,9 +98,5 @@ class ParseTest {
         FunctionRequirement output = TestCaseParser.parse(lines, className);
 
         assertEquals(2, output.inputOutput.getInputs().size());
-        assertEquals(7, output.inputOutput.getInputs().get(0).getObject());
-        assertEquals("Integer", output.inputOutput.getInputs().get(0).getType());
-        assertEquals("\"a string\"", output.inputOutput.getInputs().get(1).getObject());
-        assertEquals("String", output.inputOutput.getInputs().get(1).getType());
     }
 }
