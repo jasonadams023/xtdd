@@ -8,13 +8,7 @@ public class Variable {
     }
 
     public static Variable create(Object value) {
-        Object output = value;
-
-        if (value.getClass().equals(String.class)) {
-            output = "\"" + value + "\"";
-        }
-
-        return new Variable(output);
+        return new Variable(value);
     }
 
     public String getType() {
@@ -23,5 +17,13 @@ public class Variable {
 
     public Object getObject() {
         return value;
+    }
+
+    public String toString() {
+        if (value.getClass().equals(String.class)) {
+            return "\"" + value + "\"";
+        }
+
+        return value.toString();
     }
 }

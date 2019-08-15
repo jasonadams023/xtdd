@@ -16,6 +16,6 @@ class CreateTest {
     void should_ReturnVariableWithEnrichedString() {
         Variable variable = Variable.create("hello world");
 
-        assertEquals("\"hello world\"", variable.getObject());
+        assertEquals("hello world", variable.getObject());
     }
 }

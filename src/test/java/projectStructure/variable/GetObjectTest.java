@@ -14,6 +14,6 @@ class GetObjectTest {
         Object output2 = variable2.getObject();
 
         assertEquals(7, output1);
-        assertEquals("\"hello\"", output2);
+        assertEquals("hello", output2);
     }
 }

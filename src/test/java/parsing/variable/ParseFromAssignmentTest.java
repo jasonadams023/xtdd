@@ -13,7 +13,6 @@ class ParseFromAssignmentTest {
         Variable variable = VariableParser.parseFromAssignment(line);
 
         assertEquals(1, variable.getObject());
-        assertEquals("Integer", variable.getType());
     }
 
     @Test
@@ -22,8 +21,7 @@ class ParseFromAssignmentTest {
 
         Variable variable = VariableParser.parseFromAssignment(line);
 
-        assertEquals("\"a string\"", variable.getObject());
-        assertEquals("String", variable.getType());
+        assertEquals("a string", variable.getObject());
     }
 
     @Test
@@ -33,6 +31,5 @@ class ParseFromAssignmentTest {
         Variable variable = VariableParser.parseFromAssignment(line);
 
         assertEquals(10.2, variable.getObject());
-        assertEquals("Double", variable.getType());
     }
 }
