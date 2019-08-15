@@ -88,7 +88,7 @@ class GeneratorTest {
         assertTrue(data.contains("class " + className + " {"));
         assertTrue(data.contains("static String getNullString() {"));
         assertTrue(data.contains("return null"));
-        assertTrue(data.contains("static int getNullInt() {"));
+        assertTrue(data.contains("static Integer getNullInt() {"));
     }
 
     @Test
@@ -99,7 +99,7 @@ class GeneratorTest {
         String data = readGeneratedClass(className);
 
         assertTrue(data.contains("class " + className + " {"));
-        assertTrue(data.contains("static int getInt() {"));
+        assertTrue(data.contains("static Integer getInt() {"));
         assertTrue(data.contains("return 7"));
     }
 

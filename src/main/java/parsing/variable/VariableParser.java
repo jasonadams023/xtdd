@@ -29,7 +29,7 @@ public class VariableParser {
         return line.split(Pattern.quote("="))[1].trim().split(Pattern.quote(";"))[0];
     }
 
-    private static Object dynamicallyCreateObject(String className, String value) throws ReflectiveOperationException {
+    public static Object dynamicallyCreateObject(String className, String value) throws ReflectiveOperationException {
         Class<?> dynamicClass = Class.forName(className);
         Constructor<?> cons = dynamicClass.getConstructor(String.class);
         return cons.newInstance(value);

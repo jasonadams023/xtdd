@@ -112,12 +112,12 @@ class ParseTestFileTest {
         lines.add(TestFileParser.endFlag);
         lines.add("@Test");
         lines.add("void should_ReturnInt() {");
-        lines.add("int output = Example.function();");
+        lines.add("Integer output = Example.function();");
         lines.add("assertEquals(7, output);");
         lines.add("}");
         willReturn(lines).given(fileManager).readAllLines(path);
 
-        Signature expectedSignature = new Signature("function", "int", new ArrayList<>());
+        Signature expectedSignature = new Signature("function", "Integer", new ArrayList<>());
 
         List<ClassRequirement> output = parser.parseTestFile(path);
 

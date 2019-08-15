@@ -14,12 +14,12 @@ class FirstTest {
 
     @Test
     void should_ReturnNullInt() {
-        int output = Returns.getNullInt();
+        Integer output = Returns.getNullInt();
     }
 
     @Test
     void should_ReturnInt() {
-        int output = Returns.getInt();
+        Integer output = Returns.getInt();
 
         assertEquals(7, output);
     }

@@ -59,10 +59,10 @@ class ParseTest {
         String className = "IntClass";
 
         List<String> lines = new ArrayList<>();
-        lines.add("int output = IntClass.intFunction();");
+        lines.add("Integer output = IntClass.intFunction();");
         lines.add("assertEquals(7, output);");
 
-        Signature expectedSignature = new Signature("intFunction", "int", new ArrayList<>());
+        Signature expectedSignature = new Signature("intFunction", "Integer", new ArrayList<>());
 
         FunctionRequirement output = TestCaseParser.parse(lines, className);
 

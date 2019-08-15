@@ -68,24 +68,25 @@ public class TestCaseParser {
     }
 
     private static Object extractReturnValueFromLine(String returnType, String line) {
-        Object returnValue;
+        String returnValue;
         String args = line.split(Pattern.quote("("))[1];
         String returnValueString = args.split(Pattern.quote(","))[0];
         returnValue = returnValueString.replaceAll("\"", "");
 
-        returnValue = prepareValue(returnValue, returnType);
-        return returnValue;
-    }
+        Object object = null;
 
-    private static Object prepareValue(Object value, String returnType) {
-        if (returnType.equals("int")) {
-            value = Integer.parseInt((String) value);
+        if (!returnType.equals("void")) {
+            try {
+                object = VariableParser.dynamicallyCreateObject("java.lang." + returnType, returnValue);
+            } catch (ReflectiveOperationException e) {
+                System.out.println(e);
+            }
         }
 
-        if(value instanceof String) {
-            value = "\"" + value + "\"";
+        if (object != null && object.getClass().getSimpleName().equals("String")) {
+            object = "\"" + object + "\"";
         }
 
-        return value;
+        return object;
     }
 }
