@@ -7,30 +7,19 @@ import java.util.regex.Pattern;
 
 public class VariableParser {
     public static Variable parseFromAssignment(String line) {
-        String writtenClassName = extractWrittenClassNameFromAssignment(line);
-        String className = getClassName(writtenClassName);
+        String className = extractClassNameFromAssignment(line);
         String valueString = extractValueStringFromAssignment(line);
-        Object object = "";
 
-        try {
-            object = dynamicallyCreateObject(className, valueString);
-        } catch (ReflectiveOperationException e) {
-            System.out.println(e);
-        }
+        Object object = createObject(className, valueString);
 
         return new Variable(object);
     }
 
     public static Object parseFromAssert(String writtenClassName, String line) {
         String value = extractValueStringFromAssert(line);
-        String className = getClassName(writtenClassName);
-        Object object = "";
+        String className = enrichClassName(writtenClassName);
 
-        try {
-            object = dynamicallyCreateObject(className, value);
-        } catch (ReflectiveOperationException e) {
-            System.out.println(e);
-        }
+        Object object = createObject(className, value);
 
         if (object.getClass().getSimpleName().equals("String")) {
             object = "\"" + object + "\"";
@@ -39,7 +28,16 @@ public class VariableParser {
         return object;
     }
 
-    private static String getClassName(String type) {
+    private static String extractClassNameFromAssignment(String line) {
+        String writtenClassName = extractWrittenClassNameFromAssignment(line);
+        return enrichClassName(writtenClassName);
+    }
+
+    private static String extractWrittenClassNameFromAssignment(String line) {
+        return line.trim().split(Pattern.quote(" "))[0];
+    }
+
+    private static String enrichClassName(String type) {
         return "java.lang." + type;
     }
 
@@ -49,12 +47,21 @@ public class VariableParser {
         return returnValueString.replaceAll("\"", "");
     }
 
-    private static String extractWrittenClassNameFromAssignment(String line) {
-        return line.trim().split(Pattern.quote(" "))[0];
-    }
-
     private static String extractValueStringFromAssignment(String line) {
         return line.split(Pattern.quote("="))[1].trim().split(Pattern.quote(";"))[0];
+    }
+
+    private static Object createObject(String className, String valueString) {
+        Object object;
+
+        try {
+            object = dynamicallyCreateObject(className, valueString);
+        } catch (ReflectiveOperationException e) {
+            System.out.println(e);
+            object = "";
+        }
+
+        return object;
     }
 
     private static Object dynamicallyCreateObject(String className, String value) throws ReflectiveOperationException {
