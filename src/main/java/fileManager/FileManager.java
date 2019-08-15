@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileManager {
-    FilesWrapper files;
+    private FilesWrapper files;
 
     public FileManager(FilesWrapper files) {
         this.files = files;
