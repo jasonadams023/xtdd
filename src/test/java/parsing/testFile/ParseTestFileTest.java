@@ -1,4 +1,4 @@
-package parsing.testParser;
+package parsing.testFile;
 
 import projectStructure.functionObjects.signature.Signature;
 import projectStructure.classObjects.classRequirement.ClassRequirement;
@@ -17,14 +17,14 @@ import static org.mockito.Mockito.mock;
 
 class ParseTestFileTest {
     private Path path;
-    private TestParser parser;
+    private TestFileParser parser;
     private FileManager fileManager;
 
     @BeforeEach
     void setup() {
         path = mock(Path.class);
         fileManager = mock(FileManager.class);
-        parser = new TestParser(fileManager);
+        parser = new TestFileParser(fileManager);
     }
 
     @Test
@@ -48,9 +48,9 @@ class ParseTestFileTest {
     @Test
     void should_ReturnRequirement_ForEmptyClass() {
         List<String> lines = new ArrayList<>();
-        lines.add(TestParser.startFlag);
+        lines.add(TestFileParser.startFlag);
         lines.add("import example.Example;");
-        lines.add(TestParser.endFlag);
+        lines.add(TestFileParser.endFlag);
         willReturn(lines).given(fileManager).readAllLines(path);
 
         List<ClassRequirement> output = parser.parseTestFile(path);
@@ -63,9 +63,9 @@ class ParseTestFileTest {
     @Test
     void should_ReturnRequirements_ForFunctions() {
         List<String> lines = new ArrayList<>();
-        lines.add(TestParser.startFlag);
+        lines.add(TestFileParser.startFlag);
         lines.add("import example.Example;");
-        lines.add(TestParser.endFlag);
+        lines.add(TestFileParser.endFlag);
         lines.add("@Test");
         lines.add("void should_Return() {");
         lines.add("String output = Example.function();");
@@ -84,9 +84,9 @@ class ParseTestFileTest {
     @Test
     void should_ReturnRequirements_ForFunctions_WithReturnValues() {
         List<String> lines = new ArrayList<>();
-        lines.add(TestParser.startFlag);
+        lines.add(TestFileParser.startFlag);
         lines.add("import example.Example;");
-        lines.add(TestParser.endFlag);
+        lines.add(TestFileParser.endFlag);
         lines.add("@Test");
         lines.add("void should_ReturnString() {");
         lines.add("String output = Example.function();");
@@ -107,9 +107,9 @@ class ParseTestFileTest {
     @Test
     void should_ReturnRequirements_ForFunctions_WithDifferentReturnValues() {
         List<String> lines = new ArrayList<>();
-        lines.add(TestParser.startFlag);
+        lines.add(TestFileParser.startFlag);
         lines.add("import example.Example;");
-        lines.add(TestParser.endFlag);
+        lines.add(TestFileParser.endFlag);
         lines.add("@Test");
         lines.add("void should_ReturnInt() {");
         lines.add("int output = Example.function();");

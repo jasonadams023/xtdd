@@ -1,7 +1,7 @@
 package generator;
 
 import projectStructure.classObjects.classRequirement.ClassRequirement;
-import parsing.testParser.TestParser;
+import parsing.testFile.TestFileParser;
 import fileManager.FileManager;
 import projectStructure.classObjects.javaClass.JavaClass;
 
@@ -31,10 +31,10 @@ public class Generator {
     }
 
     private void getRequirementsFromTestFiles() {
-        TestParser testParser = new TestParser(fileManager);
+        TestFileParser testFileParser = new TestFileParser(fileManager);
 
         for (File testFile : getTestFiles()) {
-            classRequirements = testParser.parseTestFile(testFile.toPath());
+            classRequirements = testFileParser.parseTestFile(testFile.toPath());
         }
     }
 

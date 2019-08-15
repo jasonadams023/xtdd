@@ -1,16 +1,16 @@
-package parsing.testParser;
+package parsing.testFile;
 
 import projectStructure.classObjects.classRequirement.ClassRequirement;
 import projectStructure.functionObjects.functionRequirement.FunctionRequirement;
 import fileManager.FileManager;
-import parsing.testCase.TestCase;
+import parsing.testCase.TestCaseParser;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class TestParser {
+public class TestFileParser {
     private FileManager fileManager;
     private List<String> classNames;
     private List<ClassRequirement> classRequirements;
@@ -18,7 +18,7 @@ public class TestParser {
     public static final String startFlag = "//beginning of classes to generate";
     public static final String endFlag = "//end of classes to generate";
 
-    public TestParser(FileManager fileManager) {
+    public TestFileParser(FileManager fileManager) {
         this.fileManager = fileManager;
         this.classRequirements = new ArrayList<>();
         this.classNames = new ArrayList<>();
@@ -72,7 +72,7 @@ public class TestParser {
 
         for(List<String> testLines : testCaseSets) {
             for(String className : classNames) {
-                FunctionRequirement functionRequirement = TestCase.parse(testLines, className);
+                FunctionRequirement functionRequirement = TestCaseParser.parse(testLines, className);
 
                 if (functionRequirement != null) {
                     classRequirements.add(new ClassRequirement(className, functionRequirement));

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class TestCase {
+public class TestCaseParser {
     public static FunctionRequirement parse(List<String> lines, String className) {
         String functionName = "";
         String returnType = "void";
