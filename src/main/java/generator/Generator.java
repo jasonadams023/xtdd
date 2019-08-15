@@ -12,19 +12,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Generator {
-    private File directory;
+    private File projectDirectory;
     private FileManager fileManager;
     private List<JavaClass> javaClasses;
     private List<ClassRequirement> classRequirements;
 
-    public Generator(File directory, FileManager fileManager) {
-        this.directory = directory;
+    public Generator(FileManager fileManager) {
         this.fileManager = fileManager;
         this.javaClasses = new ArrayList<>();
         this.classRequirements = new ArrayList<>();
     }
 
-    public void generate() {
+    public void generate(File projectDirectory) {
+        this.projectDirectory = projectDirectory;
+
         getRequirementsFromTestFiles();
         passRequirements();
         writeFiles();
@@ -60,13 +61,13 @@ public class Generator {
     }
 
     private File[] getTestFiles() {
-        File testDirectory = fileManager.getTestDirectory(directory);
+        File testDirectory = fileManager.getTestDirectory(projectDirectory);
         return testDirectory.listFiles();
     }
 
     private void writeFiles() {
         for (JavaClass javaClass : javaClasses) {
-            Path path = Paths.get(directory.getPath() + "/src/" + javaClass.getName() + ".java");
+            Path path = Paths.get(projectDirectory.getPath() + "/src/" + javaClass.getName() + ".java");
             fileManager.writeFile(path, javaClass.toString());
         }
     }

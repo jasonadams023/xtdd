@@ -18,12 +18,13 @@ class GenerateTest {
     private Generator generator;
     private Path testPath;
     private Path testPath2;
+    private File directory;
 
     @BeforeEach
     void setup() {
-        File directory = mock(File.class);
+        directory = mock(File.class);
         fileManager = mock(FileManager.class);
-        generator = new Generator(directory, fileManager);
+        generator = new Generator(fileManager);
 
         File testDirectory = mock(File.class);
         willReturn(testDirectory).given(fileManager).getTestDirectory(directory);
@@ -60,7 +61,7 @@ class GenerateTest {
 
     @Test
     void should_GenerateFiles() {
-        generator.generate();
+        generator.generate(directory);
 
         verify(fileManager, times(2)).writeFile(any(), any());
     }
@@ -72,7 +73,7 @@ class GenerateTest {
         willReturn(readLines).given(fileManager).readAllLines(testPath);
         willReturn(readLines).given(fileManager).readAllLines(testPath2);
 
-        generator.generate();
+        generator.generate(directory);
 
         verify(fileManager, times(0)).writeFile(any(), any());
     }

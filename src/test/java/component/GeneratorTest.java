@@ -30,7 +30,7 @@ class GeneratorTest {
     void setup() {
         FilesWrapper filesWrapper = new FilesWrapper();
         FileManager fileManager = new FileManager(filesWrapper);
-        generator = new Generator(exampleDirectory, fileManager);
+        generator = new Generator(fileManager);
     }
 
     @BeforeEach
@@ -45,7 +45,7 @@ class GeneratorTest {
 
     @Test
     void shouldGenerateClassBasedOnTestFiles() {
-        generator.generate();
+        generator.generate(exampleDirectory);
         String data1 = readGeneratedClass("First");
         String data2 = readGeneratedClass("Second");
 
@@ -57,7 +57,7 @@ class GeneratorTest {
     void shouldGenerateEmptyClass() {
         String className = "Empty";
 
-        generator.generate();
+        generator.generate(exampleDirectory);
         String data = readGeneratedClass(className);
 
         String expected = "class Empty {\n" +
@@ -70,7 +70,7 @@ class GeneratorTest {
     void shouldGenerateFunctionsBasedOnTestFile() {
         String className = "First";
 
-        generator.generate();
+        generator.generate(exampleDirectory);
         String data = readGeneratedClass(className);
 
         assertTrue(data.contains("class " + className + " {"));
@@ -82,7 +82,7 @@ class GeneratorTest {
     void should_GenerateFunctions_WithDifferentReturns() {
         String className = "Returns";
 
-        generator.generate();
+        generator.generate(exampleDirectory);
         String data = readGeneratedClass(className);
 
         assertTrue(data.contains("class " + className + " {"));
@@ -95,7 +95,7 @@ class GeneratorTest {
     void should_GenerateFunctions_WithNonNullInts() {
         String className = "Returns";
 
-        generator.generate();
+        generator.generate(exampleDirectory);
         String data = readGeneratedClass(className);
 
         assertTrue(data.contains("class " + className + " {"));
@@ -107,7 +107,7 @@ class GeneratorTest {
     void should_GenerateFunctions_WithNonNullStrings() {
         String className = "Returns";
 
-        generator.generate();
+        generator.generate(exampleDirectory);
         String data = readGeneratedClass(className);
 
         assertTrue(data.contains("class " + className + " {"));
@@ -119,7 +119,7 @@ class GeneratorTest {
     void should_GenerateFunctions_WithInput() {
         String className = "Inputs";
 
-        generator.generate();
+        generator.generate(exampleDirectory);
         String data = readGeneratedClass(className);
 
         assertTrue(data.contains("class " + className + " {"));
@@ -130,7 +130,7 @@ class GeneratorTest {
     void should_GenerateFunctions_WithMultipleInputs() {
         String className = "Inputs";
 
-        generator.generate();
+        generator.generate(exampleDirectory);
         String data = readGeneratedClass(className);
 
         assertTrue(data.contains("class " + className + " {"));
@@ -142,7 +142,7 @@ class GeneratorTest {
     void should_GenerateFunctions_WithIfElseStatements() {
         String className = "IfElse";
 
-        generator.generate();
+        generator.generate(exampleDirectory);
         String data = readGeneratedClass(className);
 
         assertTrue(data.contains("class " + className + " {"));
