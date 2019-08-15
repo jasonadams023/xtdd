@@ -9,7 +9,7 @@ import example.InputOutput;
 class IfElseTest {
     @Test
     void should_Take7_AndReturnHello() {
-        int input = 7;
+        Integer input = 7;
 
         String output = IfElse.doThing(input);
 
@@ -18,7 +18,7 @@ class IfElseTest {
 
     @Test
     void should_Take3_AndReturnBye() {
-        int first = 3;
+        Integer first = 3;
 
         String output = InputOutput.add(first);
 
