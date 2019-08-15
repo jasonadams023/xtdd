@@ -20,6 +20,25 @@ public class VariableParser {
         return new Variable(object);
     }
 
+    public static Variable parseFromAssert(String type, String line) {
+        Object object = "";
+        String args = line.split(Pattern.quote("("))[1];
+        String returnValueString = args.split(Pattern.quote(","))[0];
+        String value = returnValueString.replaceAll("\"", "");
+
+        try {
+            object = dynamicallyCreateObject("java.lang." + type, value);
+        } catch (ReflectiveOperationException e) {
+            System.out.println(e);
+        }
+
+        if (object.getClass().getSimpleName().equals("String")) {
+            object = "\"" + object + "\"";
+        }
+
+        return new Variable(object);
+    }
+
     private static String extractClassName(String line) {
         String type = line.trim().split(Pattern.quote(" "))[0];
         return "java.lang." + type;
