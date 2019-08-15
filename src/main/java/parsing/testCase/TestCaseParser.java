@@ -27,7 +27,7 @@ public class TestCaseParser {
             }
 
             if (line.contains("assertEquals")) {
-                returnValue = extractReturnValueFromLine(returnType, line);
+                returnValue = VariableParser.parseFromAssert(returnType, line);
             }
         }
 
@@ -64,28 +64,5 @@ public class TestCaseParser {
         line = line.split(Pattern.quote("("))[0];
 
         return line;
-    }
-
-    private static Object extractReturnValueFromLine(String returnType, String line) {
-        String returnValue;
-        String args = line.split(Pattern.quote("("))[1];
-        String returnValueString = args.split(Pattern.quote(","))[0];
-        returnValue = returnValueString.replaceAll("\"", "");
-
-        Object object = null;
-
-        if (!returnType.equals("void")) {
-            try {
-                object = VariableParser.dynamicallyCreateObject("java.lang." + returnType, returnValue);
-            } catch (ReflectiveOperationException e) {
-                System.out.println(e);
-            }
-        }
-
-        if (object != null && object.getClass().getSimpleName().equals("String")) {
-            object = "\"" + object + "\"";
-        }
-
-        return object;
     }
 }

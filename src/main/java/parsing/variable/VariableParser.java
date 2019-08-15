@@ -20,7 +20,7 @@ public class VariableParser {
         return new Variable(object);
     }
 
-    public static Variable parseFromAssert(String type, String line) {
+    public static Object parseFromAssert(String type, String line) {
         Object object = "";
         String args = line.split(Pattern.quote("("))[1];
         String returnValueString = args.split(Pattern.quote(","))[0];
@@ -36,7 +36,7 @@ public class VariableParser {
             object = "\"" + object + "\"";
         }
 
-        return new Variable(object);
+        return object;
     }
 
     private static String extractClassName(String line) {
@@ -48,7 +48,7 @@ public class VariableParser {
         return line.split(Pattern.quote("="))[1].trim().split(Pattern.quote(";"))[0];
     }
 
-    public static Object dynamicallyCreateObject(String className, String value) throws ReflectiveOperationException {
+    private static Object dynamicallyCreateObject(String className, String value) throws ReflectiveOperationException {
         Class<?> dynamicClass = Class.forName(className);
         Constructor<?> cons = dynamicClass.getConstructor(String.class);
         return cons.newInstance(value);
