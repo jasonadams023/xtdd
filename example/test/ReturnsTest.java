@@ -23,4 +23,11 @@ class FirstTest {
 
         assertEquals(7, output);
     }
+
+    @Test
+    void should_ReturnString() {
+        String output = Returns.getString();
+
+        assertEquals("hello world", output);
+    }
 }

@@ -92,7 +92,7 @@ class GeneratorTest {
     }
 
     @Test
-    void should_GenerateFunctions_WithNonNullReturns() {
+    void should_GenerateFunctions_WithNonNullInts() {
         String className = "Returns";
 
         generator.generate();
@@ -101,6 +101,18 @@ class GeneratorTest {
         assertTrue(data.contains("class " + className + " {"));
         assertTrue(data.contains("static Integer getInt() {"));
         assertTrue(data.contains("return 7"));
+    }
+
+    @Test
+    void should_GenerateFunctions_WithNonNullStrings() {
+        String className = "Returns";
+
+        generator.generate();
+        String data = readGeneratedClass(className);
+
+        assertTrue(data.contains("class " + className + " {"));
+        assertTrue(data.contains("static String getString() {"));
+        assertTrue(data.contains("return \"hello world\";"));
     }
 
     @Test
