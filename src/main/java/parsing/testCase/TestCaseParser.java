@@ -5,7 +5,6 @@ import projectStructure.variable.Variable;
 import projectStructure.functionObjects.signature.Signature;
 import projectStructure.functionObjects.functionRequirement.FunctionRequirement;
 
-import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -19,7 +18,7 @@ public class TestCaseParser {
 
         for(String line : lines) {
             if (!line.contains(className) && line.contains(" = ")) {
-                variables.add(VariableParser.parseFromLine(line));
+                variables.add(VariableParser.parseFromAssignment(line));
             }
 
             if (line.contains(className + ".")) {

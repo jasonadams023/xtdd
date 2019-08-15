@@ -5,12 +5,12 @@ import projectStructure.variable.Variable;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class VariableParserTest {
+class ParseFromAssignmentTest {
     @Test
     void should_ParseIntegers() {
         String line = "Integer integer = 1;";
 
-        Variable variable = VariableParser.parseFromLine(line);
+        Variable variable = VariableParser.parseFromAssignment(line);
 
         assertEquals(1, variable.getObject());
         assertEquals("Integer", variable.getType());
@@ -20,7 +20,7 @@ class VariableParserTest {
     void should_ParseStrings() {
         String line = "String text = \"a string\"";
 
-        Variable variable = VariableParser.parseFromLine(line);
+        Variable variable = VariableParser.parseFromAssignment(line);
 
         assertEquals("\"a string\"", variable.getObject());
         assertEquals("String", variable.getType());
@@ -30,7 +30,7 @@ class VariableParserTest {
     void should_ParseDoubles() {
         String line = "Double num = 10.2";
 
-        Variable variable = VariableParser.parseFromLine(line);
+        Variable variable = VariableParser.parseFromAssignment(line);
 
         assertEquals(10.2, variable.getObject());
         assertEquals("Double", variable.getType());

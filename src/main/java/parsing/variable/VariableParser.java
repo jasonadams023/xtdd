@@ -6,7 +6,7 @@ import java.lang.reflect.Constructor;
 import java.util.regex.Pattern;
 
 public class VariableParser {
-    public static Variable parseFromLine(String line) {
+    public static Variable parseFromAssignment(String line) {
         String className = extractClassName(line);
         String valueString = extractValueString(line);
         Object object = "";
