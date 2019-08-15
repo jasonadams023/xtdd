@@ -3,7 +3,7 @@ package projectStructure.variable;
 public class Variable {
     private Object value;
 
-    public Variable(Object value) {
+    private Variable(Object value) {
         this.value = value;
     }
 

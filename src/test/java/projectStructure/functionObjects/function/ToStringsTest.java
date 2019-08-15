@@ -56,8 +56,8 @@ class ToStringsTest {
     @Test
     void should_ReturnFunctionWithProperInputs() {
         List<Variable> inputs = new ArrayList<>();
-        inputs.add(new Variable(1));
-        inputs.add(new Variable("string"));
+        inputs.add(Variable.create(1));
+        inputs.add(Variable.create("string"));
 
         List<String> inputTypes = new ArrayList<>();
         inputTypes.add(("int"));

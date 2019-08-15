@@ -7,8 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class GetTypeTest {
     @Test
     void should_ReturnNameOfClass() {
-        Variable variable1 = new Variable(1);
-        Variable variable2 = new Variable("string");
+        Variable variable1 = Variable.create(1);
+        Variable variable2 = Variable.create("string");
 
         String output1 = variable1.getType();
         String output2 = variable2.getType();

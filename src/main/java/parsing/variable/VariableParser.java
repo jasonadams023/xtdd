@@ -12,7 +12,7 @@ public class VariableParser {
 
         Object object = createObject(className, valueString);
 
-        return new Variable(object);
+        return Variable.create(object);
     }
 
     public static Object parseFromAssert(String writtenClassName, String line) {
@@ -48,7 +48,17 @@ public class VariableParser {
     }
 
     private static String extractValueStringFromAssignment(String line) {
-        return line.split(Pattern.quote("="))[1].trim().split(Pattern.quote(";"))[0];
+        String valueString;
+        String postAssignmentOperator = line.split(Pattern.quote("="))[1].trim();
+        String rawValue = postAssignmentOperator.split(Pattern.quote(";"))[0];
+
+        if (rawValue.charAt(0) == '\"' && rawValue.charAt(rawValue.length() - 1) == '\"') {
+            valueString = rawValue.substring(1, rawValue.length() - 1);
+        } else {
+            valueString = rawValue;
+        }
+
+        return valueString;
     }
 
     private static Object createObject(String className, String valueString) {
