@@ -84,6 +84,25 @@ class EqualsTest {
     }
 
     @Test
+    void should_ReturnFalseWhenFunctionRequirementsListsDoNotMatch() {
+        List<String> inputTypes = new ArrayList<>();
+        inputTypes.add("Integer");
+        Signature signature = new Signature("DifferentName", "Integer", inputTypes);
+
+        List<Variable> inputs = new ArrayList<>();
+        inputs.add(Variable.create(1));
+
+        Object returnValue = 1;
+        FunctionRequirement functionRequirement = FunctionRequirement.create(signature, inputs, returnValue);
+
+        classRequirement2.addFunctionRequirement(functionRequirement);
+
+        boolean output = classRequirement1.equals(classRequirement2);
+
+        assertFalse(output);
+    }
+
+    @Test
     void should_ReturnTrueWhenFieldsMatch() {
         boolean output = classRequirement1.equals(classRequirement2);
 

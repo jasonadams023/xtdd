@@ -24,7 +24,7 @@ public class ClassRequirement {
         if (o instanceof ClassRequirement) {
             ClassRequirement compareTo = (ClassRequirement) o;
 
-            if (this.name.equals(compareTo.name) && this.function.equals(compareTo.function)) {
+            if (this.name.equals(compareTo.name) && this.function.equals(compareTo.function) && this.functionRequirements.equals(compareTo.functionRequirements)) {
                 return true;
             } else {
                 return false;
