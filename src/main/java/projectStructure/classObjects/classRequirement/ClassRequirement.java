@@ -11,6 +11,10 @@ public class ClassRequirement {
         this.function = function;
     }
 
+    public static ClassRequirement create(String name) {
+        return new ClassRequirement(name, null);
+    }
+
     public boolean equals(Object o) {
         if (o instanceof ClassRequirement) {
             ClassRequirement compareTo = (ClassRequirement) o;
