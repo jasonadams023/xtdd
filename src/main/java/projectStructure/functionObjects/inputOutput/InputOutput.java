@@ -21,4 +21,17 @@ public class InputOutput {
     public List<Variable> getInputs() {
         return inputs;
     }
+
+    public boolean equals(Object o) {
+        if (o instanceof InputOutput) {
+            InputOutput compareTo = (InputOutput) o;
+            if (this.inputs.equals(compareTo.inputs) && this.returnValue.equals(compareTo.returnValue)) {
+                return true;
+            }
+
+            return false;
+        }
+
+        return false;
+    }
 }
