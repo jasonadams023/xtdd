@@ -20,4 +20,18 @@ public class FunctionRequirement {
 
         return new FunctionRequirement(signature, io);
     }
+
+    public boolean equals(Object o) {
+        if (o instanceof FunctionRequirement) {
+            FunctionRequirement compareTo = (FunctionRequirement) o;
+
+            if (this.signature.equals(compareTo.signature) && this.inputOutput.equals(compareTo.inputOutput)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        return false;
+    }
 }
