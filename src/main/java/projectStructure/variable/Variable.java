@@ -26,4 +26,18 @@ public class Variable {
 
         return value.toString();
     }
+
+    public boolean equals(Object o) {
+        if (o instanceof Variable) {
+            Variable compareTo = (Variable) o;
+
+            if (this.value.equals(compareTo.value)) {
+                return true;
+            }
+
+            return false;
+        }
+
+        return false;
+    }
 }
