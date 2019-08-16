@@ -4,6 +4,7 @@ import projectStructure.classObjects.classRequirement.ClassRequirement;
 import parsing.testFile.TestFileParser;
 import fileManager.FileManager;
 import projectStructure.classObjects.javaClass.JavaClass;
+import projectStructure.functionObjects.functionRequirement.FunctionRequirement;
 
 import java.io.File;
 import java.nio.file.Path;
@@ -52,7 +53,9 @@ public class Generator {
     private void passRequirementToClass(ClassRequirement classRequirement) {
         for (JavaClass javaClass : javaClasses) {
             if (javaClass.getName().equals(classRequirement.name)) {
-                javaClass.addRequirement(classRequirement.function);
+                for (FunctionRequirement functionRequirement : classRequirement.functionRequirements) {
+                    javaClass.addRequirement(functionRequirement);
+                }
             }
         }
     }

@@ -27,7 +27,8 @@ class EqualsTest {
 
         Object returnValue1 = 1;
         FunctionRequirement functionRequirement1 = FunctionRequirement.create(signature1, inputs1, returnValue1);
-        classRequirement1 = new ClassRequirement("name", functionRequirement1);
+        classRequirement1 = ClassRequirement.create("name");
+        classRequirement1.addFunctionRequirement(functionRequirement1);
 
         List<String> inputTypes2 = new ArrayList<>();
         inputTypes2.add("Integer");
@@ -38,7 +39,10 @@ class EqualsTest {
 
         Object returnValue2 = 1;
         FunctionRequirement functionRequirement2 = FunctionRequirement.create(signature2, inputs2, returnValue2);
-        classRequirement2 = new ClassRequirement("name", functionRequirement2);
+        List<FunctionRequirement> functionRequirements2 = new ArrayList<>();
+        functionRequirements2.add(functionRequirement2);
+        classRequirement2 = new ClassRequirement("name");
+        classRequirement2.addFunctionRequirement(functionRequirement2);
     }
 
     @Test
@@ -76,7 +80,7 @@ class EqualsTest {
         Object returnValue = 1;
         FunctionRequirement functionRequirement = FunctionRequirement.create(signature, inputs, returnValue);
 
-        classRequirement2.function = functionRequirement;
+        classRequirement2.addFunctionRequirement(functionRequirement);
 
         boolean output = classRequirement1.equals(classRequirement2);
 

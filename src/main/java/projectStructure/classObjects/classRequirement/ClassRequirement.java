@@ -7,24 +7,22 @@ import java.util.List;
 
 public class ClassRequirement {
     public String name;
-    public FunctionRequirement function;
-    List<FunctionRequirement> functionRequirements;
+    public List<FunctionRequirement> functionRequirements;
 
-    public ClassRequirement(String name, FunctionRequirement function) {
+    public ClassRequirement(String name) {
         this.name = name;
-        this.function = function;
         this.functionRequirements = new ArrayList<>();
     }
 
     public static ClassRequirement create(String name) {
-        return new ClassRequirement(name, null);
+        return new ClassRequirement(name);
     }
 
     public boolean equals(Object o) {
         if (o instanceof ClassRequirement) {
             ClassRequirement compareTo = (ClassRequirement) o;
 
-            if (this.name.equals(compareTo.name) && this.function.equals(compareTo.function) && this.functionRequirements.equals(compareTo.functionRequirements)) {
+            if (this.name.equals(compareTo.name) && this.functionRequirements.equals(compareTo.functionRequirements)) {
                 return true;
             } else {
                 return false;

@@ -55,7 +55,7 @@ public class TestFileParser {
 
     private void setClassRequirements() {
         for(String className : classNames) {
-            classRequirements.add(new ClassRequirement(className, null));
+            classRequirements.add(ClassRequirement.create(className));
         }
     }
 
@@ -71,11 +71,12 @@ public class TestFileParser {
         List<List<String>> testCaseSets = getTestCaseSets(lines);
 
         for(List<String> testLines : testCaseSets) {
-            for(String className : classNames) {
+            for(ClassRequirement classRequirement : classRequirements) {
+                String className = classRequirement.name;
                 FunctionRequirement functionRequirement = TestCaseParser.parse(testLines, className);
 
                 if (functionRequirement != null) {
-                    classRequirements.add(new ClassRequirement(className, functionRequirement));
+                    classRequirement.addFunctionRequirement(functionRequirement);
                 }
             }
         }

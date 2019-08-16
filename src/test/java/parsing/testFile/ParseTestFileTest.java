@@ -1,5 +1,6 @@
 package parsing.testFile;
 
+import projectStructure.functionObjects.functionRequirement.FunctionRequirement;
 import projectStructure.functionObjects.signature.Signature;
 import projectStructure.classObjects.classRequirement.ClassRequirement;
 import fileManager.FileManager;
@@ -12,6 +13,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.BDDMockito.willReturn;
 import static org.mockito.Mockito.mock;
 
@@ -57,7 +59,7 @@ class ParseTestFileTest {
 
         assertEquals(1, output.size());
         assertEquals("Example", output.get(0).name);
-        assertNull(output.get(0).function);
+        assertTrue(output.get(0).functionRequirements.isEmpty());
     }
 
     @Test
@@ -74,11 +76,12 @@ class ParseTestFileTest {
 
         Signature expectedSignature = new Signature("function", "String", new ArrayList<>());
 
-        List<ClassRequirement> output = parser.parseTestFile(path);
+        List<ClassRequirement> classRequirements = parser.parseTestFile(path);
+        List<FunctionRequirement> functionRequirements = classRequirements.get(0).functionRequirements;
 
-        assertEquals(2, output.size());
-        assertEquals("Example", output.get(1).name);
-        assertEquals(expectedSignature, output.get(1).function.signature);
+        assertEquals(1, classRequirements.size());
+        assertEquals("Example", classRequirements.get(0).name);
+        assertEquals(expectedSignature, functionRequirements.get(0).signature);
     }
 
     @Test
@@ -96,12 +99,13 @@ class ParseTestFileTest {
 
         Signature expectedSignature = new Signature("function", "String", new ArrayList<>());
 
-        List<ClassRequirement> output = parser.parseTestFile(path);
+        List<ClassRequirement> classRequirements = parser.parseTestFile(path);
+        List<FunctionRequirement> functionRequirements = classRequirements.get(0).functionRequirements;
 
-        assertEquals(2, output.size());
-        assertEquals("Example", output.get(1).name);
-        assertEquals(expectedSignature, output.get(1).function.signature);
-        assertEquals("\"a string\"", output.get(1).function.inputOutput.getReturnValue());
+        assertEquals(1, classRequirements.size());
+        assertEquals("Example", classRequirements.get(0).name);
+        assertEquals(expectedSignature, functionRequirements.get(0).signature);
+        assertEquals("\"a string\"", functionRequirements.get(0).inputOutput.getReturnValue());
     }
 
     @Test
@@ -119,11 +123,13 @@ class ParseTestFileTest {
 
         Signature expectedSignature = new Signature("function", "Integer", new ArrayList<>());
 
-        List<ClassRequirement> output = parser.parseTestFile(path);
+        List<ClassRequirement> classRequirements = parser.parseTestFile(path);
+        List<FunctionRequirement> functionRequirements = classRequirements.get(0).functionRequirements;
 
-        assertEquals(2, output.size());
-        assertEquals("Example", output.get(1).name);
-        assertEquals(expectedSignature, output.get(1).function.signature);
-        assertEquals(7, (int) output.get(1).function.inputOutput.getReturnValue());
+        assertEquals(1, classRequirements.size());
+        assertEquals("Example", classRequirements.get(0).name);
+        assertEquals(1, functionRequirements.size());
+        assertEquals(expectedSignature, functionRequirements.get(0).signature);
+        assertEquals(7, (int) functionRequirements.get(0).inputOutput.getReturnValue());
     }
 }
