@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.BDDMockito.willReturn;
 import static org.mockito.Mockito.mock;
@@ -131,5 +131,43 @@ class ParseTestFileTest {
         assertEquals(1, functionRequirements.size());
         assertEquals(expectedSignature, functionRequirements.get(0).signature);
         assertEquals(7, (int) functionRequirements.get(0).inputOutput.getReturnValue());
+    }
+
+    @Test
+    void should_BeIdempotent() {
+        List<String> lines = new ArrayList<>();
+        lines.add(TestFileParser.startFlag);
+        lines.add("import example.Example;");
+        lines.add(TestFileParser.endFlag);
+        lines.add("@Test");
+        lines.add("void should_ReturnInt() {");
+        lines.add("Integer output = Example.function();");
+        lines.add("assertEquals(7, output);");
+        lines.add("}");
+        lines.add("@Test");
+        lines.add("void should_ReturnInt() {");
+        lines.add("Integer output = Other.other();");
+        lines.add("assertEquals(8, output);");
+        lines.add("}");
+        willReturn(lines).given(fileManager).readAllLines(path);
+
+        Path path2 = mock(Path.class);
+        List<String> lines2 = new ArrayList<>();
+        lines2.add(TestFileParser.startFlag);
+        lines2.add("import example.Other;");
+        lines2.add(TestFileParser.endFlag);
+        lines2.add("@Test");
+        lines2.add("void should_ReturnInt() {");
+        lines2.add("Integer output = Other.other();");
+        lines2.add("assertEquals(7, output);");
+        lines2.add("}");
+        willReturn(lines2).given(fileManager).readAllLines(path2);
+
+        List<ClassRequirement> output1 = new ArrayList<>(parser.parseTestFile(path));
+        List<ClassRequirement> output2 = new ArrayList<>(parser.parseTestFile(path2));
+        List<ClassRequirement> output3 = new ArrayList<>(parser.parseTestFile(path));
+
+        assertEquals(output1, output3);
+        assertNotEquals(output1, output2);
     }
 }

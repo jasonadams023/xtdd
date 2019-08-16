@@ -20,12 +20,14 @@ public class TestFileParser {
 
     public TestFileParser(FileManager fileManager) {
         this.fileManager = fileManager;
-        this.classRequirements = new ArrayList<>();
         this.classNames = new ArrayList<>();
+        this.classRequirements = new ArrayList<>();
     }
 
     public List<ClassRequirement> parseTestFile(Path path) {
         List<String> lines = fileManager.readAllLines(path);
+        this.classNames.clear();
+        this.classRequirements.clear();
 
         getClassNames(lines);
         setClassRequirements();

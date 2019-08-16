@@ -33,7 +33,7 @@ public class Generator {
         TestFileParser testFileParser = new TestFileParser(fileManager);
 
         for (File testFile : getTestFiles(projectDirectory)) {
-            classRequirements = testFileParser.parseTestFile(testFile.toPath());
+            classRequirements.addAll(testFileParser.parseTestFile(testFile.toPath()));
         }
     }
 
