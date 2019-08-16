@@ -33,4 +33,8 @@ public class ClassRequirement {
 
         return false;
     }
+
+    public void addFunctionRequirement(FunctionRequirement functionRequirement) {
+        this.functionRequirements.add(functionRequirement);
+    }
 }
