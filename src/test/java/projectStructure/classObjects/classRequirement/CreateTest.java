@@ -3,7 +3,7 @@ package projectStructure.classObjects.classRequirement;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class CreateTest {
     @Test
@@ -11,6 +11,6 @@ class CreateTest {
         ClassRequirement classRequirement = ClassRequirement.create("ClassName");
 
         assertEquals("ClassName", classRequirement.name);
-        assertNull(classRequirement.function);
+        assertTrue(classRequirement.functionRequirements.isEmpty());
     }
 }

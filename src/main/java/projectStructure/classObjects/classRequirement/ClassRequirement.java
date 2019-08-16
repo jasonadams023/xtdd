@@ -2,13 +2,18 @@ package projectStructure.classObjects.classRequirement;
 
 import projectStructure.functionObjects.functionRequirement.FunctionRequirement;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ClassRequirement {
     public String name;
     public FunctionRequirement function;
+    List<FunctionRequirement> functionRequirements;
 
     public ClassRequirement(String name, FunctionRequirement function) {
         this.name = name;
         this.function = function;
+        this.functionRequirements = new ArrayList<>();
     }
 
     public static ClassRequirement create(String name) {
