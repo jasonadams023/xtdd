@@ -20,6 +20,10 @@ public class Variable {
     }
 
     public String toString() {
+        if (value == null) {
+            return null;
+        }
+
         if (value.getClass().equals(String.class)) {
             return "\"" + value + "\"";
         }
