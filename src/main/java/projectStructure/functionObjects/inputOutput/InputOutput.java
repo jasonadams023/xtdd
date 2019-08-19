@@ -6,16 +6,16 @@ import java.util.List;
 
 public class InputOutput {
     private List<Variable> inputs;
-    private Object returnValue;
+    private Variable returnValue;
 
     public InputOutput (List<Variable> inputs, Object returnValue) {
         this.inputs = inputs;
-        this.returnValue = returnValue;
+        this.returnValue = Variable.create(returnValue);
     }
 
     //TODO: replace these getters with equals() and toString()
     public Object getReturnValue() {
-        return returnValue;
+        return returnValue.getObject();
     }
 
     public List<Variable> getInputs() {
