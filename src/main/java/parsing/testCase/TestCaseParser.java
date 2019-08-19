@@ -13,7 +13,7 @@ public class TestCaseParser {
     public static FunctionRequirement parse(List<String> lines, String className) {
         String functionName = "";
         String returnType = "void";
-        Object returnValue = null;
+        Variable returnValue = Variable.create(null);
         List<Variable> variables = new ArrayList<>();
 
         for(String line : lines) {
@@ -42,7 +42,7 @@ public class TestCaseParser {
 
         Signature signature = new Signature(functionName, returnType, inputTypes);
 
-        return FunctionRequirement.create(signature, variables, Variable.create(returnValue));
+        return FunctionRequirement.create(signature, variables, returnValue);
     }
 
     private static String extractReturnTypeFromLine(String line) {

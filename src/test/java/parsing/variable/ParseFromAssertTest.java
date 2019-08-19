@@ -3,6 +3,7 @@ package parsing.variable;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import projectStructure.variable.Variable;
 
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
@@ -37,20 +38,22 @@ class ParseFromAssertTest {
     void should_ParseIntegers() {
         String type = "Integer";
         String line = "assertEquals(7, output);";
-        Object output = VariableParser.parseFromAssert(type, line);
 
-        assertEquals(7, output);
-        assertEquals("Integer", output.getClass().getSimpleName());
+        Variable output = VariableParser.parseFromAssert(type, line);
+
+        assertEquals(7, output.getObject());
+        assertEquals("Integer", output.getType());
     }
 
     @Test
     void should_ParseStrings() {
         String type = "String";
         String line = "assertEquals(\"hello world\", output);";
-        Object output = VariableParser.parseFromAssert(type, line);
 
-        assertEquals("hello world", output);
-        assertEquals("String", output.getClass().getSimpleName());
+        Variable output = VariableParser.parseFromAssert(type, line);
+
+        assertEquals("hello world", output.getObject());
+        assertEquals("String", output.getType());
     }
 
     @Test
@@ -61,12 +64,12 @@ class ParseFromAssertTest {
         String type = "nonsense";
         String line = "assertEquals(\"hello world\", output);";
 
-        Object output = VariableParser.parseFromAssert(type, line);
+        Variable output = VariableParser.parseFromAssert(type, line);
 
         newHandler.flush();
         assertTrue(outputStream.toString().contains("WARNING: java.lang.ClassNotFoundException: java.lang.nonsense"));
 
-        assertEquals("", output);
-        assertEquals("String", output.getClass().getSimpleName());
+        assertEquals("", output.getObject());
+        assertEquals("String", output.getType());
     }
 }

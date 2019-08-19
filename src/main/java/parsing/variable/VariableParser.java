@@ -18,13 +18,13 @@ public class VariableParser {
         return Variable.create(object);
     }
 
-    public static Object parseFromAssert(String writtenClassName, String line) {
+    public static Variable parseFromAssert(String writtenClassName, String line) {
         String value = extractValueStringFromAssert(line);
         String className = enrichClassName(writtenClassName);
 
         Object object = createObject(className, value);
 
-        return object;
+        return Variable.create(object);
     }
 
     private static String extractClassNameFromAssignment(String line) {
