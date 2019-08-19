@@ -15,7 +15,7 @@ import static org.mockito.Mockito.*;
 
 class ReadAllLinesTest {
     @Test
-    void should_CallReadAllLinesMethod() {
+    void should_CallReadAllLinesMethod() throws IOException {
         FilesWrapper filesWrapper = mock(FilesWrapper.class);
         FileManager fileManager = new FileManager(filesWrapper);
 
@@ -24,11 +24,7 @@ class ReadAllLinesTest {
         lines.add("one");
         lines.add("two");
 
-        try {
-            willReturn(lines).given(filesWrapper).readAllLines(path);
-        } catch (Exception e) {
-            fail("Failed in setup");
-        }
+        willReturn(lines).given(filesWrapper).readAllLines(path);
 
         List<String> output = fileManager.readAllLines(path);
 
@@ -36,18 +32,14 @@ class ReadAllLinesTest {
     }
 
     @Test
-    void should_PrintStackTraceAndReturnEmptyList_WhenExceptionThrown() {
+    void should_PrintStackTraceAndReturnEmptyList_WhenExceptionThrown() throws IOException {
         FilesWrapper filesWrapper = mock(FilesWrapper.class);
         FileManager fileManager = new FileManager(filesWrapper);
         Path path = Paths.get("./somePath");
 
         IOException exceptionMock = mock(IOException.class);
 
-        try {
-            when(filesWrapper.readAllLines(path)).thenThrow(exceptionMock);
-        } catch (Exception e) {
-            fail("Failed in setup");
-        }
+        when(filesWrapper.readAllLines(path)).thenThrow(exceptionMock);
 
         List<String> output = fileManager.readAllLines(path);
 
