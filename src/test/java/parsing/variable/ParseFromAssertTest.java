@@ -24,4 +24,14 @@ class ParseFromAssertTest {
         assertEquals("hello world", output);
         assertEquals("String", output.getClass().getSimpleName());
     }
+
+    @Test
+    void should_ReturnUnknownsAsEmptyString() {
+        String type = "nonsense";
+        String line = "assertEquals(\"hello world\", output);";
+        Object output = VariableParser.parseFromAssert(type, line);
+
+        assertEquals("", output);
+        assertEquals("String", output.getClass().getSimpleName());
+    }
 }
