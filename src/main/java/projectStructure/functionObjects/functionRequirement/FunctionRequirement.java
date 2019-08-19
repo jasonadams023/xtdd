@@ -15,8 +15,8 @@ public class FunctionRequirement {
         this.inputOutput = inputOutput;
     }
 
-    public static FunctionRequirement create(Signature signature, List<Variable> inputs, Object returnValue) {
-        InputOutput io = new InputOutput(inputs, Variable.create(returnValue));
+    public static FunctionRequirement create(Signature signature, List<Variable> inputs, Variable returnValue) {
+        InputOutput io = new InputOutput(inputs, returnValue);
 
         return new FunctionRequirement(signature, io);
     }

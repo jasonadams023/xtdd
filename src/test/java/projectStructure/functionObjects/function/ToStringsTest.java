@@ -28,7 +28,7 @@ class ToStringsTest {
     @Test
     void should_ReturnFunctionWithNullReturn_WhenReturnTypeIsSetAndReturnValueIsNot() {
         Signature signature = new Signature("Example", "String", new ArrayList<>());
-        FunctionRequirement functionRequirement = FunctionRequirement.create(signature, null, null);
+        FunctionRequirement functionRequirement = FunctionRequirement.create(signature, null, Variable.create(null));
         Function function = Function.createFromRequirement(functionRequirement);
 
         List<String> functionStrings = function.toStrings();
@@ -42,7 +42,7 @@ class ToStringsTest {
     @Test
     void should_ReturnFunctionWithProperReturnValue_WhenReturnTypeAndReturnValueIsSet() {
         Signature signature = new Signature("Example", "int", new ArrayList<>());
-        FunctionRequirement functionRequirement = FunctionRequirement.create(signature, null, 7);
+        FunctionRequirement functionRequirement = FunctionRequirement.create(signature, null, Variable.create(7));
         Function function = Function.createFromRequirement(functionRequirement);
 
         List<String> functionStrings = function.toStrings();

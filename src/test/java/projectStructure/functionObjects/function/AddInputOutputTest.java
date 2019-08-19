@@ -22,7 +22,7 @@ class AddInputOutputTest {
         Variable arg1 = Variable.create(1);
         inputs.add(arg1);
 
-        Object returnValue = "output";
+        Variable returnValue = Variable.create("output");
 
         FunctionRequirement requirement = FunctionRequirement.create(signature, inputs, returnValue);
         Function function = Function.createFromRequirement(requirement);

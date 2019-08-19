@@ -23,7 +23,7 @@ class EqualsTest {
         List<Variable> inputs = new ArrayList<>();
         inputs.add(Variable.create(1));
 
-        Object returnValue = 1;
+        Variable returnValue = Variable.create(1);
         functionRequirement1 = FunctionRequirement.create(signature, inputs, returnValue);
     }
 
@@ -50,7 +50,7 @@ class EqualsTest {
         List<Variable> inputs = new ArrayList<>();
         inputs.add(Variable.create(1));
 
-        Object returnValue = 1;
+        Variable returnValue = Variable.create(1);
         FunctionRequirement functionRequirement2 = FunctionRequirement.create(signature, inputs, returnValue);
 
         boolean output = functionRequirement1.equals(functionRequirement2);
@@ -67,7 +67,7 @@ class EqualsTest {
         List<Variable> inputs = new ArrayList<>();
         inputs.add(Variable.create(2));
 
-        Object returnValue = 1;
+        Variable returnValue = Variable.create(1);
         FunctionRequirement functionRequirement2 = FunctionRequirement.create(signature, inputs, returnValue);
 
         boolean output = functionRequirement1.equals(functionRequirement2);
@@ -84,7 +84,7 @@ class EqualsTest {
         List<Variable> inputs = new ArrayList<>();
         inputs.add(Variable.create(1));
 
-        Object returnValue = 2;
+        Variable returnValue = Variable.create(2);
         FunctionRequirement functionRequirement2 = FunctionRequirement.create(signature, inputs, returnValue);
 
         boolean output = functionRequirement1.equals(functionRequirement2);
@@ -101,7 +101,7 @@ class EqualsTest {
         List<Variable> inputs = new ArrayList<>();
         inputs.add(Variable.create(1));
 
-        Object returnValue = 1;
+        Variable returnValue = Variable.create(1);
         FunctionRequirement functionRequirement2 = FunctionRequirement.create(signature, inputs, returnValue);
 
         boolean output = functionRequirement1.equals(functionRequirement2);

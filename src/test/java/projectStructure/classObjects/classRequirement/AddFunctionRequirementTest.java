@@ -22,7 +22,7 @@ class AddFunctionRequirementTest {
         List<Variable> inputs = new ArrayList<>();
         inputs.add(Variable.create(1));
 
-        Object returnValue = 1;
+        Variable returnValue = Variable.create(1);
         FunctionRequirement functionRequirement = FunctionRequirement.create(signature, inputs, returnValue);
 
         classRequirement.addFunctionRequirement(functionRequirement);

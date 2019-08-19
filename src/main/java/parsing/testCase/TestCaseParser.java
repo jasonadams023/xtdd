@@ -42,7 +42,7 @@ public class TestCaseParser {
 
         Signature signature = new Signature(functionName, returnType, inputTypes);
 
-        return FunctionRequirement.create(signature, variables, returnValue);
+        return FunctionRequirement.create(signature, variables, Variable.create(returnValue));
     }
 
     private static String extractReturnTypeFromLine(String line) {
