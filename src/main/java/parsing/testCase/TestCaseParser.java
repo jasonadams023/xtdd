@@ -13,12 +13,12 @@ public class TestCaseParser {
     public static FunctionRequirement parse(List<String> lines, String className) {
         String functionName = "";
         String returnType = "void";
+        List<Variable> inputs = new ArrayList<>();
         Variable returnValue = Variable.create(null);
-        List<Variable> variables = new ArrayList<>();
 
         for(String line : lines) {
             if (!line.contains(className) && line.contains(" = ")) {
-                variables.add(VariableParser.parseFromAssignment(line));
+                inputs.add(VariableParser.parseFromAssignment(line));
             }
 
             if (line.contains(className + ".")) {
@@ -36,13 +36,13 @@ public class TestCaseParser {
         }
 
         List<String> inputTypes = new ArrayList<>();
-        for(Variable variable : variables) {
+        for(Variable variable : inputs) {
             inputTypes.add(variable.getType());
         }
 
         Signature signature = new Signature(functionName, returnType, inputTypes);
 
-        return FunctionRequirement.create(signature, variables, returnValue);
+        return FunctionRequirement.create(signature, inputs, returnValue);
     }
 
     private static String extractReturnTypeFromLine(String line) {
