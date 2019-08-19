@@ -67,7 +67,7 @@ public class VariableParser {
         try {
             object = dynamicallyCreateObject(className, valueString);
         } catch (ReflectiveOperationException e) {
-            System.out.println(e);
+            e.printStackTrace();
             object = "";
         }
 
