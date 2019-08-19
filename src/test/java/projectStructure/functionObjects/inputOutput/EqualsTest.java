@@ -18,7 +18,7 @@ class EqualsTest {
         List<Variable> inputs = new ArrayList<>();
         inputs.add(Variable.create(1));
         Object returnValue = 1;
-        inputOutput = new InputOutput(inputs, returnValue);
+        inputOutput = new InputOutput(inputs, Variable.create(returnValue));
     }
 
     @Test
@@ -41,7 +41,7 @@ class EqualsTest {
         inputs.add(Variable.create(1));
         inputs.add(Variable.create(1));
         Object returnValue = 1;
-        InputOutput differentInputOutput = new InputOutput(inputs, returnValue);
+        InputOutput differentInputOutput = new InputOutput(inputs, Variable.create(returnValue));
 
         boolean output = inputOutput.equals(differentInputOutput);
 
@@ -53,7 +53,7 @@ class EqualsTest {
         List<Variable> inputs = new ArrayList<>();
         inputs.add(Variable.create(1));
         Object returnValue = 2;
-        InputOutput differentInputOutput = new InputOutput(inputs, returnValue);
+        InputOutput differentInputOutput = new InputOutput(inputs, Variable.create(returnValue));
 
         boolean output = inputOutput.equals(differentInputOutput);
 
@@ -65,7 +65,7 @@ class EqualsTest {
         List<Variable> inputs = new ArrayList<>();
         inputs.add(Variable.create(1));
         Object returnValue = 1;
-        InputOutput matchingInputOutput = new InputOutput(inputs, returnValue);
+        InputOutput matchingInputOutput = new InputOutput(inputs, Variable.create(returnValue));
 
         boolean output = inputOutput.equals(matchingInputOutput);
 

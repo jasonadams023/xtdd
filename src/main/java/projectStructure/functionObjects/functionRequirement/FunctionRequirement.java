@@ -16,7 +16,7 @@ public class FunctionRequirement {
     }
 
     public static FunctionRequirement create(Signature signature, List<Variable> inputs, Object returnValue) {
-        InputOutput io = new InputOutput(inputs, returnValue);
+        InputOutput io = new InputOutput(inputs, Variable.create(returnValue));
 
         return new FunctionRequirement(signature, io);
     }

@@ -8,9 +8,9 @@ public class InputOutput {
     private List<Variable> inputs;
     private Variable returnValue;
 
-    public InputOutput (List<Variable> inputs, Object returnValue) {
+    public InputOutput (List<Variable> inputs, Variable returnValue) {
         this.inputs = inputs;
-        this.returnValue = Variable.create(returnValue);
+        this.returnValue = returnValue;
     }
 
     //TODO: replace these getters with equals() and toString()

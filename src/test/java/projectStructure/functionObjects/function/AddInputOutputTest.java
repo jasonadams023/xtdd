@@ -33,7 +33,7 @@ class AddInputOutputTest {
 
         Object newReturnValue = "new output";
 
-        InputOutput newInputOutput = new InputOutput(newInputs, newReturnValue);
+        InputOutput newInputOutput = new InputOutput(newInputs, Variable.create(newReturnValue));
 
         function.addInputOutput(newInputOutput);
 
