@@ -21,10 +21,6 @@ public class VariableParser {
 
         Object object = createObject(className, value);
 
-        if (object.getClass().getSimpleName().equals("String")) {
-            object = "\"" + object + "\"";
-        }
-
         return object;
     }
 

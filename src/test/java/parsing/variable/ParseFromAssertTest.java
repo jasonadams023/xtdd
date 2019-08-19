@@ -21,7 +21,7 @@ class ParseFromAssertTest {
         String line = "assertEquals(\"hello world\", output);";
         Object output = VariableParser.parseFromAssert(type, line);
 
-        assertEquals("\"hello world\"", output);
+        assertEquals("hello world", output);
         assertEquals("String", output.getClass().getSimpleName());
     }
 }

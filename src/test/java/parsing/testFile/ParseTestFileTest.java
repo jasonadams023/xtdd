@@ -105,7 +105,7 @@ class ParseTestFileTest {
         assertEquals(1, classRequirements.size());
         assertEquals("Example", classRequirements.get(0).name);
         assertEquals(expectedSignature, functionRequirements.get(0).signature);
-        assertEquals("\"a string\"", functionRequirements.get(0).inputOutput.getReturnValue());
+        assertEquals("a string", functionRequirements.get(0).inputOutput.getReturnValue().getObject());
     }
 
     @Test
@@ -130,7 +130,7 @@ class ParseTestFileTest {
         assertEquals("Example", classRequirements.get(0).name);
         assertEquals(1, functionRequirements.size());
         assertEquals(expectedSignature, functionRequirements.get(0).signature);
-        assertEquals(7, (int) functionRequirements.get(0).inputOutput.getReturnValue());
+        assertEquals(7, (int) functionRequirements.get(0).inputOutput.getReturnValue().getObject());
     }
 
     @Test

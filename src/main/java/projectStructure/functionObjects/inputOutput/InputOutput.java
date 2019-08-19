@@ -14,8 +14,8 @@ public class InputOutput {
     }
 
     //TODO: replace these getters with equals() and toString()
-    public Object getReturnValue() {
-        return returnValue.getObject();
+    public Variable getReturnValue() {
+        return returnValue;
     }
 
     public List<Variable> getInputs() {
