@@ -92,7 +92,7 @@ class ParseTest {
         List<String> lines = new ArrayList<>();
         lines.add("Integer num = 7;");
         lines.add("String line = \"a string\";");
-        lines.add("int output = InputClass.inputFunction(num, line);");
+        lines.add("Integer output = InputClass.inputFunction(num, line);");
         lines.add("assertEquals(7, output);");
 
         FunctionRequirement output = TestCaseParser.parse(lines, className);
