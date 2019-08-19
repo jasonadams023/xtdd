@@ -6,13 +6,12 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 class WriteFileTest {
     @Test
-    void should_CallWriteMethodWithArgs() {
+    void should_CallWriteMethodWithArgs() throws IOException {
         FilesWrapper filesWrapper = mock(FilesWrapper.class);
         FileManager fileManager = new FileManager(filesWrapper);
 
@@ -22,15 +21,11 @@ class WriteFileTest {
 
         fileManager.writeFile(path, text);
 
-        try {
-            verify(filesWrapper, times(1)).write(path, bytes);
-        } catch (Exception e) {
-            fail("Try verify failed");
-        }
+        verify(filesWrapper, times(1)).write(path, bytes);
     }
 
     @Test
-    void should_PrintStackTrace_WhenExceptionThrown() {
+    void should_PrintStackTrace_WhenExceptionThrown() throws IOException {
         FilesWrapper filesWrapper = mock(FilesWrapper.class);
         FileManager fileManager = new FileManager(filesWrapper);
 
@@ -39,11 +34,7 @@ class WriteFileTest {
 
         IOException exceptionMock = mock(IOException.class);
 
-        try {
-            when(filesWrapper.write(any(), any())).thenThrow(exceptionMock);
-        } catch (Exception e) {
-            fail("Failed in setup");
-        }
+        when(filesWrapper.write(any(), any())).thenThrow(exceptionMock);
 
         fileManager.writeFile(path, text);
 
