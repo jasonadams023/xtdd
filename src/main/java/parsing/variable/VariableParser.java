@@ -3,9 +3,12 @@ package parsing.variable;
 import projectStructure.variable.Variable;
 
 import java.lang.reflect.Constructor;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 public class VariableParser {
+    private static Logger LOGGER = Logger.getLogger(VariableParser.class.getName());
+
     public static Variable parseFromAssignment(String line) {
         String className = extractClassNameFromAssignment(line);
         String valueString = extractValueStringFromAssignment(line);
@@ -63,7 +66,7 @@ public class VariableParser {
         try {
             object = dynamicallyCreateObject(className, valueString);
         } catch (ReflectiveOperationException e) {
-            e.printStackTrace();
+            LOGGER.warning(e.toString());
             object = "";
         }
 
