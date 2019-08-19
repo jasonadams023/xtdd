@@ -75,7 +75,7 @@ public class VariableParser {
 
     private static Object dynamicallyCreateObject(String className, String value) throws ReflectiveOperationException {
         Class<?> dynamicClass = Class.forName(className);
-        Constructor<?> cons = dynamicClass.getConstructor(String.class);
-        return cons.newInstance(value);
+        Constructor<?> constructor = dynamicClass.getConstructor(String.class);
+        return constructor.newInstance(value);
     }
 }
