@@ -144,11 +144,6 @@ class ParseTestFileTest {
         lines.add("Integer output = Example.function();");
         lines.add("assertEquals(7, output);");
         lines.add("}");
-        lines.add("@Test");
-        lines.add("void should_ReturnInt() {");
-        lines.add("Integer output = Other.other();");
-        lines.add("assertEquals(8, output);");
-        lines.add("}");
         willReturn(lines).given(fileManager).readAllLines(path);
 
         Path path2 = mock(Path.class);
