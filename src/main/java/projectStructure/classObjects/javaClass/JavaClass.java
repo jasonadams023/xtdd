@@ -19,6 +19,10 @@ public class JavaClass {
         return name;
     }
 
+    public void addRequirement(FunctionRequirement requirement) {
+        addFunction(requirement);
+    }
+
     public boolean equals(Object o) {
         if (o instanceof JavaClass) {
             JavaClass compareTo = (JavaClass) o;
@@ -26,14 +30,6 @@ public class JavaClass {
         }
 
         return false;
-    }
-
-    public void addRequirement(FunctionRequirement requirement) {
-        if (requirement == null) {
-            return;
-        }
-
-        addFunction(requirement);
     }
 
     private void addFunction(FunctionRequirement requirement) {
