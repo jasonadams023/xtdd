@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Function {
     private Signature signature;
-    public List<InputOutput> inputOutputs;
+    List<InputOutput> inputOutputs;
 
     private Function(FunctionRequirement requirement) {
         this.inputOutputs = new ArrayList<>();

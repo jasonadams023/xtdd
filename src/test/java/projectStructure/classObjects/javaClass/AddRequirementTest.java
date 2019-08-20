@@ -45,6 +45,6 @@ class AddRequirementTest {
         javaClass.addRequirement(functionRequirement2);
 
         assertEquals(1, javaClass.functions.size());
-        assertEquals(2, javaClass.functions.get(0).inputOutputs.size());
+        assertEquals(expectedFunction.toStrings(), javaClass.functions.get(0).toStrings());
     }
 }
