@@ -20,9 +20,8 @@ class ToStringsTest {
 
         List<String> functionStrings = function.toStrings();
 
-        assertEquals("", functionStrings.get(0));
-        assertEquals("static void Example() {\n", functionStrings.get(1));
-        assertEquals("}\n", functionStrings.get(2));
+        assertEquals("static void Example() {\n", functionStrings.get(0));
+        assertEquals("}\n", functionStrings.get(1));
     }
 
     @Test
@@ -33,10 +32,9 @@ class ToStringsTest {
 
         List<String> functionStrings = function.toStrings();
 
-        assertEquals("", functionStrings.get(0));
-        assertEquals("static String Example() {\n", functionStrings.get(1));
-        assertEquals("\treturn null;\n", functionStrings.get(2));
-        assertEquals("}\n", functionStrings.get(3));
+        assertEquals("static String Example() {\n", functionStrings.get(0));
+        assertEquals("\treturn null;\n", functionStrings.get(1));
+        assertEquals("}\n", functionStrings.get(2));
     }
 
     @Test
@@ -47,10 +45,9 @@ class ToStringsTest {
 
         List<String> functionStrings = function.toStrings();
 
-        assertEquals("", functionStrings.get(0));
-        assertEquals("static int Example() {\n", functionStrings.get(1));
-        assertEquals("\treturn 7;\n", functionStrings.get(2));
-        assertEquals("}\n", functionStrings.get(3));
+        assertEquals("static int Example() {\n", functionStrings.get(0));
+        assertEquals("\treturn 7;\n", functionStrings.get(1));
+        assertEquals("}\n", functionStrings.get(2));
     }
 
     @Test
@@ -69,9 +66,8 @@ class ToStringsTest {
 
         List<String> functionStrings = function.toStrings();
 
-        assertEquals("", functionStrings.get(0));
-        assertEquals("static void Example(int arg1, String arg2) {\n", functionStrings.get(1));
-        assertEquals("}\n", functionStrings.get(2));
+        assertEquals("static void Example(int arg1, String arg2) {\n", functionStrings.get(0));
+        assertEquals("}\n", functionStrings.get(1));
     }
 
     @Test
@@ -97,13 +93,12 @@ class ToStringsTest {
 
         List<String> functionStrings = function.toStrings();
 
-        assertEquals("", functionStrings.get(0));
-        assertEquals("static Integer Example(int arg1) {\n", functionStrings.get(1));
-        assertEquals("\tif (arg1 == 1) {\n", functionStrings.get(2));
-        assertEquals("\t\treturn 1;\n", functionStrings.get(3));
-        assertEquals("\t} else if (arg1 == 2) {\n", functionStrings.get(4));
-        assertEquals("\t\treturn 2;\n", functionStrings.get(5));
-        assertEquals("\t}\n", functionStrings.get(6));
-        assertEquals("}\n", functionStrings.get(7));
+        assertEquals("static Integer Example(int arg1) {\n", functionStrings.get(0));
+        assertEquals("\tif (arg1 == 1) {\n", functionStrings.get(1));
+        assertEquals("\t\treturn 1;\n", functionStrings.get(2));
+        assertEquals("\t} else if (arg1 == 2) {\n", functionStrings.get(3));
+        assertEquals("\t\treturn 2;\n", functionStrings.get(4));
+        assertEquals("\t}\n", functionStrings.get(5));
+        assertEquals("}\n", functionStrings.get(6));
     }
 }

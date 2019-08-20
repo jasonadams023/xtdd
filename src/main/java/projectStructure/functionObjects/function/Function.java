@@ -35,7 +35,6 @@ public class Function {
 
     public List<String> toStrings() {
         List<String> output = new ArrayList<>();
-        output.add("");
 
         output.add(getHeader());
         output.addAll(getBody());
