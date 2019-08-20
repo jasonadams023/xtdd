@@ -18,9 +18,9 @@ class IfElseTest {
 
     @Test
     void should_Take3_AndReturnBye() {
-        Integer first = 3;
+        Integer input = 3;
 
-        String output = IfElse.add(first);
+        String output = IfElse.doThing(input);
 
         assertEquals("bye", output);
     }

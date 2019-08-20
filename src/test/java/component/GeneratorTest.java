@@ -146,8 +146,8 @@ class GeneratorTest {
         String data = readGeneratedClass(className);
 
         assertTrue(data.contains("class " + className + " {"));
-        assertTrue(data.contains("static String add(int arg1) {"));
-        assertTrue(data.contains("if (arg1 =="));
+        assertTrue(data.contains("static String doThing(Integer arg1) {"));
+        assertTrue(data.contains("if (arg1 == 7) {"));
         assertTrue(data.contains("return \"hello\";"));
         assertTrue(data.contains("else {"));
         assertTrue(data.contains("return \"bye\";"));

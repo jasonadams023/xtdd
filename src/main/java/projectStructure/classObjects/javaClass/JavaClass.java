@@ -35,6 +35,7 @@ public class JavaClass {
     private void addFunction(FunctionRequirement requirement) {
         for (Function function : functions) {
             if(function.matchesRequirement(requirement)) {
+                function.addInputOutput(requirement.inputOutput);
                 return;
             }
         }
