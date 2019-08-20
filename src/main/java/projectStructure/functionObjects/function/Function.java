@@ -41,23 +41,23 @@ public class Function {
     }
 
     private List<String> getBody() {
-        List<String> strings = new ArrayList<>();
+        List<String> body = new ArrayList<>();
 
         if(signature.hasReturn()) {
             if (inputOutputs.size() == 1) {
-                strings.add(returnStatement(0));
+                body.add(returnStatement(0));
             } else {
-                strings.addAll(ifElse());
+                body.addAll(ifElse());
             }
-
-            strings = indentLines(strings);
         }
 
-        return strings;
+        body = indentLines(body);
+
+        return body;
     }
 
     private List<String> ifElse() {
-        List<String> strings = new ArrayList<>();
+        List<String> ifElse = new ArrayList<>();
 
         for (int i = 0; i < inputOutputs.size(); i++) {
             String openingString;
@@ -69,13 +69,13 @@ public class Function {
 
             openingString += ifStatement(i);
 
-            strings.add(openingString);
-            strings.add("\t" + returnStatement(i));
+            ifElse.add(openingString);
+            ifElse.add("\t" + returnStatement(i));
         }
         String closingString = "}\n";
-        strings.add(closingString);
+        ifElse.add(closingString);
 
-        return strings;
+        return ifElse;
     }
 
     private List<String> indentLines(List<String> inputStrings) {
