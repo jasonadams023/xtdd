@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class AddClassRequirementTest {
+class AddRequirementTest {
     @Test
     void should_AddFunction_BasedOnRequirement() {
         Signature signature = new Signature("function", "void", null);
