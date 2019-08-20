@@ -30,7 +30,7 @@ public class Function {
         output.add("");
 
         output.add(getHeader());
-        output.add(getBody());
+        output.addAll(getBody());
         output.add(getFooter());
 
         return output;
@@ -40,12 +40,39 @@ public class Function {
         return signature.toString() + " {\n";
     }
 
-    private String getBody() {
+    private List<String> getBody() {
+        List<String> strings = new ArrayList<>();
+
         if(signature.hasReturn()) {
-            return "\treturn " + inputOutputs.get(0).getReturnValue() + ";\n";
+
+            if (inputOutputs.size() == 1) {
+                strings.add("\treturn " + inputOutputs.get(0).getReturnValue() + ";\n");
+            } else {
+                for (int i = 0; i < inputOutputs.size(); i++) {
+                    String openingString;
+                    if (i != 0) {
+                        openingString = "\t} else ";
+                    } else {
+                        openingString = "\t";
+                    }
+
+                    openingString += ifStatement(i);
+
+                    strings.add(openingString);
+                    strings.add("\t\treturn " + inputOutputs.get(i).getReturnValue() + ";\n");
+                }
+                String closingString = "\t}\n";
+                strings.add(closingString);
+            }
+        } else {
+            strings.add("");
         }
 
-        return "";
+        return strings;
+    }
+
+    private String ifStatement(int i) {
+        return "if (arg1 == " + inputOutputs.get(i).getInputs().get(0).toString() + ") {\n";
     }
 
     private String getFooter() {

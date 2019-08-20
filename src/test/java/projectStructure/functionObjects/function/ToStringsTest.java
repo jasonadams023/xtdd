@@ -1,5 +1,6 @@
 package projectStructure.functionObjects.function;
 
+import projectStructure.functionObjects.inputOutput.InputOutput;
 import projectStructure.variable.Variable;
 import projectStructure.functionObjects.signature.Signature;
 import projectStructure.functionObjects.functionRequirement.FunctionRequirement;
@@ -73,5 +74,38 @@ class ToStringsTest {
         assertEquals("static void Example(int arg1, String arg2) {\n", functionStrings.get(1));
         assertEquals("", functionStrings.get(2));
         assertEquals("}\n", functionStrings.get(3));
+    }
+
+    @Test
+    void should_ReturnIfElse_ForMultipleReturns() {
+        List<String> inputTypes = new ArrayList<>();
+        inputTypes.add(("int"));
+
+        Signature signature = new Signature("Example", "Integer", inputTypes);
+
+        List<Variable> inputs = new ArrayList<>();
+        inputs.add(Variable.create(1));
+        Variable returnValue = Variable.create(1);
+        FunctionRequirement functionRequirement = FunctionRequirement.create(signature, inputs, returnValue);
+
+        Function function = Function.createFromRequirement(functionRequirement);
+
+        List<Variable> inputs2 = new ArrayList<>();
+        inputs2.add(Variable.create(2));
+        Variable returnValue2 = Variable.create(2);
+        InputOutput inputOutput = new InputOutput(inputs2, returnValue2);
+
+        function.addInputOutput(inputOutput);
+
+        List<String> functionStrings = function.toStrings();
+
+        assertEquals("", functionStrings.get(0));
+        assertEquals("static Integer Example(int arg1) {\n", functionStrings.get(1));
+        assertEquals("\tif (arg1 == 1) {\n", functionStrings.get(2));
+        assertEquals("\t\treturn 1;\n", functionStrings.get(3));
+        assertEquals("\t} else if (arg1 == 2) {\n", functionStrings.get(4));
+        assertEquals("\t\treturn 2;\n", functionStrings.get(5));
+        assertEquals("\t}\n", functionStrings.get(6));
+        assertEquals("}\n", functionStrings.get(7));
     }
 }
