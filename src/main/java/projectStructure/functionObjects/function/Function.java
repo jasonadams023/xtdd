@@ -51,9 +51,9 @@ public class Function {
                 for (int i = 0; i < inputOutputs.size(); i++) {
                     String openingString;
                     if (i != 0) {
-                        openingString = "\t} else ";
+                        openingString = "} else ";
                     } else {
-                        openingString = "\t";
+                        openingString = "";
                     }
 
                     openingString += ifStatement(i);
@@ -61,9 +61,11 @@ public class Function {
                     strings.add(openingString);
                     strings.add("\t" + returnStatement(i));
                 }
-                String closingString = "\t}\n";
+                String closingString = "}\n";
                 strings.add(closingString);
             }
+
+            strings = indentLines(strings);
         } else {
             strings.add("");
         }
@@ -71,8 +73,18 @@ public class Function {
         return strings;
     }
 
+    private List<String> indentLines(List<String> inputStrings) {
+        List<String> outputStrings = new ArrayList<>();
+
+        for (String string : inputStrings) {
+            outputStrings.add("\t" + string);
+        }
+
+        return outputStrings;
+    }
+
     private String returnStatement(int i) {
-        return "\treturn " + inputOutputs.get(i).getReturnValue() + ";\n";
+        return "return " + inputOutputs.get(i).getReturnValue() + ";\n";
     }
 
     private String ifStatement(int i) {
