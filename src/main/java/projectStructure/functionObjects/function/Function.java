@@ -46,7 +46,7 @@ public class Function {
         if(signature.hasReturn()) {
 
             if (inputOutputs.size() == 1) {
-                strings.add("\treturn " + inputOutputs.get(0).getReturnValue() + ";\n");
+                strings.add(returnStatement(0));
             } else {
                 for (int i = 0; i < inputOutputs.size(); i++) {
                     String openingString;
@@ -59,7 +59,7 @@ public class Function {
                     openingString += ifStatement(i);
 
                     strings.add(openingString);
-                    strings.add("\t\treturn " + inputOutputs.get(i).getReturnValue() + ";\n");
+                    strings.add("\t" + returnStatement(i));
                 }
                 String closingString = "\t}\n";
                 strings.add(closingString);
@@ -69,6 +69,10 @@ public class Function {
         }
 
         return strings;
+    }
+
+    private String returnStatement(int i) {
+        return "\treturn " + inputOutputs.get(i).getReturnValue() + ";\n";
     }
 
     private String ifStatement(int i) {
