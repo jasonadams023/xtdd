@@ -48,27 +48,35 @@ public class Function {
             if (inputOutputs.size() == 1) {
                 strings.add(returnStatement(0));
             } else {
-                for (int i = 0; i < inputOutputs.size(); i++) {
-                    String openingString;
-                    if (i != 0) {
-                        openingString = "} else ";
-                    } else {
-                        openingString = "";
-                    }
-
-                    openingString += ifStatement(i);
-
-                    strings.add(openingString);
-                    strings.add("\t" + returnStatement(i));
-                }
-                String closingString = "}\n";
-                strings.add(closingString);
+                strings.addAll(ifElse());
             }
 
             strings = indentLines(strings);
         } else {
             strings.add("");
         }
+
+        return strings;
+    }
+
+    private List<String> ifElse() {
+        List<String> strings = new ArrayList<>();
+
+        for (int i = 0; i < inputOutputs.size(); i++) {
+            String openingString;
+            if (i != 0) {
+                openingString = "} else ";
+            } else {
+                openingString = "";
+            }
+
+            openingString += ifStatement(i);
+
+            strings.add(openingString);
+            strings.add("\t" + returnStatement(i));
+        }
+        String closingString = "}\n";
+        strings.add(closingString);
 
         return strings;
     }
