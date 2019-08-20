@@ -68,16 +68,7 @@ public class Function {
         List<String> ifElse = new ArrayList<>();
 
         for (int i = 0; i < inputOutputs.size(); i++) {
-            String openingString;
-            if (i != 0) {
-                openingString = "} else ";
-            } else {
-                openingString = "";
-            }
-
-            openingString += ifStatement(i);
-
-            ifElse.add(openingString);
+            ifElse.add(openingLine(i));
             ifElse.add("\t" + returnStatement(i));
         }
 
@@ -85,6 +76,17 @@ public class Function {
         ifElse.add(closingString);
 
         return ifElse;
+    }
+
+    private String openingLine(int i) {
+        String openingLine = "";
+
+        if (i != 0) {
+            openingLine = "} else ";
+        }
+
+        openingLine += ifStatement(i);
+        return openingLine;
     }
 
     private List<String> indentLines(List<String> inputStrings) {
