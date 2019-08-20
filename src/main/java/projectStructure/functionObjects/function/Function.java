@@ -25,6 +25,14 @@ public class Function {
         return new Function(requirement);
     }
 
+    public void addInputOutput(InputOutput inputOutput) {
+        inputOutputs.add(inputOutput);
+    }
+
+    public boolean matchesRequirement(FunctionRequirement requirement) {
+        return (requirement.signature.equals(signature));
+    }
+
     public List<String> toStrings() {
         List<String> output = new ArrayList<>();
         output.add("");
@@ -72,6 +80,7 @@ public class Function {
             ifElse.add(openingString);
             ifElse.add("\t" + returnStatement(i));
         }
+
         String closingString = "}\n";
         ifElse.add(closingString);
 
@@ -98,13 +107,5 @@ public class Function {
 
     private String getFooter() {
         return "}\n";
-    }
-
-    public boolean matchesRequirement(FunctionRequirement requirement) {
-        return (requirement.signature.equals(signature));
-    }
-
-    public void addInputOutput(InputOutput inputOutput) {
-        inputOutputs.add(inputOutput);
     }
 }
