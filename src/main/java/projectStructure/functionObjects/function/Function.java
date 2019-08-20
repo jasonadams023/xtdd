@@ -44,7 +44,6 @@ public class Function {
         List<String> strings = new ArrayList<>();
 
         if(signature.hasReturn()) {
-
             if (inputOutputs.size() == 1) {
                 strings.add(returnStatement(0));
             } else {
@@ -52,8 +51,6 @@ public class Function {
             }
 
             strings = indentLines(strings);
-        } else {
-            strings.add("");
         }
 
         return strings;

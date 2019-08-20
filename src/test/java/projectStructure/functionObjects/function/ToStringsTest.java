@@ -22,8 +22,7 @@ class ToStringsTest {
 
         assertEquals("", functionStrings.get(0));
         assertEquals("static void Example() {\n", functionStrings.get(1));
-        assertEquals("", functionStrings.get(2));
-        assertEquals("}\n", functionStrings.get(3));
+        assertEquals("}\n", functionStrings.get(2));
     }
 
     @Test
@@ -72,8 +71,7 @@ class ToStringsTest {
 
         assertEquals("", functionStrings.get(0));
         assertEquals("static void Example(int arg1, String arg2) {\n", functionStrings.get(1));
-        assertEquals("", functionStrings.get(2));
-        assertEquals("}\n", functionStrings.get(3));
+        assertEquals("}\n", functionStrings.get(2));
     }
 
     @Test
