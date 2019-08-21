@@ -15,14 +15,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class GeneratorTest {
-    private File exampleDirectory = new File("./example");
-    private File exampleSourceDirectory = new File(exampleDirectory.getPath() + "/src");
+    private File exampleDirectory = new File("./example/src");
+    private File exampleMainDirectory = new File(exampleDirectory.getPath() + "/main");
     private Generator generator;
 
     @BeforeAll
     void validateDirectory() throws IOException {
-        if (!exampleSourceDirectory.exists()) {
-            Files.createDirectory(exampleSourceDirectory.toPath());
+        if (!exampleMainDirectory.exists()) {
+            Files.createDirectory(exampleMainDirectory.toPath());
         }
     }
 
@@ -36,7 +36,7 @@ class GeneratorTest {
     @BeforeEach
     @AfterAll
     void cleanup() {
-        for(File file: exampleSourceDirectory.listFiles()) {
+        for(File file: exampleMainDirectory.listFiles()) {
             if (!file.isDirectory()) {
                 file.delete();
             }
@@ -156,7 +156,7 @@ class GeneratorTest {
         String data = "";
 
         try {
-            data = new String(Files.readAllBytes(Paths.get(exampleSourceDirectory.getPath() + "/" + className + ".java")));
+            data = new String(Files.readAllBytes(Paths.get(exampleMainDirectory.getPath() + "/" + className + ".java")));
         } catch (IOException e) {
             e.printStackTrace();
         }

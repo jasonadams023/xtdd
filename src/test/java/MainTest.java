@@ -7,13 +7,13 @@ import java.io.File;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class MainTest {
-    private File exampleDirectory = new File("./example");
-    private File exampleSourceDirectory = new File(exampleDirectory.getPath() + "/src");
+    private File exampleDirectory = new File("./example/src");
+    private File exampleMainDirectory = new File(exampleDirectory.getPath() + "/main");
 
     @BeforeEach
     @AfterAll
     void cleanup() {
-        for(File file: exampleSourceDirectory.listFiles()) {
+        for(File file: exampleMainDirectory.listFiles()) {
             if (!file.isDirectory()) {
                 file.delete();
             }
@@ -27,6 +27,6 @@ class MainTest {
 
         Main.main(args);
 
-        assert(exampleSourceDirectory.listFiles().length > 0);
+        assert(exampleMainDirectory.listFiles().length > 0);
     }
 }
