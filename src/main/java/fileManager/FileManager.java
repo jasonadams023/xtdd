@@ -32,11 +32,19 @@ public class FileManager {
     }
 
     public File getTestDirectory(File directory) {
-        File[] directoryFiles = directory.listFiles();
-        if (directoryFiles != null) {
-            for (File file : directoryFiles) {
-                if (file.getName().equals("test") && file.isDirectory()) {
-                    return file;
+        if (directory.isDirectory()) {
+            if (directory.getName().equals("test")) {
+                return directory;
+            } else {
+                File[] files = directory.listFiles();
+
+                if (files != null) {
+                    for (File file : files) {
+                        File nextFile = getTestDirectory(file);
+                        if (nextFile != null && nextFile.isDirectory() && nextFile.getName().equals("test")) {
+                            return nextFile;
+                        }
+                    }
                 }
             }
         }

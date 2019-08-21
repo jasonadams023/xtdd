@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class GeneratorTest {
-    private File exampleDirectory = new File("./example/src");
+    private File exampleDirectory = new File("./example");
     private File exampleMainDirectory = new File(exampleDirectory.getPath() + "/main");
     private Generator generator;
 
