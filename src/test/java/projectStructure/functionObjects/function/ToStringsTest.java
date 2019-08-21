@@ -98,7 +98,9 @@ class ToStringsTest {
         assertEquals("\t\treturn 1;\n", functionStrings.get(2));
         assertEquals("\t} else if (arg1 == 2) {\n", functionStrings.get(3));
         assertEquals("\t\treturn 2;\n", functionStrings.get(4));
-        assertEquals("\t}\n", functionStrings.get(5));
-        assertEquals("}\n", functionStrings.get(6));
+        assertEquals("\t} else {\n", functionStrings.get(5));
+        assertEquals("\t\treturn 1;\n", functionStrings.get(6));
+        assertEquals("\t}\n", functionStrings.get(7));
+        assertEquals("}\n", functionStrings.get(8));
     }
 }

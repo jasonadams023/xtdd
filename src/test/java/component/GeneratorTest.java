@@ -137,7 +137,6 @@ class GeneratorTest {
         assertTrue(data.contains("static void setArgs(Integer arg1, String arg2) {"));
     }
 
-    @Disabled
     @Test
     void should_GenerateFunctions_WithIfElseStatements() {
         String className = "IfElse";

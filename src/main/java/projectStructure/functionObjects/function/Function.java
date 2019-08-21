@@ -71,8 +71,7 @@ public class Function {
             ifElse.add("\t" + returnStatement(i));
         }
 
-        String closingString = "}\n";
-        ifElse.add(closingString);
+        ifElse.addAll(finalElse());
 
         return ifElse;
     }
@@ -104,6 +103,16 @@ public class Function {
 
     private String ifStatement(int i) {
         return "if (arg1 == " + inputOutputs.get(i).getInputs().get(0).toString() + ") {\n";
+    }
+
+    private List<String> finalElse() {
+        List<String> finalElse = new ArrayList<>();
+
+        finalElse.add("} else {\n");
+        finalElse.add("\t" + returnStatement(0));
+        finalElse.add("}\n");
+
+        return finalElse;
     }
 
     private String getFooter() {
