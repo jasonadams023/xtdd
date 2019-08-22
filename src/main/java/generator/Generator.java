@@ -10,6 +10,7 @@ import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Generator {
@@ -31,8 +32,9 @@ public class Generator {
 
     private void getRequirementsFromTestFiles(File projectDirectory) {
         TestFileParser testFileParser = new TestFileParser(fileManager);
+        File testDirectory = fileManager.getTestDirectory(projectDirectory);
 
-        for (File testFile : getTestFiles(projectDirectory)) {
+        for (File testFile : getTestFiles(testDirectory)) {
             classRequirements.addAll(testFileParser.parseTestFile(testFile.toPath()));
         }
     }
@@ -60,9 +62,21 @@ public class Generator {
         }
     }
 
-    private File[] getTestFiles(File projectDirectory) {
-        File testDirectory = fileManager.getTestDirectory(projectDirectory);
-        return testDirectory.listFiles();
+    private List<File> getTestFiles(File directory) {
+        List<File> testFiles = new ArrayList<>();
+        List<File> files = new ArrayList<>();
+
+        files.addAll(Arrays.asList(directory.listFiles()));
+
+        for (File file : files) {
+            if (file.isDirectory()) {
+                testFiles.addAll(getTestFiles(file));
+            } else if (file.getName().contains("Test.java")) {
+                testFiles.add(file);
+            }
+        }
+
+        return testFiles;
     }
 
     private void writeFiles(File projectDirectory) {

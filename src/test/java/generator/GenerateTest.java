@@ -30,10 +30,15 @@ class GenerateTest {
         willReturn(testDirectory).given(fileManager).getTestDirectory(directory);
 
         File[] testFiles = new File[2];
+
         File testFile = mock(File.class);
         testFiles[0] = testFile;
+        willReturn("FileOneTest.java").given(testFile).getName();
+
         File testFile2 = mock(File.class);
         testFiles[1] = testFile2;
+        willReturn("FileTwoTest.java").given(testFile2).getName();
+
         willReturn(testFiles).given(testDirectory).listFiles();
 
         testPath = mock(Path.class);

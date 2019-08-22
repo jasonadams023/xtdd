@@ -7,8 +7,8 @@ import java.io.File;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class MainTest {
-    private File exampleDirectory = new File("./example/src");
-    private File exampleMainDirectory = new File(exampleDirectory.getPath() + "/main");
+    private File exampleDirectory = new File("./example");
+    private File exampleMainDirectory = new File(exampleDirectory.getPath() + "/src/main");
 
     @BeforeEach
     @AfterAll
