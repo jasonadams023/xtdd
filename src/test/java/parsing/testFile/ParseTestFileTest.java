@@ -139,8 +139,7 @@ class ParseTestFileTest {
 
         Path path2 = mock(Path.class);
         List<String> lines2 = new ArrayList<>();
-        lines.add("class OtherTest {");
-
+        lines2.add("class OtherTest {");
         lines2.add("@Test");
         lines2.add("void should_ReturnInt() {");
         lines2.add("Integer output = Other.other();");
