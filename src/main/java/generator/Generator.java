@@ -64,9 +64,7 @@ public class Generator {
 
     private List<File> getTestFiles(File directory) {
         List<File> testFiles = new ArrayList<>();
-        List<File> files = new ArrayList<>();
-
-        files.addAll(Arrays.asList(directory.listFiles()));
+        List<File> files = Arrays.asList(directory.listFiles());
 
         for (File file : files) {
             if (file.isDirectory()) {
