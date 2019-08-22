@@ -67,7 +67,7 @@ public class Generator {
 
     private void writeFiles(File projectDirectory) {
         for (JavaClass javaClass : javaClasses) {
-            Path path = Paths.get(projectDirectory.getPath() + "/main/" + javaClass.getName() + ".java");
+            Path path = Paths.get(projectDirectory.getPath() + "/src/main/" + javaClass.getName() + ".java");
             fileManager.writeFile(path, javaClass.toString());
         }
     }
