@@ -1,6 +1,5 @@
 package generator;
 
-import parsing.testFile.TestFileParser;
 import fileManager.FileManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -48,16 +47,12 @@ class GenerateTest {
         willReturn(testPath2).given(testFile2).toPath();
 
         List<String> readLines = new ArrayList<>();
-        readLines.add(TestFileParser.startFlag);
-        readLines.add("import example.Example;");
-        readLines.add(TestFileParser.endFlag);
+        readLines.add("class ExampleTest {");
         readLines.add("Example.function();");
         willReturn(readLines).given(fileManager).readAllLines(testPath);
 
         List<String> readLines2 = new ArrayList<>();
-        readLines2.add(TestFileParser.startFlag);
-        readLines2.add("import example.Different;");
-        readLines2.add(TestFileParser.endFlag);
+        readLines2.add("class DifferentTest {");
         readLines2.add("String output = Different.otherFunction();");
         willReturn(readLines2).given(fileManager).readAllLines(testPath2);
 

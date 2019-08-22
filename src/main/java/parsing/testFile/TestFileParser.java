@@ -15,9 +15,6 @@ public class TestFileParser {
     private List<String> classNames;
     private List<ClassRequirement> classRequirements;
 
-    public static final String startFlag = "//beginning of classes to generate";
-    public static final String endFlag = "//end of classes to generate";
-
     public TestFileParser(FileManager fileManager) {
         this.fileManager = fileManager;
         this.classNames = new ArrayList<>();
@@ -37,19 +34,10 @@ public class TestFileParser {
     }
 
     private void getClassNames(List<String> lines) {
-        boolean flag = false;
         for (String line : lines) {
-            if(line.equals(startFlag)) {
-                flag = true;
-                continue;
-            }
-
-            if (line.equals(endFlag)) {
-                break;
-            }
-
-            if(flag) {
-                String className = getClassNameFromImport(line);
+            if (line.contains("class")) {
+                String[] words = line.split(" ");
+                String className = words[1].substring(0, words[1].length() - 4);
                 classNames.add(className);
             }
         }
@@ -59,14 +47,6 @@ public class TestFileParser {
         for(String className : classNames) {
             classRequirements.add(ClassRequirement.create(className));
         }
-    }
-
-    private String getClassNameFromImport(String line) {
-        String[] split = line.split(Pattern.quote("."));
-        String last = split[split.length - 1];
-        String className = last.split(Pattern.quote(";"))[0];
-
-        return className;
     }
 
     private void setFunctionRequirements(List<String> lines) {

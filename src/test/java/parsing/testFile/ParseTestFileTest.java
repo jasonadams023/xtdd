@@ -50,9 +50,8 @@ class ParseTestFileTest {
     @Test
     void should_ReturnRequirement_ForEmptyClass() {
         List<String> lines = new ArrayList<>();
-        lines.add(TestFileParser.startFlag);
-        lines.add("import example.Example;");
-        lines.add(TestFileParser.endFlag);
+        lines.add("class ExampleTest {");
+
         willReturn(lines).given(fileManager).readAllLines(path);
 
         List<ClassRequirement> output = parser.parseTestFile(path);
@@ -65,9 +64,7 @@ class ParseTestFileTest {
     @Test
     void should_ReturnRequirements_ForFunctions() {
         List<String> lines = new ArrayList<>();
-        lines.add(TestFileParser.startFlag);
-        lines.add("import example.Example;");
-        lines.add(TestFileParser.endFlag);
+        lines.add("class ExampleTest {");
         lines.add("@Test");
         lines.add("void should_Return() {");
         lines.add("String output = Example.function();");
@@ -87,9 +84,7 @@ class ParseTestFileTest {
     @Test
     void should_ReturnRequirements_ForFunctions_WithReturnValues() {
         List<String> lines = new ArrayList<>();
-        lines.add(TestFileParser.startFlag);
-        lines.add("import example.Example;");
-        lines.add(TestFileParser.endFlag);
+        lines.add("class ExampleTest {");
         lines.add("@Test");
         lines.add("void should_ReturnString() {");
         lines.add("String output = Example.function();");
@@ -111,9 +106,7 @@ class ParseTestFileTest {
     @Test
     void should_ReturnRequirements_ForFunctions_WithDifferentReturnValues() {
         List<String> lines = new ArrayList<>();
-        lines.add(TestFileParser.startFlag);
-        lines.add("import example.Example;");
-        lines.add(TestFileParser.endFlag);
+        lines.add("class ExampleTest {");
         lines.add("@Test");
         lines.add("void should_ReturnInt() {");
         lines.add("Integer output = Example.function();");
@@ -136,9 +129,7 @@ class ParseTestFileTest {
     @Test
     void should_BeIdempotent() {
         List<String> lines = new ArrayList<>();
-        lines.add(TestFileParser.startFlag);
-        lines.add("import example.Example;");
-        lines.add(TestFileParser.endFlag);
+        lines.add("class ExampleTest {");
         lines.add("@Test");
         lines.add("void should_ReturnInt() {");
         lines.add("Integer output = Example.function();");
@@ -148,9 +139,8 @@ class ParseTestFileTest {
 
         Path path2 = mock(Path.class);
         List<String> lines2 = new ArrayList<>();
-        lines2.add(TestFileParser.startFlag);
-        lines2.add("import example.Other;");
-        lines2.add(TestFileParser.endFlag);
+        lines.add("class OtherTest {");
+
         lines2.add("@Test");
         lines2.add("void should_ReturnInt() {");
         lines2.add("Integer output = Other.other();");
