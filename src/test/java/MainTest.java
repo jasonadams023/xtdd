@@ -1,4 +1,3 @@
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -11,7 +10,6 @@ class MainTest {
     private File exampleMainDirectory = new File(exampleDirectory.getPath() + "/src/main");
 
     @BeforeEach
-    @AfterAll
     void cleanup() {
         for(File file: exampleMainDirectory.listFiles()) {
             if (!file.isDirectory()) {

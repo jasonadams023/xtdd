@@ -28,13 +28,12 @@ class GeneratorTest {
 
     @BeforeEach
     void setup() {
+        cleanup();
         FilesWrapper filesWrapper = new FilesWrapper();
         FileManager fileManager = new FileManager(filesWrapper);
         generator = new Generator(fileManager);
     }
 
-    @BeforeEach
-    @AfterAll
     void cleanup() {
         for(File file: exampleMainDirectory.listFiles()) {
             if (!file.isDirectory()) {
