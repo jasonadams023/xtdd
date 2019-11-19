@@ -4,6 +4,7 @@ import fileManager.FileManager;
 import fileManager.FilesWrapper;
 import generator.Generator;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.function.Executable;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,8 +15,8 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.StringContains.containsString;
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class GeneratorTest {
@@ -52,8 +53,10 @@ class GeneratorTest {
         String data1 = readGeneratedClass("First");
         String data2 = readGeneratedClass("Second");
 
-        assertTrue(data1.contains("class First {"));
-        assertTrue(data2.contains("class Second {"));
+        assertAll(
+            () -> assertThat(data1, containsString("class First {")),
+            () -> assertThat(data2, containsString("class Second {"))
+        );
     }
 
     @Test
@@ -76,8 +79,10 @@ class GeneratorTest {
         generator.generate(exampleDirectory);
         String data = readGeneratedClass(className);
 
-        assertTrue(data.contains("static void example() {"));
-        assertTrue(data.contains("static void different() {"));
+        assertAll(
+            () -> assertThat(data, containsString("static void example() {")),
+            () -> assertThat(data, containsString("static void different() {"))
+        );
     }
 
     @Test
@@ -87,9 +92,11 @@ class GeneratorTest {
         generator.generate(exampleDirectory);
         String data = readGeneratedClass(className);
 
-        assertTrue(data.contains("static String getNullString() {"));
-        assertTrue(data.contains("return null"));
-        assertTrue(data.contains("static Integer getNullInt() {"));
+        assertAll(
+            () -> assertThat(data, containsString("static String getNullString() {")),
+            () -> assertThat(data, containsString("return null")),
+            () -> assertThat(data, containsString("static Integer getNullInt() {"))
+        );
     }
 
     @Test
@@ -99,9 +106,11 @@ class GeneratorTest {
         generator.generate(exampleDirectory);
         String data = readGeneratedClass(className);
 
-        assertTrue(data.contains("class " + className + " {"));
-        assertTrue(data.contains("static Integer getInt() {"));
-        assertTrue(data.contains("return 7"));
+        assertAll(
+            () -> assertThat(data, containsString("class " + className + " {")),
+            () -> assertThat(data, containsString("static Integer getInt() {")),
+            () -> assertThat(data, containsString("return 7"))
+        );
     }
 
     @Test
@@ -111,8 +120,10 @@ class GeneratorTest {
         generator.generate(exampleDirectory);
         String data = readGeneratedClass(className);
 
-        assertTrue(data.contains("static String getString() {"));
-        assertTrue(data.contains("return \"hello world\";"));
+        assertAll(
+            () -> assertThat(data, containsString("static String getString() {")),
+            () -> assertThat(data, containsString("return \"hello world\";"))
+        );
     }
 
     @Test
@@ -122,7 +133,7 @@ class GeneratorTest {
         generator.generate(exampleDirectory);
         String data = readGeneratedClass(className);
 
-        assertTrue(data.contains("static void setInt(Integer arg1) {"));
+        assertThat(data, containsString("static void setInt(Integer arg1) {"));
     }
 
     @Test
@@ -132,7 +143,7 @@ class GeneratorTest {
         generator.generate(exampleDirectory);
         String data = readGeneratedClass(className);
 
-        assertTrue(data.contains("static void setArgs(Integer arg1, String arg2) {"));
+        assertThat(data, containsString("static void setArgs(Integer arg1, String arg2) {"));
     }
 
     @Test
@@ -153,7 +164,7 @@ class GeneratorTest {
         expectedOrder.add("else {");
         expectedOrder.add("return \"hello\";");
 
-        assertContainsOrder(expectedOrder, data);
+        orderedContainsAssert(expectedOrder, data);
     }
 
     private String readGeneratedClass(String className) {
@@ -168,16 +179,19 @@ class GeneratorTest {
         return data;
     }
 
-    private void assertContainsOrder(List<String> expectedList, String data) {
+    private void orderedContainsAssert(List<String> expectedList, String data) {
         String[] dataLines = data.split("\n");
         int indexOfFirstMatch = getIndexOfFirstMatch(dataLines, expectedList.get(0));
+        List<Executable> assertions = new ArrayList<>();
 
         for (int i = 0; i < expectedList.size(); i++) {
             String expectedLine = expectedList.get(i);
             String dataLine = dataLines[i  + indexOfFirstMatch];
 
-            assertThat("Assertion: " + i, dataLine, containsString(expectedLine));
+            assertions.add(() -> assertThat(dataLine, containsString(expectedLine)));
         }
+
+        assertAll(assertions);
     }
 
     private int getIndexOfFirstMatch(String[] dataLines, String expected) {
