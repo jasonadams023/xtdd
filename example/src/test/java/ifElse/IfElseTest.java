@@ -13,6 +13,15 @@ class IfElseTest {
     }
 
     @Test
+    void should_Take4_AndReturnDifferent() {
+        Integer input = 4;
+
+        String output = IfElse.doThing(input);
+
+        assertEquals("different", output);
+    }
+
+    @Test
     void should_Take3_AndReturnBye() {
         Integer input = 3;
 

@@ -148,6 +148,10 @@ class GeneratorTest {
         assertTrue(data.contains("static String doThing(Integer arg1) {"));
         assertTrue(data.contains("if (arg1 == 7) {"));
         assertTrue(data.contains("return \"hello\";"));
+        assertTrue(data.contains("} else if (arg1 == 4) {"));
+        assertTrue(data.contains("return \"different\";"));
+        assertTrue(data.contains("} else if (arg1 == 3) {"));
+        assertTrue(data.contains("return \"bye\";"));
         assertTrue(data.contains("else {"));
         assertTrue(data.contains("return \"bye\";"));
     }
