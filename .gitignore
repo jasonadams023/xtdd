@@ -4,6 +4,7 @@ out/
 xtdd.ipr
 xtdd.iws
 example/src/main/*
+calculator/src/main*
 
 //Gradle
 .gradle/
