@@ -9,7 +9,11 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.StringContains.containsString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -34,7 +38,7 @@ class GeneratorTest {
         generator = new Generator(fileManager);
     }
 
-    void cleanup() {
+    private void cleanup() {
         for(File file: exampleMainDirectory.listFiles()) {
             if (!file.isDirectory()) {
                 file.delete();
@@ -43,7 +47,7 @@ class GeneratorTest {
     }
 
     @Test
-    void shouldGenerateClassBasedOnTestFiles() {
+    void should_GenerateClass_BasedOnTestFiles() {
         generator.generate(exampleDirectory);
         String data1 = readGeneratedClass("First");
         String data2 = readGeneratedClass("Second");
@@ -53,7 +57,7 @@ class GeneratorTest {
     }
 
     @Test
-    void shouldGenerateEmptyClass() {
+    void should_GenerateEmptyClass() {
         String className = "Empty";
 
         generator.generate(exampleDirectory);
@@ -66,13 +70,12 @@ class GeneratorTest {
     }
 
     @Test
-    void shouldGenerateFunctionsBasedOnTestFile() {
+    void should_GenerateFunctions_BasedOnTestFile() {
         String className = "First";
 
         generator.generate(exampleDirectory);
         String data = readGeneratedClass(className);
 
-        assertTrue(data.contains("class " + className + " {"));
         assertTrue(data.contains("static void example() {"));
         assertTrue(data.contains("static void different() {"));
     }
@@ -84,14 +87,13 @@ class GeneratorTest {
         generator.generate(exampleDirectory);
         String data = readGeneratedClass(className);
 
-        assertTrue(data.contains("class " + className + " {"));
         assertTrue(data.contains("static String getNullString() {"));
         assertTrue(data.contains("return null"));
         assertTrue(data.contains("static Integer getNullInt() {"));
     }
 
     @Test
-    void should_GenerateFunctions_WithNonNullInts() {
+    void should_GenerateFunctions_WithNonNullIntReturns() {
         String className = "Returns";
 
         generator.generate(exampleDirectory);
@@ -103,13 +105,12 @@ class GeneratorTest {
     }
 
     @Test
-    void should_GenerateFunctions_WithNonNullStrings() {
+    void should_GenerateFunctions_WithNonNullStringReturns() {
         String className = "Returns";
 
         generator.generate(exampleDirectory);
         String data = readGeneratedClass(className);
 
-        assertTrue(data.contains("class " + className + " {"));
         assertTrue(data.contains("static String getString() {"));
         assertTrue(data.contains("return \"hello world\";"));
     }
@@ -121,7 +122,6 @@ class GeneratorTest {
         generator.generate(exampleDirectory);
         String data = readGeneratedClass(className);
 
-        assertTrue(data.contains("class " + className + " {"));
         assertTrue(data.contains("static void setInt(Integer arg1) {"));
     }
 
@@ -132,7 +132,6 @@ class GeneratorTest {
         generator.generate(exampleDirectory);
         String data = readGeneratedClass(className);
 
-        assertTrue(data.contains("class " + className + " {"));
         assertTrue(data.contains("static void setArgs(Integer arg1, String arg2) {"));
     }
 
@@ -143,16 +142,18 @@ class GeneratorTest {
         generator.generate(exampleDirectory);
         String data = readGeneratedClass(className);
 
-        assertTrue(data.contains("class " + className + " {"));
-        assertTrue(data.contains("static String doThing(Integer arg1) {"));
-        assertTrue(data.contains("if (arg1 == 7) {"));
-        assertTrue(data.contains("return \"hello\";"));
-        assertTrue(data.contains("} else if (arg1 == 4) {"));
-        assertTrue(data.contains("return \"different\";"));
-        assertTrue(data.contains("} else if (arg1 == 3) {"));
-        assertTrue(data.contains("return \"bye\";"));
-        assertTrue(data.contains("else {"));
-        assertTrue(data.contains("return \"bye\";"));
+        List<String> expectedOrder = new ArrayList<>();
+
+        expectedOrder.add("if (arg1 == 7) {");
+        expectedOrder.add("return \"hello\";");
+        expectedOrder.add("} else if (arg1 == 4) {");
+        expectedOrder.add("return \"different\";");
+        expectedOrder.add("} else if (arg1 == 3) {");
+        expectedOrder.add("return \"bye\";");
+        expectedOrder.add("else {");
+        expectedOrder.add("return \"hello\";");
+
+        assertContainsOrder(expectedOrder, data);
     }
 
     private String readGeneratedClass(String className) {
@@ -165,5 +166,30 @@ class GeneratorTest {
         }
 
         return data;
+    }
+
+    private void assertContainsOrder(List<String> expectedList, String data) {
+        String[] dataLines = data.split("\n");
+        int indexOfFirstMatch = getIndexOfFirstMatch(dataLines, expectedList.get(0));
+
+        for (int i = 0; i < expectedList.size(); i++) {
+            String expectedLine = expectedList.get(i);
+            String dataLine = dataLines[i  + indexOfFirstMatch];
+
+            assertThat("Assertion: " + i, dataLine, containsString(expectedLine));
+        }
+    }
+
+    private int getIndexOfFirstMatch(String[] dataLines, String expected) {
+        int indexOfFirstMatch = 0;
+
+        for (int j = 0; j < dataLines.length - 1; j++) {
+            String dataLine = dataLines[j];
+            if (dataLine.contains(expected)) {
+                indexOfFirstMatch = j;
+                break;
+            }
+        }
+        return indexOfFirstMatch;
     }
 }
