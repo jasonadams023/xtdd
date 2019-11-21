@@ -4,8 +4,6 @@ import org.junit.jupiter.api.TestInstance;
 
 import java.io.File;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class MainTest {
     private File exampleDirectory = new File("./example");
@@ -28,10 +26,5 @@ class MainTest {
         Main.main(args);
 
         assert(exampleMainDirectory.listFiles().length > 0);
-    }
-
-    @Test
-    void should_Fail() {
-        assertTrue(false);
     }
 }
