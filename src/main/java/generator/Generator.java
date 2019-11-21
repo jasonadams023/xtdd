@@ -14,10 +14,11 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
+import java.util.logging.Logger;
 
 public class Generator {
+    private static Logger LOGGER = Logger.getLogger(Generator.class.getName());
+
     private FileManager fileManager;
     private List<JavaClass> javaClasses;
     private List<ClassRequirement> classRequirements;
