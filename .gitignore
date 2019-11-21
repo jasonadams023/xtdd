@@ -9,5 +9,3 @@ calculator/src/main*
 //Gradle
 .gradle/
 build/
-gradlew
-gradlew.bat
