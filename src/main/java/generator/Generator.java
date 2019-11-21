@@ -84,16 +84,16 @@ public class Generator {
     private void writeFiles(File projectDirectory) {
         for (JavaClass javaClass : javaClasses) {
             ensureMainDirectoryExists(projectDirectory);
-            Path path = Paths.get(projectDirectory.getPath() + "/src/main/" + javaClass.getName() + ".java");
+            Path path = Paths.get(projectDirectory.getPath() + "/src/main/java/" + javaClass.getName() + ".java");
             fileManager.writeFile(path, javaClass.toString());
         }
     }
 
     private void ensureMainDirectoryExists(File projectDirectory) {
-        File mainDirectory = new File(projectDirectory.getPath() + "/src/main/");
+        File mainDirectory = new File(projectDirectory.getPath() + "/src/main/java");
         if (!mainDirectory.exists()) {
             try {
-                Files.createDirectory(mainDirectory.toPath());
+                Files.createDirectories(mainDirectory.toPath());
             } catch (IOException error) {
                 LOGGER.warning("Failed to write main directory\n" +
                         "Error message: " + error + "\n");
