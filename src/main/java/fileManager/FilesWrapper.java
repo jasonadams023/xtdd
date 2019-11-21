@@ -15,4 +15,8 @@ public class FilesWrapper {
     List<String> readAllLines(Path path) throws IOException {
         return Files.readAllLines(path);
     }
+
+    void createDirectories(Path directoryPath) throws IOException {
+        Files.createDirectories(directoryPath);
+    }
 }

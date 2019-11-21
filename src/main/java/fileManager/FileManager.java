@@ -53,4 +53,12 @@ public class FileManager {
 
         return null;
     }
+
+    public void ensureDirectoryExists(Path directory) {
+        try {
+            files.createDirectories(directory);
+        } catch (IOException error) {
+            LOGGER.warning("Failed to write directory: " + directory + "\nError message: " + error + "\n");
+        }
+    }
 }
