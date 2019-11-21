@@ -21,31 +21,27 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class GeneratorTest {
     private File exampleDirectory = new File("./example");
-    private File exampleMainDirectory = new File(exampleDirectory.getPath() + "/src/main/java");
+    private File exampleMainDirectory = new File(exampleDirectory.getPath() + "/src/main");
+    private File exampleJavaDirectory = new File(exampleMainDirectory.getPath() + "/java");
     private Generator generator;
 
     @BeforeEach
     void setup() {
-        cleanup();
+        recursiveDelete(exampleMainDirectory);
         FilesWrapper filesWrapper = new FilesWrapper();
         FileManager fileManager = new FileManager(filesWrapper);
         generator = new Generator(fileManager);
     }
 
-    private void cleanup() {
-        if (exampleMainDirectory.exists()) {
-            for (File file : exampleMainDirectory.listFiles()) {
-                if (!file.isDirectory()) {
-                    file.delete();
+    private void recursiveDelete(File file) {
+        if (file.exists()) {
+            if (file.isDirectory()) {
+                for (File subFile : file.listFiles()) {
+                    recursiveDelete(subFile);
                 }
             }
-            exampleMainDirectory.delete();
 
-            for(File file: exampleDirectory.listFiles()) {
-                if (file.getPath().contains("main")) {
-                    file.delete();
-                }
-            }
+            file.delete();
         }
     }
 
@@ -173,7 +169,7 @@ class GeneratorTest {
         String data = "";
 
         try {
-            data = new String(Files.readAllBytes(Paths.get(exampleMainDirectory.getPath() + "/" + className + ".java")));
+            data = new String(Files.readAllBytes(Paths.get(exampleJavaDirectory.getPath() + "/" + className + ".java")));
         } catch (IOException e) {
             e.printStackTrace();
         }
