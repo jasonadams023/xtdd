@@ -2,10 +2,13 @@
 
 Xtreme Test Driven Development. Project to generate code based on tests.
 
-## Use
+## Setup
 
-Takes in a given folder, looks for a `test` folder and generates code in the `src` folder under the given folder (alongside the `test` folder).
+Clone the repo from here: [github](https://github.com/jasonadams023/xtdd)
 
-Pass in the root directory of the project you would like to generate code for to the run script. Ex:
+To build use: `./gradlew build`
 
+To run use: `./run.sh`
+
+Pass in the root directory of a project you would like to run the project on to the run script. Ex:
 `./run.sh ./example/`
