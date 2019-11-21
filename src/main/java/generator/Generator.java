@@ -7,11 +7,15 @@ import projectStructure.classObjects.javaClass.JavaClass;
 import projectStructure.functionObjects.functionRequirement.FunctionRequirement;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 
 public class Generator {
     private FileManager fileManager;
@@ -79,8 +83,21 @@ public class Generator {
 
     private void writeFiles(File projectDirectory) {
         for (JavaClass javaClass : javaClasses) {
+            ensureMainDirectoryExists(projectDirectory);
             Path path = Paths.get(projectDirectory.getPath() + "/src/main/" + javaClass.getName() + ".java");
             fileManager.writeFile(path, javaClass.toString());
+        }
+    }
+
+    private void ensureMainDirectoryExists(File projectDirectory) {
+        File mainDirectory = new File(projectDirectory.getPath() + "/src/main/");
+        if (!mainDirectory.exists()) {
+            try {
+                Files.createDirectory(mainDirectory.toPath());
+            } catch (IOException error) {
+                LOGGER.warning("Failed to write main directory\n" +
+                        "Error message: " + error + "\n");
+            }
         }
     }
 }

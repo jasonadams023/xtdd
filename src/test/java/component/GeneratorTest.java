@@ -24,13 +24,6 @@ class GeneratorTest {
     private File exampleMainDirectory = new File(exampleDirectory.getPath() + "/src/main");
     private Generator generator;
 
-    @BeforeAll
-    void validateDirectory() throws IOException {
-        if (!exampleMainDirectory.exists()) {
-            Files.createDirectory(exampleMainDirectory.toPath());
-        }
-    }
-
     @BeforeEach
     void setup() {
         cleanup();
@@ -40,9 +33,18 @@ class GeneratorTest {
     }
 
     private void cleanup() {
-        for(File file: exampleMainDirectory.listFiles()) {
-            if (!file.isDirectory()) {
-                file.delete();
+        if (exampleMainDirectory.exists()) {
+            for (File file : exampleMainDirectory.listFiles()) {
+                if (!file.isDirectory()) {
+                    file.delete();
+                }
+            }
+            exampleMainDirectory.delete();
+
+            for(File file: exampleDirectory.listFiles()) {
+                if (file.getPath().contains("main")) {
+                    file.delete();
+                }
             }
         }
     }
