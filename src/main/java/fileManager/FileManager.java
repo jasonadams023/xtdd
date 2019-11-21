@@ -5,8 +5,10 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class FileManager {
+    private static Logger LOGGER = Logger.getLogger(FileManager.class.getName());
     private FilesWrapper files;
 
     public FileManager(FilesWrapper files) {
@@ -16,8 +18,8 @@ public class FileManager {
     public void writeFile(Path path, String text) {
         try {
             files.write(path, text.getBytes());
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException error) {
+            LOGGER.warning("Failed to write file: " + path + "\nError message: " + error + "\n");
         }
     }
 
