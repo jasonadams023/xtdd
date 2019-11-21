@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'idea'
+    id 'jacoco'
 }
 
 group 'xtdd'
@@ -27,5 +28,20 @@ test {
 test {
     testLogging {
         exceptionFormat = 'full'
+    }
+}
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                counter = 'BRANCH'
+                minimum = 0.95
+            }
+            limit {
+                counter = 'INSTRUCTION'
+                minimum = 0.99
+            }
+        }
     }
 }
