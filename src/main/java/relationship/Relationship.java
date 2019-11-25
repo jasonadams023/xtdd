@@ -13,12 +13,14 @@ class Relationship {
 
         if (firstInput.equals(firstOutput)) {
             return "one to one";
-        } else if(firstInput.getType().equals("Integer") && firstOutput.getType().equals("Integer")) {
+        } else if(firstOutput.getType().equals("Integer")) {
             Integer inputInt = (Integer) firstInput.getObject();
             Integer outputInt = (Integer) firstOutput.getObject();
 
             if (inputInt + 1 == outputInt) {
                 return "plus one";
+            } else {
+                return "plus two";
             }
         }
 
