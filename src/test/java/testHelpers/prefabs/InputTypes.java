@@ -1,4 +1,4 @@
-package prefabs;
+package testHelpers.prefabs;
 
 import java.util.Collections;
 import java.util.List;

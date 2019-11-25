@@ -5,6 +5,7 @@ import projectStructure.variable.Variable;
 import projectStructure.functionObjects.signature.Signature;
 import projectStructure.functionObjects.functionRequirement.FunctionRequirement;
 import org.junit.jupiter.api.Test;
+import testHelpers.utils.TestUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -93,14 +94,16 @@ class ToStringsTest {
 
         List<String> functionStrings = function.toStrings();
 
-        assertEquals("static Integer Example(int arg1) {\n", functionStrings.get(0));
-        assertEquals("\tif (arg1 == 1) {\n", functionStrings.get(1));
-        assertEquals("\t\treturn 1;\n", functionStrings.get(2));
-        assertEquals("\t} else if (arg1 == 2) {\n", functionStrings.get(3));
-        assertEquals("\t\treturn 2;\n", functionStrings.get(4));
-        assertEquals("\t} else {\n", functionStrings.get(5));
-        assertEquals("\t\treturn 1;\n", functionStrings.get(6));
-        assertEquals("\t}\n", functionStrings.get(7));
-        assertEquals("}\n", functionStrings.get(8));
+        List<String> expectedOrder = new ArrayList<>();
+        expectedOrder.add("\tif (arg1 == 1) {\n");
+        expectedOrder.add("\t\treturn 1;\n");
+        expectedOrder.add("\t} else if (arg1 == 2) {\n");
+        expectedOrder.add("\t\treturn 2;\n");
+        expectedOrder.add("\t} else {\n");
+        expectedOrder.add("\t\treturn 1;\n");
+        expectedOrder.add("\t}\n");
+        expectedOrder.add("}\n");
+
+        TestUtils.orderedContainsAssert(expectedOrder, functionStrings);
     }
 }

@@ -1,9 +1,9 @@
 package projectStructure.classObjects.javaClass;
 
-import prefabs.Inputs;
-import prefabs.Requirements;
-import prefabs.Signatures;
-import prefabs.Variables;
+import testHelpers.prefabs.Inputs;
+import testHelpers.prefabs.Requirements;
+import testHelpers.prefabs.Signatures;
+import testHelpers.prefabs.Variables;
 import projectStructure.functionObjects.function.Function;
 import projectStructure.functionObjects.functionRequirement.FunctionRequirement;
 import org.junit.jupiter.api.Test;

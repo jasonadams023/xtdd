@@ -4,7 +4,6 @@ import fileManager.FileManager;
 import fileManager.FilesWrapper;
 import generator.Generator;
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.function.Executable;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,6 +16,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.StringContains.containsString;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import testHelpers.utils.TestUtils;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class GeneratorTest {
@@ -162,7 +163,7 @@ class GeneratorTest {
         expectedOrder.add("else {");
         expectedOrder.add("return \"hello\";");
 
-        orderedContainsAssert(expectedOrder, data);
+        TestUtils.orderedContainsAssert(expectedOrder, data);
     }
 
     private String readGeneratedClass(String className) {
@@ -175,33 +176,5 @@ class GeneratorTest {
         }
 
         return data;
-    }
-
-    private void orderedContainsAssert(List<String> expectedList, String data) {
-        String[] dataLines = data.split("\n");
-        int indexOfFirstMatch = getIndexOfFirstMatch(dataLines, expectedList.get(0));
-        List<Executable> assertions = new ArrayList<>();
-
-        for (int i = 0; i < expectedList.size(); i++) {
-            String expectedLine = expectedList.get(i);
-            String dataLine = dataLines[i  + indexOfFirstMatch];
-
-            assertions.add(() -> assertThat(dataLine, containsString(expectedLine)));
-        }
-
-        assertAll(assertions);
-    }
-
-    private int getIndexOfFirstMatch(String[] dataLines, String expected) {
-        int indexOfFirstMatch = 0;
-
-        for (int j = 0; j < dataLines.length - 1; j++) {
-            String dataLine = dataLines[j];
-            if (dataLine.contains(expected)) {
-                indexOfFirstMatch = j;
-                break;
-            }
-        }
-        return indexOfFirstMatch;
     }
 }

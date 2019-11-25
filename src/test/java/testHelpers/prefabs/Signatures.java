@@ -1,4 +1,4 @@
-package prefabs;
+package testHelpers.prefabs;
 
 import projectStructure.functionObjects.signature.Signature;
 
