@@ -26,6 +26,20 @@ class FinderTest {
     }
 
     @Test
+    void should_ReturnNoneFound_WhenFailingToFindRelationship2() {
+        List<InputOutput> inputOutputs = new ArrayList<>();
+
+        List<Variable> inputs1 = new ArrayList<>();
+        inputs1.add(Variable.create(1));
+        Variable output1 = Variable.create("asdf");
+        inputOutputs.add(new InputOutput(inputs1, output1));
+
+        String output = Relationship.finder(inputOutputs);
+
+        assertEquals("none found", output);
+    }
+
+    @Test
     void should_DetermineRelationship_OneToOne() {
         List<InputOutput> inputOutputs = new ArrayList<>();
 
