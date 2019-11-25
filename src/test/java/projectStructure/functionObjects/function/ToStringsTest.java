@@ -106,4 +106,45 @@ class ToStringsTest {
 
         TestUtils.orderedContainsAssert(expectedOrder, functionStrings);
     }
+
+    @Test
+    void should_ReturnIfElse_WithMultipleInputs() {
+        List<String> inputTypes = new ArrayList<>();
+        inputTypes.add(("int"));
+        inputTypes.add(("int"));
+
+        Signature signature = new Signature("Example", "Integer", inputTypes);
+
+        List<Variable> inputs = new ArrayList<>();
+        inputs.add(Variable.create(1));
+        inputs.add(Variable.create(2));
+        Variable returnValue = Variable.create(3);
+        FunctionRequirement functionRequirement = FunctionRequirement.create(signature, inputs, returnValue);
+
+        Function function = Function.createFromRequirement(functionRequirement);
+
+        List<Variable> inputs2 = new ArrayList<>();
+        inputs2.add(Variable.create(2));
+        inputs2.add(Variable.create(3));
+        Variable returnValue2 = Variable.create(5);
+        InputOutput inputOutput = new InputOutput(inputs2, returnValue2);
+
+        function.addInputOutput(inputOutput);
+
+        List<String> functionStrings = function.toStrings();
+
+        List<String> expectedOrder = new ArrayList<>();
+
+        expectedOrder.add("static Integer Example(int arg1, int arg2) {\n");
+        expectedOrder.add("\tif (arg1 == 1 && arg2 == 2) {\n");
+        expectedOrder.add("\t\treturn 3;\n");
+        expectedOrder.add("\t} else if (arg1 == 2 && arg2 == 3) {\n");
+        expectedOrder.add("\t\treturn 5;\n");
+        expectedOrder.add("\t} else {\n");
+        expectedOrder.add("\t\treturn 3;\n");
+        expectedOrder.add("\t}\n");
+        expectedOrder.add("}\n");
+
+        TestUtils.orderedContainsAssert(expectedOrder, functionStrings);
+    }
 }

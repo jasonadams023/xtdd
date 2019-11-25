@@ -3,6 +3,7 @@ package projectStructure.functionObjects.function;
 import projectStructure.functionObjects.inputOutput.InputOutput;
 import projectStructure.functionObjects.signature.Signature;
 import projectStructure.functionObjects.functionRequirement.FunctionRequirement;
+import projectStructure.variable.Variable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -102,7 +103,22 @@ public class Function {
     }
 
     private String ifStatement(int i) {
-        return "if (arg1 == " + inputOutputs.get(i).getInputs().get(0).toString() + ") {\n";
+        return "if (" + conditional(i) + ") {\n";
+    }
+
+    private String conditional(int i) {
+        List<Variable> inputs = inputOutputs.get(i).getInputs();
+        StringBuilder conditional = new StringBuilder();
+
+        for (int j = 0; j < inputs.size(); j++) {
+            if(j != 0) {
+                conditional.append(" && ");
+            }
+
+            conditional.append("arg").append((j + 1)).append(" == ").append(inputs.get(j));
+        }
+
+        return conditional.toString();
     }
 
     private List<String> finalElse() {
